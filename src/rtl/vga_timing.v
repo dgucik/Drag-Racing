@@ -1,10 +1,10 @@
 module vga_timing (
-    output wire [10:0] vcount,
-    output wire vsync,
-    output wire vblnk,
-    output wire [10:0] hcount,
-    output wire hsync,
-    output wire hblnk,
+    output wire [10:0] vga_vcount,
+    output wire vga_vsync,
+    output wire vga_vblnk,
+    output wire [10:0] vga_hcount,
+    output wire vga_hsync,
+    output wire vga_hblnk,
     input wire clk
     );
     
@@ -18,44 +18,44 @@ module vga_timing (
                 VER_SYNC_START = 771,
                 VER_SYNC_TIME = 6;
     
-    reg [10:0] vcount_reg = 0, hcount_reg = 0;
-    reg vsync_reg = 0, vblnk_reg = 0, hsync_reg = 0, hblnk_reg = 0;
+    reg [10:0] vga_vcount_reg = 0, vga_hcount_reg = 0;
+    reg vga_vsync_reg = 0, vga_vblnk_reg = 0, vga_hsync_reg = 0, vga_hblnk_reg = 0;
     
-    reg [10:0] vcount_nxt = 0, hcount_nxt = 0;
-    reg vsync_nxt = 0, vblnk_nxt = 0, hsync_nxt = 0, hblnk_nxt = 0;
+    reg [10:0] vga_vcount_nxt = 0, vga_hcount_nxt = 0;
+    reg vga_vsync_nxt = 0, vga_vblnk_nxt = 0, vga_hsync_nxt = 0, vga_hblnk_nxt = 0;
     
     always @(posedge clk) begin
-        vcount_reg <= vcount_nxt;
-        vsync_reg <= vsync_nxt;
-        vblnk_reg <= vblnk_nxt;
-        hcount_reg <= hcount_nxt;
-        hsync_reg <= hsync_nxt;
-        hblnk_reg <= hblnk_nxt;   
+        vga_vcount_reg <= vga_vcount_nxt;
+        vga_vsync_reg <= vga_vsync_nxt;
+        vga_vblnk_reg <= vga_vblnk_nxt;
+        vga_hcount_reg <= vga_hcount_nxt;
+        vga_hsync_reg <= vga_hsync_nxt;
+        vga_hblnk_reg <= vga_hblnk_nxt;   
     end
     
     always @* begin
-        if(hcount_reg == HOR_TOTAL_TIME - 1) begin
-            hcount_nxt = 0;
-            if(vcount_reg == VER_TOTAL_TIME - 1)
-                vcount_nxt = 0;
+        if(vga_hcount_reg == HOR_TOTAL_TIME - 1) begin
+            vga_hcount_nxt = 0;
+            if(vga_vcount_reg == VER_TOTAL_TIME - 1)
+                vga_vcount_nxt = 0;
             else
-                vcount_nxt = vcount_reg + 1;
+                vga_vcount_nxt = vga_vcount_reg + 1;
         end
         else begin
-            hcount_nxt = hcount_reg + 1;
-            vcount_nxt = vcount_reg;
+            vga_hcount_nxt = vga_hcount_reg + 1;
+            vga_vcount_nxt = vga_vcount_reg;
         end 
-        vsync_nxt = ((vcount_nxt >= VER_SYNC_START) && (vcount_nxt < VER_SYNC_START + VER_SYNC_TIME));
-        vblnk_nxt = ((vcount_nxt >= VER_BLNK_START) && (vcount_nxt < VER_TOTAL_TIME));
-        hsync_nxt = ((hcount_nxt >= HOR_SYNC_START) && (hcount_nxt < HOR_SYNC_START + HOR_SYNC_TIME));
-        hblnk_nxt = ((hcount_nxt >= HOR_BLNK_START) && (hcount_nxt < HOR_TOTAL_TIME));
+        vga_vsync_nxt = ((vga_vcount_nxt >= VER_SYNC_START) && (vga_vcount_nxt < VER_SYNC_START + VER_SYNC_TIME));
+        vga_vblnk_nxt = ((vga_vcount_nxt >= VER_BLNK_START) && (vga_vcount_nxt < VER_TOTAL_TIME));
+        vga_hsync_nxt = ((vga_hcount_nxt >= HOR_SYNC_START) && (vga_hcount_nxt < HOR_SYNC_START + HOR_SYNC_TIME));
+        vga_hblnk_nxt = ((vga_hcount_nxt >= HOR_BLNK_START) && (vga_hcount_nxt < HOR_TOTAL_TIME));
     end
     
-    assign vcount = vcount_reg;
-    assign vsync = vsync_reg; 
-    assign vblnk = vblnk_reg;
-    assign hcount = hcount_reg;
-    assign hsync = hsync_reg;
-    assign hblnk = hblnk_reg;
+    assign vga_vcount = vga_vcount_reg;
+    assign vga_vsync = vga_vsync_reg; 
+    assign vga_vblnk = vga_vblnk_reg;
+    assign vga_hcount = vga_hcount_reg;
+    assign vga_hsync = vga_hsync_reg;
+    assign vga_hblnk = vga_hblnk_reg;
 
 endmodule

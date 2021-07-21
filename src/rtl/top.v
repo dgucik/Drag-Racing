@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: AGH University of Science and Technology
-// Engineer: Daniel Gucik, Patryk Kociñski
+// Engineer: Daniel Gucik, Patryk Kociï¿½ski
 // 
 // Create Date: 20.07.2021 21:23:01
 // Design Name: -
@@ -38,8 +38,8 @@ module top(
     wire rst_ext;
     
     //vga_timing
-    wire [10:0] vcount, hcount;
-    wire vsync, vblnk, hsync, hblnk;
+    wire [10:0] vga_vcount, vga_hcount;
+    wire vga_vsync, vga_vblnk, vga_hsync, vga_hblnk;
     
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -56,12 +56,12 @@ module top(
     );
     
     vga_timing u_vga_timing (
-        .vcount(vcount),
-        .vsync(vsync),
-        .vblnk(vblnk),
-        .hcount(hcount),
-        .hsync(hsync),
-        .hblnk(hblnk),
+        .vga_vcount(vga_vcount),
+        .vga_vsync(vga_vsync),
+        .vga_vblnk(vga_vblnk),
+        .vga_hcount(vga_hcount),
+        .vga_hsync(vga_hsync),
+        .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
     
