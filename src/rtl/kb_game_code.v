@@ -1,16 +1,15 @@
 module kb_game_code (
     input wire clk,
     input wire reset,
-    input wire code_new,
     input wire key_pressed,
-    input wire key_code,
+    input wire [7:0] key_code,
     output wire [3:0] kb_key_pressed
 );
 
 /////////////// TO TYLKO PRZYKLAD, POZMIENIAC KLAWISZE W POZNIEJSZEJ FAZIE ROZWOJU GRY //////////////////
-    localparam  W_code = 8'h1D;
-                A_code = 8'h1C;
-                S_code = 8'h1B;
+    localparam  W_code = 8'h1D,
+                A_code = 8'h1C,
+                S_code = 8'h1B,
                 D_code = 8'h23;
 
     reg W_pressed, A_pressed, S_pressed, D_pressed;

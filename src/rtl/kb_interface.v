@@ -11,7 +11,7 @@ module kb_interface (
     wire [7:0] dout;
 
     //keyboard
-    wire code_new, key_pressed;
+    wire key_pressed;
     wire [7:0] key_code;
 
     ps2_rx u_ps2_rx (
@@ -28,8 +28,8 @@ module kb_interface (
         .clk(clk), 
         .reset(reset),
         .din(dout),
-        .scan_done_tick(scan_done_tick),
-        .code_new(code_new),
+        .scan_done_tick(rx_done_tick),
+        .code_new(),
         .key_pressed(key_pressed),
         .key_code(key_code)
     );
@@ -37,7 +37,6 @@ module kb_interface (
     kb_game_code u_kb_game_code(
         .clk(clk),
         .reset(reset),
-        .code_new(code_new),
         .key_pressed(key_pressed),
         .key_code(key_code),
         .kb_key_pressed(kb_key_pressed)
