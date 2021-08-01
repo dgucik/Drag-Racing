@@ -1,8 +1,8 @@
 module keyboard (
     input wire clk, 
     input wire reset,
-    input wire ps2_clk,
-    input wire ps2_data,
+    input wire [7:0] din,
+    input wire scan_done_tick,
     output reg code_new,
     output reg key_pressed,
     output reg [7:0] key_code
@@ -12,23 +12,10 @@ module keyboard (
                 BRK_CODE    = 2'b01,
                 MAKE_CODE   = 2'b10;    
                 
-
     reg [1:0] state, state_nxt;
-    wire scan_done_tick;
-    wire [7:0] scan_out;
 
     reg [7:0] key_code_nxt;
     reg code_new_nxt, key_pressed_nxt;
-
-    ps2_rx u_ps2_rx (
-      .clk(clk),
-      .reset(reset),
-      .rx_en(1'b1),
-      .ps2c(ps2_clk),
-      .ps2d(ps2_data),
-      .rx_done_tick(scan_done_tick),
-      .dout(scan_out)
-    );
 
     always @(posedge clk, posedge reset)
         if(reset) begin
@@ -55,7 +42,7 @@ module keyboard (
         state_nxt = state;
         case(state)
             WAIT_CODE:
-                if((scan_done_tick == 1'b1) && (scan_out == 8'hF0))
+                if((scan_done_tick == 1'b1) && (din == 8'hF0))
                     state_nxt = BRK_CODE;
                 else if(scan_done_tick == 1'b1)
                     state_nxt = MAKE_CODE;
@@ -63,13 +50,13 @@ module keyboard (
                 if(scan_done_tick == 1'b1) begin
                     code_new_nxt = 0;
                     key_pressed_nxt = 0;
-                    key_code_nxt = scan_out;
+                    key_code_nxt = din;
                     state_nxt = WAIT_CODE;  
                 end 
             MAKE_CODE: begin
                 code_new_nxt = 1;
                 key_pressed_nxt = 1;
-                key_code_nxt = scan_out;
+                key_code_nxt = din;
                 state_nxt = WAIT_CODE;
             end          
         endcase
