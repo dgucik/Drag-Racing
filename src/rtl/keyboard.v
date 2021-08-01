@@ -61,7 +61,7 @@ module keyboard (
                     state_nxt = MAKE_CODE;
             BRK_CODE:
                 if(scan_done_tick == 1'b1) begin
-                    code_new_nxt = 1;
+                    code_new_nxt = 0;
                     key_pressed_nxt = 0;
                     key_code_nxt = scan_out;
                     state_nxt = WAIT_CODE;  
