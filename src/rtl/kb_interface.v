@@ -3,7 +3,7 @@ module kb_interface (
     input wire reset,
     input wire ps2_clk,
     input wire ps2_data,
-    output wire kb_key_pressed
+    output wire [3:0] kb_key_pressed
 );
 
     //ps2_rx
