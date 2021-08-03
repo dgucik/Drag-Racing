@@ -64,8 +64,47 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
+
+    //draw_car
+    wire [10:0] car_hcount_out, car_vcount_out;
+    wire car_hsync_out, car_hblnk_out, car_vsync_out, car_vblnk_out;
+    wire [18:0] pixel_addr;
+    wire [11:0] car_rgb_out;
+
+    //image_rom
+    wire [11:0] rom_rgb;
+
+    draw_car u_draw_car(
+        .clk(clk65MHz),
+        .reset(rst),
+        .car_hcount_in(vga_hcount),
+        .car_hsync_in(vga_hsync),
+        .car_hblnk_in(vga_hblnk),
+        .car_vcount_in(vga_vcount),
+        .car_vsync_in(vga_vsync),
+        .car_vblnk_in(vga_vblnk),
+        .car_rgb_in(12'h0_0_0),
+        .car_xpos(200),
+        .car_ypos(200),
+        .car_rgb_pixel(rom_rgb),
+
+        .car_hcount_out(car_hcount_out),
+        .car_hsync_out(car_hsync_out),
+        .car_hblnk_out(car_hblnk_out),
+        .car_vcount_out(car_vcount_out),
+        .car_vsync_out(car_vsync_out),
+        .car_vblnk_out(car_vblnk_out),
+        .car_rgb_out(car_rgb_out),
+        .pixel_addr(pixel_addr)
+    );
+
+    image_rom u_image_rom(
+        .address(pixel_addr),
+        .rgb(rom_rgb),
+        .clk(clk65MHz)
+    );
     
-    //assign vs = ;
-    //assign hs = ;
-    //assign {r,g,b} = ;  
+    assign vs = car_vsync_out;
+    assign hs = car_hsync_out;
+    assign {r,g,b} = car_rgb_out;  
 endmodule
