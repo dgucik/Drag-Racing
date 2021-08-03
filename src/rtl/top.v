@@ -68,13 +68,13 @@ module top(
     //draw_car
     wire [10:0] car_hcount_out, car_vcount_out;
     wire car_hsync_out, car_hblnk_out, car_vsync_out, car_vblnk_out;
-    wire [18:0] pixel_addr;
+    wire [16:0] pixel_addr;
     wire [11:0] car_rgb_out;
 
     //image_rom
     wire [11:0] rom_rgb;
 
-    draw_car u_draw_car(
+    draw_car u_draw_car_p1(
         .clk(clk65MHz),
         .reset(rst),
         .car_hcount_in(vga_hcount),
@@ -84,8 +84,8 @@ module top(
         .car_vsync_in(vga_vsync),
         .car_vblnk_in(vga_vblnk),
         .car_rgb_in(12'h0_0_0),
-        .car_xpos(200),
-        .car_ypos(200),
+        .car_xpos(256),
+        .car_ypos(400),
         .car_rgb_pixel(rom_rgb),
 
         .car_hcount_out(car_hcount_out),

@@ -6,7 +6,7 @@
 // red, green and blue color values (4-bit each)
 module image_rom (
     input wire clk ,
-    input wire [18:0] address,  // address = {addry[5:0], addrx[5:0]}
+    input wire [16:0] address,  // address = {addry[5:0], addrx[5:0]}
     output reg [11:0] rgb
 );
 
