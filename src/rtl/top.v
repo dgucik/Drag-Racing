@@ -71,7 +71,7 @@ module top(
     wire [16:0] pixel_addr;
     wire [11:0] car_rgb_out;
 
-    draw_car u_draw_car_p1(
+    draw_car u_draw_car(
         .clk(clk65MHz),
         .reset(rst),
         .car_hcount_in(vga_hcount),
