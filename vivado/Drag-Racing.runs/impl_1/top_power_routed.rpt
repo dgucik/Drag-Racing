@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2017.3 (win64) Build 2018833 Wed Oct  4 19:58:22 MDT 2017
-| Date             : Wed Aug  4 21:35:55 2021
+| Date             : Wed Aug  4 23:45:11 2021
 | Host             : DESKTOP-S7T01R9 running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.196        |
+| Total On-Chip Power (W)  | 0.198        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.124        |
+| Dynamic (W)              | 0.126        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.0         |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.001 |        5 |       --- |             --- |
-| Slice Logic    |    <0.001 |      947 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      504 |     20800 |            2.42 |
-|   CARRY4       |    <0.001 |      144 |      8150 |            1.77 |
+| Slice Logic    |     0.001 |     1264 |       --- |             --- |
+|   LUT as Logic |     0.001 |      680 |     20800 |            3.27 |
+|   CARRY4       |    <0.001 |      196 |      8150 |            2.40 |
 |   Register     |    <0.001 |       48 |     41600 |            0.12 |
-|   Others       |     0.000 |        8 |       --- |             --- |
-| Signals        |    <0.001 |      262 |       --- |             --- |
+|   Others       |     0.000 |        7 |       --- |             --- |
+| Signals        |    <0.001 |      326 |       --- |             --- |
 | MMCM           |     0.120 |        1 |         5 |           20.00 |
-| I/O            |     0.001 |       16 |       106 |           15.09 |
+| I/O            |     0.002 |       16 |       106 |           15.09 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.196 |          |           |                 |
+| Total          |     0.198 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +72,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.013 |       0.003 |      0.010 |
+| Vccint    |       1.000 |     0.013 |       0.004 |      0.010 |
 | Vccaux    |       1.800 |     0.079 |       0.067 |      0.013 |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -143,11 +143,11 @@ Table of Contents
 +----------------+-----------+
 | Name           | Power (W) |
 +----------------+-----------+
-| top            |     0.124 |
+| top            |     0.126 |
 |   u_clk_gen    |     0.121 |
 |     inst       |     0.121 |
 |   u_draw_car   |    <0.001 |
-|   u_vga_timing |     0.002 |
+|   u_vga_timing |     0.003 |
 +----------------+-----------+
 
 
