@@ -71,9 +71,6 @@ module top(
     wire [16:0] pixel_addr;
     wire [11:0] car_rgb_out;
 
-    //image_rom
-    wire [11:0] rom_rgb;
-
     draw_car u_draw_car_p1(
         .clk(clk65MHz),
         .reset(rst),
@@ -86,7 +83,6 @@ module top(
         .car_rgb_in(12'h0_0_0),
         .car_xpos(256),
         .car_ypos(400),
-        .car_rgb_pixel(rom_rgb),
 
         .car_hcount_out(car_hcount_out),
         .car_hsync_out(car_hsync_out),
@@ -94,14 +90,7 @@ module top(
         .car_vcount_out(car_vcount_out),
         .car_vsync_out(car_vsync_out),
         .car_vblnk_out(car_vblnk_out),
-        .car_rgb_out(car_rgb_out),
-        .pixel_addr(pixel_addr)
-    );
-
-    image_rom u_image_rom(
-        .address(pixel_addr),
-        .rgb(rom_rgb),
-        .clk(clk65MHz)
+        .car_rgb_out(car_rgb_out)
     );
     
     assign vs = car_vsync_out;
