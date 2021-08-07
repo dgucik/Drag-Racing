@@ -2,3 +2,6 @@
 /vivado/Drag-Racing.sim
 *.jou
 *.log
+/vivado/Drag-Racing.runs
+*.dmp
+*.str

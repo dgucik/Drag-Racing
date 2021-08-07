@@ -64,6 +64,59 @@ module draw_car(
 
 
                 //---------------------------------------------------------------------------------
+                else if( //szpryszki
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) || 
+                            (car_hcount_in >= car_xpos + 63) && (car_hcount_in <= car_xpos + 87) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 64) && (car_hcount_in <= car_xpos + 86) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) ||
+                            (car_hcount_in >= car_xpos + 65) && (car_hcount_in <= car_xpos + 85) && (car_vcount_in >= car_ypos + 32) && (car_vcount_in <= car_ypos + 44) ||
+                            (car_hcount_in >= car_xpos + 66) && (car_hcount_in <= car_xpos + 84) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||   
+                            (car_hcount_in >= car_xpos + 67) && (car_hcount_in <= car_xpos + 83) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 46) ||
+                            (car_hcount_in >= car_xpos + 68) && (car_hcount_in <= car_xpos + 82) && (car_vcount_in >= car_ypos + 29) && (car_vcount_in <= car_ypos + 47) ||
+                            (car_hcount_in >= car_xpos + 69) && (car_hcount_in <= car_xpos + 81) && (car_vcount_in >= car_ypos + 28) && (car_vcount_in <= car_ypos + 48) ||
+                            (car_hcount_in >= car_xpos + 70) && (car_hcount_in <= car_xpos + 80) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 49) ||
+
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) || 
+                            (car_hcount_in >= car_xpos + 246) && (car_hcount_in <= car_xpos + 270) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 247) && (car_hcount_in <= car_xpos + 269) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) ||
+                            (car_hcount_in >= car_xpos + 248) && (car_hcount_in <= car_xpos + 268) && (car_vcount_in >= car_ypos + 32) && (car_vcount_in <= car_ypos + 44) ||
+                            (car_hcount_in >= car_xpos + 249) && (car_hcount_in <= car_xpos + 267) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||   
+                            (car_hcount_in >= car_xpos + 250) && (car_hcount_in <= car_xpos + 266) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 46) ||
+                            (car_hcount_in >= car_xpos + 251) && (car_hcount_in <= car_xpos + 265) && (car_vcount_in >= car_ypos + 29) && (car_vcount_in <= car_ypos + 47) ||
+                            (car_hcount_in >= car_xpos + 252) && (car_hcount_in <= car_xpos + 264) && (car_vcount_in >= car_ypos + 28) && (car_vcount_in <= car_ypos + 48) ||
+                            (car_hcount_in >= car_xpos + 253) && (car_hcount_in <= car_xpos + 263) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 49)  
+                            
+                )
+                rgb_out_nxt = 12'h222;
+
+                else if( //LOPONA
+                            (car_hcount_in >= car_xpos + 68) && (car_hcount_in <= car_xpos + 82) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 59) ||
+                            (car_hcount_in >= car_xpos + 65) && (car_hcount_in <= car_xpos + 85) && (car_vcount_in >= car_ypos + 18) && (car_vcount_in <= car_ypos + 58) ||
+                            (car_hcount_in >= car_xpos + 54) && (car_hcount_in <= car_xpos + 96) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||
+                            (car_hcount_in >= car_xpos + 55) && (car_hcount_in <= car_xpos + 95) && (car_vcount_in >= car_ypos + 28) && (car_vcount_in <= car_ypos + 48) ||
+                            (car_hcount_in >= car_xpos + 56) && (car_hcount_in <= car_xpos + 94) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 49) ||
+                            (car_hcount_in >= car_xpos + 57) && (car_hcount_in <= car_xpos + 93) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) ||
+                            (car_hcount_in >= car_xpos + 58) && (car_hcount_in <= car_xpos + 92) && (car_vcount_in >= car_ypos + 24) && (car_vcount_in <= car_ypos + 52) ||
+                            (car_hcount_in >= car_xpos + 59) && (car_hcount_in <= car_xpos + 91) && (car_vcount_in >= car_ypos + 23) && (car_vcount_in <= car_ypos + 53) ||
+                            (car_hcount_in >= car_xpos + 60) && (car_hcount_in <= car_xpos + 90) && (car_vcount_in >= car_ypos + 22) && (car_vcount_in <= car_ypos + 54) ||
+                            (car_hcount_in >= car_xpos + 61) && (car_hcount_in <= car_xpos + 89) && (car_vcount_in >= car_ypos + 21) && (car_vcount_in <= car_ypos + 55) ||
+                            (car_hcount_in >= car_xpos + 63) && (car_hcount_in <= car_xpos + 87) && (car_vcount_in >= car_ypos + 20) && (car_vcount_in <= car_ypos + 56) ||
+                            (car_hcount_in >= car_xpos + 63) && (car_hcount_in <= car_xpos + 87) && (car_vcount_in >= car_ypos + 20) && (car_vcount_in <= car_ypos + 56) ||
+                            (car_hcount_in >= car_xpos + 64) && (car_hcount_in <= car_xpos + 86) && (car_vcount_in >= car_ypos + 19) && (car_vcount_in <= car_ypos + 57) ||
+                            (car_hcount_in >= car_xpos + 251) && (car_hcount_in <= car_xpos + 265) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 59) ||
+                            (car_hcount_in >= car_xpos + 248) && (car_hcount_in <= car_xpos + 268) && (car_vcount_in >= car_ypos + 18) && (car_vcount_in <= car_ypos + 58) ||
+                            (car_hcount_in >= car_xpos + 237) && (car_hcount_in <= car_xpos + 279) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||
+                            (car_hcount_in >= car_xpos + 238) && (car_hcount_in <= car_xpos + 278) && (car_vcount_in >= car_ypos + 28) && (car_vcount_in <= car_ypos + 48) ||
+                            (car_hcount_in >= car_xpos + 239) && (car_hcount_in <= car_xpos + 277) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 49) ||
+                            (car_hcount_in >= car_xpos + 240) && (car_hcount_in <= car_xpos + 276) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) ||
+                            (car_hcount_in >= car_xpos + 241) && (car_hcount_in <= car_xpos + 275) && (car_vcount_in >= car_ypos + 24) && (car_vcount_in <= car_ypos + 52) ||
+                            (car_hcount_in >= car_xpos + 242) && (car_hcount_in <= car_xpos + 274) && (car_vcount_in >= car_ypos + 23) && (car_vcount_in <= car_ypos + 53) ||
+                            (car_hcount_in >= car_xpos + 243) && (car_hcount_in <= car_xpos + 273) && (car_vcount_in >= car_ypos + 22) && (car_vcount_in <= car_ypos + 54) ||
+                            (car_hcount_in >= car_xpos + 244) && (car_hcount_in <= car_xpos + 272) && (car_vcount_in >= car_ypos + 21) && (car_vcount_in <= car_ypos + 55) ||
+                            (car_hcount_in >= car_xpos + 246) && (car_hcount_in <= car_xpos + 270) && (car_vcount_in >= car_ypos + 20) && (car_vcount_in <= car_ypos + 56) ||
+                            (car_hcount_in >= car_xpos + 246) && (car_hcount_in <= car_xpos + 270) && (car_vcount_in >= car_ypos + 20) && (car_vcount_in <= car_ypos + 56) ||
+                            (car_hcount_in >= car_xpos + 247) && (car_hcount_in <= car_xpos + 269) && (car_vcount_in >= car_ypos + 19) && (car_vcount_in <= car_ypos + 57)
+                )
+                rgb_out_nxt = 12'h000;
 
                 else if( //SZARY CIEMNY
                             (car_hcount_in >= car_xpos + 142) && (car_hcount_in <= car_xpos + 150) && (car_vcount_in >= car_ypos) && (car_vcount_in <= car_ypos + 2) ||

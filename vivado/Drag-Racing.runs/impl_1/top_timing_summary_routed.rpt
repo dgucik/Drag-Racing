@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.3 (win64) Build 2018833 Wed Oct  4 19:58:22 MDT 2017
-| Date         : Sat Aug  7 17:40:53 2021
+| Date         : Sat Aug  7 22:47:40 2021
 | Host         : DESKTOP-S7T01R9 running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -file top_timing_summary_routed.rpt -warn_on_violation -rpx top_timing_summary_routed.rpx
 | Design       : top
@@ -126,7 +126,7 @@ Table of Contents
 
     WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
     -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
-      4.532        0.000                      0                   77        0.122        0.000                      0                   77        3.000        0.000                       0                    72  
+      3.423        0.000                      0                   88        0.122        0.000                      0                   88        3.000        0.000                       0                    83  
 
 
 All user specified timing constraints are met.
@@ -152,7 +152,7 @@ clk                 {0.000 5.000}      10.000          100.000
 Clock                   WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
 -----                   -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
 clk                                                                                                                                                                   3.000        0.000                       0                     1  
-  clk65MHz_clk_gen        4.532        0.000                      0                   77        0.122        0.000                      0                   77        7.192        0.000                       0                    68  
+  clk65MHz_clk_gen        3.423        0.000                      0                   88        0.122        0.000                      0                   88        7.192        0.000                       0                    79  
   clkfbout_clk_gen                                                                                                                                                    7.845        0.000                       0                     3  
 
 
@@ -209,7 +209,7 @@ High Pulse Width  Slow    MMCME2_ADV/CLKIN1  n/a            2.000         5.000 
 From Clock:  clk65MHz_clk_gen
   To Clock:  clk65MHz_clk_gen
 
-Setup :            0  Failing Endpoints,  Worst Slack        4.532ns,  Total Violation        0.000ns
+Setup :            0  Failing Endpoints,  Worst Slack        3.423ns,  Total Violation        0.000ns
 Hold  :            0  Failing Endpoints,  Worst Slack        0.122ns,  Total Violation        0.000ns
 PW    :            0  Failing Endpoints,  Worst Slack        7.192ns,  Total Violation        0.000ns
 ---------------------------------------------------------------------------------------------------
@@ -217,20 +217,20 @@ PW    :            0  Failing Endpoints,  Worst Slack        7.192ns,  Total Vio
 
 Max Delay Paths
 --------------------------------------------------------------------------------------
-Slack (MET) :             4.532ns  (required time - arrival time)
-  Source:                 u_vga_timing/vga_vcount_reg_reg[5]/C
+Slack (MET) :             3.423ns  (required time - arrival time)
+  Source:                 u_vga_timing/vga_vcount_reg_reg[2]/C
                             (rising edge-triggered cell FDRE clocked by clk65MHz_clk_gen  {rise@0.000ns fall@7.692ns period=15.385ns})
-  Destination:            u_draw_car/car_rgb_out_reg[6]/D
+  Destination:            u_draw_car/car_rgb_out_reg[1]/D
                             (rising edge-triggered cell FDRE clocked by clk65MHz_clk_gen  {rise@0.000ns fall@7.692ns period=15.385ns})
   Path Group:             clk65MHz_clk_gen
   Path Type:              Setup (Max at Slow Process Corner)
   Requirement:            15.385ns  (clk65MHz_clk_gen rise@15.385ns - clk65MHz_clk_gen rise@0.000ns)
-  Data Path Delay:        10.778ns  (logic 1.983ns (18.399%)  route 8.795ns (81.601%))
-  Logic Levels:           7  (CARRY4=1 LUT2=1 LUT3=1 LUT6=4)
-  Clock Path Skew:        -0.024ns (DCD - SCD + CPR)
-    Destination Clock Delay (DCD):    -1.481ns = ( 13.904 - 15.385 ) 
-    Source Clock Delay      (SCD):    -0.894ns
-    Clock Pessimism Removal (CPR):    0.564ns
+  Data Path Delay:        11.612ns  (logic 2.851ns (24.552%)  route 8.761ns (75.448%))
+  Logic Levels:           9  (CARRY4=2 LUT2=2 LUT4=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.020ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    -1.482ns = ( 13.903 - 15.385 ) 
+    Source Clock Delay      (SCD):    -0.885ns
+    Clock Pessimism Removal (CPR):    0.578ns
   Clock Uncertainty:      0.079ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
     Total System Jitter     (TSJ):    0.071ns
     Discrete Jitter          (DJ):    0.142ns
@@ -249,27 +249,32 @@ Slack (MET) :             4.532ns  (required time - arrival time)
                          net (fo=2, routed)           1.661    -2.608    u_clk_gen/inst/clk65MHz_clk_gen
     BUFGCTRL_X0Y0        BUFGCTRL (Prop_bufgctrl_I0_O)
                                                       0.096    -2.512 r  u_clk_gen/inst/clkout2_buf/O
-                         net (fo=57, routed)          1.618    -0.894    u_vga_timing/clk65MHz
-    SLICE_X0Y24          FDRE                                         r  u_vga_timing/vga_vcount_reg_reg[5]/C
+                         net (fo=68, routed)          1.627    -0.885    u_vga_timing/clk65MHz
+    SLICE_X2Y31          FDRE                                         r  u_vga_timing/vga_vcount_reg_reg[2]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X0Y24          FDRE (Prop_fdre_C_Q)         0.456    -0.438 f  u_vga_timing/vga_vcount_reg_reg[5]/Q
-                         net (fo=167, routed)         2.527     2.089    u_vga_timing/vga_vcount[5]
-    SLICE_X28Y40         LUT3 (Prop_lut3_I0_O)        0.124     2.213 r  u_vga_timing/car_rgb_out[11]_i_297/O
-                         net (fo=1, routed)           0.000     2.213    u_vga_timing/car_rgb_out[11]_i_297_n_0
-    SLICE_X28Y40         CARRY4 (Prop_carry4_S[1]_CO[3])
-                                                      0.550     2.763 r  u_vga_timing/car_rgb_out_reg[11]_i_114/CO[3]
-                         net (fo=3, routed)           1.611     4.375    u_vga_timing/u_draw_car/rgb_out_nxt170_out
-    SLICE_X33Y30         LUT6 (Prop_lut6_I4_O)        0.124     4.499 f  u_vga_timing/car_rgb_out[9]_i_9/O
-                         net (fo=1, routed)           1.290     5.789    u_vga_timing/car_rgb_out[9]_i_9_n_0
-    SLICE_X13Y37         LUT6 (Prop_lut6_I2_O)        0.124     5.913 f  u_vga_timing/car_rgb_out[9]_i_4/O
-                         net (fo=4, routed)           1.690     7.603    u_vga_timing/car_rgb_out[9]_i_4_n_0
-    SLICE_X1Y32          LUT2 (Prop_lut2_I0_O)        0.154     7.757 f  u_vga_timing/car_rgb_out[0]_i_2/O
-                         net (fo=2, routed)           1.263     9.020    u_vga_timing/car_rgb_out[0]_i_2_n_0
-    SLICE_X5Y35          LUT6 (Prop_lut6_I1_O)        0.327     9.347 r  u_vga_timing/car_rgb_out[6]_i_4/O
-                         net (fo=1, routed)           0.414     9.760    u_vga_timing/car_rgb_out[6]_i_4_n_0
-    SLICE_X1Y35          LUT6 (Prop_lut6_I2_O)        0.124     9.884 r  u_vga_timing/car_rgb_out[6]_i_1/O
-                         net (fo=1, routed)           0.000     9.884    u_draw_car/D[6]
-    SLICE_X1Y35          FDRE                                         r  u_draw_car/car_rgb_out_reg[6]/D
+    SLICE_X2Y31          FDRE (Prop_fdre_C_Q)         0.478    -0.407 f  u_vga_timing/vga_vcount_reg_reg[2]/Q
+                         net (fo=187, routed)         2.516     2.109    u_vga_timing/vga_vcount[2]
+    SLICE_X40Y41         LUT2 (Prop_lut2_I1_O)        0.296     2.405 r  u_vga_timing/car_rgb_out[10]_i_1580/O
+                         net (fo=1, routed)           0.000     2.405    u_vga_timing/car_rgb_out[10]_i_1580_n_0
+    SLICE_X40Y41         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550     2.955 r  u_vga_timing/car_rgb_out_reg[10]_i_799/CO[3]
+                         net (fo=1, routed)           0.000     2.955    u_vga_timing/car_rgb_out_reg[10]_i_799_n_0
+    SLICE_X40Y42         CARRY4 (Prop_carry4_CI_CO[1])
+                                                      0.157     3.112 f  u_vga_timing/car_rgb_out_reg[10]_i_312/CO[1]
+                         net (fo=4, routed)           1.194     4.306    u_vga_timing/u_draw_car/rgb_out_nxt20238_in
+    SLICE_X38Y44         LUT6 (Prop_lut6_I1_O)        0.329     4.635 f  u_vga_timing/car_rgb_out[10]_i_141/O
+                         net (fo=1, routed)           1.151     5.786    u_vga_timing/car_rgb_out[10]_i_141_n_0
+    SLICE_X15Y47         LUT5 (Prop_lut5_I0_O)        0.124     5.910 f  u_vga_timing/car_rgb_out[10]_i_38/O
+                         net (fo=2, routed)           0.899     6.809    u_vga_timing/car_rgb_out[10]_i_38_n_0
+    SLICE_X11Y45         LUT6 (Prop_lut6_I1_O)        0.124     6.933 r  u_vga_timing/car_rgb_out[10]_i_9/O
+                         net (fo=5, routed)           1.036     7.969    u_vga_timing/car_rgb_out[10]_i_9_n_0
+    SLICE_X8Y34          LUT2 (Prop_lut2_I1_O)        0.116     8.085 f  u_vga_timing/car_rgb_out[8]_i_2/O
+                         net (fo=3, routed)           0.682     8.767    u_vga_timing/car_rgb_out[8]_i_2_n_0
+    SLICE_X6Y34          LUT4 (Prop_lut4_I3_O)        0.320     9.087 r  u_vga_timing/car_rgb_out[1]_i_2/O
+                         net (fo=1, routed)           0.719     9.806    u_vga_timing/car_rgb_out[1]_i_2_n_0
+    SLICE_X1Y34          LUT5 (Prop_lut5_I3_O)        0.357    10.163 r  u_vga_timing/car_rgb_out[1]_i_1/O
+                         net (fo=1, routed)           0.565    10.728    u_draw_car/D[1]
+    SLICE_X1Y34          FDRE                                         r  u_draw_car/car_rgb_out_reg[1]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk65MHz_clk_gen rise edge)
@@ -283,16 +288,16 @@ Slack (MET) :             4.532ns  (required time - arrival time)
                          net (fo=2, routed)           1.581    12.298    u_clk_gen/inst/clk65MHz_clk_gen
     BUFGCTRL_X0Y0        BUFGCTRL (Prop_bufgctrl_I0_O)
                                                       0.091    12.389 r  u_clk_gen/inst/clkout2_buf/O
-                         net (fo=57, routed)          1.514    13.904    u_draw_car/clk65MHz
-    SLICE_X1Y35          FDRE                                         r  u_draw_car/car_rgb_out_reg[6]/C
-                         clock pessimism              0.564    14.467    
-                         clock uncertainty           -0.079    14.388    
-    SLICE_X1Y35          FDRE (Setup_fdre_C_D)        0.029    14.417    u_draw_car/car_rgb_out_reg[6]
+                         net (fo=68, routed)          1.513    13.903    u_draw_car/clk65MHz
+    SLICE_X1Y34          FDRE                                         r  u_draw_car/car_rgb_out_reg[1]/C
+                         clock pessimism              0.578    14.480    
+                         clock uncertainty           -0.079    14.401    
+    SLICE_X1Y34          FDRE (Setup_fdre_C_D)       -0.250    14.151    u_draw_car/car_rgb_out_reg[1]
   -------------------------------------------------------------------
-                         required time                         14.417    
-                         arrival time                          -9.884    
+                         required time                         14.151    
+                         arrival time                         -10.728    
   -------------------------------------------------------------------
-                         slack                                  4.532    
+                         slack                                  3.423    
 
 
 
