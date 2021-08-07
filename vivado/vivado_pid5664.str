@@ -1,0 +1,97 @@
+/*
+
+Xilinx Vivado v2017.3 (64-bit) [Major: 2017, Minor: 3]
+SW Build: 2018833 on Wed Oct  4 19:58:22 MDT 2017
+IP Build: 2016188 on Wed Oct  4 21:52:56 MDT 2017
+
+Process ID: 5664
+License: Customer
+
+Current time: 	Sat Aug 07 12:47:36 CEST 2021
+Time zone: 	Central European Time (Europe/Belgrade)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 1536x864
+Screen resolution (DPI): 96
+Available screens: 2
+Available disk space: 20 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_112 64-bit
+Java home: 	D:/Xilinx/Vivado/2017.3/tps/win64/jre
+JVM executable location: 	D:/Xilinx/Vivado/2017.3/tps/win64/jre/bin/java.exe
+
+User name: 	Daniel Gucik
+User home directory: C:/Users/Daniel Gucik
+User working directory: D:/aaaaaPROJEEEEKT/vivado
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: D:/Xilinx/Vivado
+HDI_APPROOT: D:/Xilinx/Vivado/2017.3
+RDI_DATADIR: D:/Xilinx/Vivado/2017.3/data
+RDI_BINDIR: D:/Xilinx/Vivado/2017.3/bin
+
+User preferences location: C:/Users/Daniel Gucik/AppData/Roaming/Xilinx/Vivado
+Vivado preferences directory: C:/Users/Daniel Gucik/AppData/Roaming/Xilinx/Vivado/2017.3/vivado.xml
+Vivado layouts directory: C:/Users/Daniel Gucik/AppData/Roaming/Xilinx/Vivado/2017.3/layouts
+PlanAhead jar file location: 	D:/Xilinx/Vivado/2017.3/lib/classes/planAhead.jar
+Vivado log file location: 	D:/aaaaaPROJEEEEKT/vivado/vivado.log
+Vivado journal file location: 	D:/aaaaaPROJEEEEKT/vivado/vivado.jou
+Engine tmp dir: 	D:/aaaaaPROJEEEEKT/vivado/.Xil/Vivado-5664-DESKTOP-S7T01R9
+
+GUI allocated memory:	184 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 585 MB
+
+Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// [GUI Memory]: 60 MB (+60574kb) [00:00:08]
+// [Engine Memory]: 505 MB (+378042kb) [00:00:08]
+// Opening Vivado Project: D:\aaaaaPROJEEEEKT\vivado\Drag-Racing.xpr. Version: Vivado v2017.3 
+// bs (cl):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project D:/aaaaaPROJEEEEKT/vivado/Drag-Racing.xpr 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project D:/aaaaaPROJEEEEKT/vivado/Drag-Racing.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [Engine Memory]: 550 MB (+20515kb) [00:00:11]
+// [GUI Memory]: 70 MB (+6670kb) [00:00:14]
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2017.3/data/ip'. 
+// [Engine Memory]: 585 MB (+7994kb) [00:00:15]
+// HMemoryUtils.trashcanNow. Engine heap size: 589 MB. GUI used memory: 37 MB. Current time: 8/7/21 12:47:37 PM CEST
+// Project name: Drag-Racing; location: D:/aaaaaPROJEEEEKT/vivado; part: xc7a35tcpg236-1
+// [Engine Memory]: 617 MB (+2969kb) [00:00:17]
+// Tcl Message: open_project: Time (s): cpu = 00:00:20 ; elapsed = 00:00:08 . Memory (MB): peak = 794.992 ; gain = 22.051 
+// WARNING: HTimer (FileMgr Design Graph Update Timer) is taking too long to process. Increasing delay to 3000 ms.
+dismissDialog("Open Project"); // bs (cl)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 70 seconds
+collapseTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // u (O, cl)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager]", 21); // u (O, cl)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Program and Debug, Open Hardware Manager, Open Target]", 22, false); // u (O, cl)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HW_TARGET
+selectMenuItem(PAResourceCommand.PACommandNames_AUTO_CONNECT_TARGET, "Auto Connect"); // ac (ai, Popup.HeavyWeightWindow)
+// Run Command: PAResourceCommand.PACommandNames_OPEN_HARDWARE_MANAGER
+// Tcl Command: 'rdi::info_commands get_hw_probes'
+// Tcl Command: 'load_features labtools'
+// TclEventType: LOAD_FEATURE
+// bs (cl):  Open Hardware Manager : addNotify
+// TclEventType: HW_SESSION_OPEN

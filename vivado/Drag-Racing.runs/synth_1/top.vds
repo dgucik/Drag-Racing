@@ -2,8 +2,8 @@
 # Vivado v2017.3 (64-bit)
 # SW Build 2018833 on Wed Oct  4 19:58:22 MDT 2017
 # IP Build 2016188 on Wed Oct  4 21:52:56 MDT 2017
-# Start of session at: Wed Aug  4 23:43:21 2021
-# Process ID: 8864
+# Start of session at: Sat Aug  7 17:39:04 2021
+# Process ID: 14060
 # Current directory: D:/aaaaaPROJEEEEKT/vivado/Drag-Racing.runs/synth_1
 # Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
 # Log file: D:/aaaaaPROJEEEEKT/vivado/Drag-Racing.runs/synth_1/top.vds
@@ -15,9 +15,9 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 20552 
+INFO: Helper process launched with PID 9096 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 355.422 ; gain = 95.609
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 355.762 ; gain = 95.914
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'top' [D:/aaaaaPROJEEEEKT/src/rtl/top.v:21]
 INFO: [Synth 8-638] synthesizing module 'clk_gen' [D:/aaaaaPROJEEEEKT/src/rtl/clk_gen.v:71]
@@ -107,16 +107,16 @@ INFO: [Synth 8-638] synthesizing module 'vga_timing' [D:/aaaaaPROJEEEEKT/src/rtl
 	Parameter VER_SYNC_START bound to: 771 - type: integer 
 	Parameter VER_SYNC_TIME bound to: 6 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'vga_timing' (9#1) [D:/aaaaaPROJEEEEKT/src/rtl/vga_timing.v:1]
-INFO: [Synth 8-638] synthesizing module 'draw_car' [D:/aaaaaPROJEEEEKT/src/rtl/draw_car.v:1]
+INFO: [Synth 8-638] synthesizing module 'draw_car' [D:/aaaaaPROJEEEEKT/src/rtl/draw_car.v:2]
 	Parameter RGB_1 bound to: 12'b111110001010 
 	Parameter RGB_2 bound to: 12'b111101010100 
 	Parameter RGB_3 bound to: 12'b110100010000 
-INFO: [Synth 8-256] done synthesizing module 'draw_car' (10#1) [D:/aaaaaPROJEEEEKT/src/rtl/draw_car.v:1]
+INFO: [Synth 8-256] done synthesizing module 'draw_car' (10#1) [D:/aaaaaPROJEEEEKT/src/rtl/draw_car.v:2]
 INFO: [Synth 8-256] done synthesizing module 'top' (11#1) [D:/aaaaaPROJEEEEKT/src/rtl/top.v:21]
 WARNING: [Synth 8-3331] design top has unconnected port ps2_clk
 WARNING: [Synth 8-3331] design top has unconnected port ps2_data
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 396.879 ; gain = 137.066
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 399.848 ; gain = 140.000
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -126,7 +126,7 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 396.879 ; gain = 137.066
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 399.848 ; gain = 140.000
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -156,27 +156,27 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 2 instances were transformed.
   BUFGCE => BUFGCTRL: 2 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 710.496 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 716.770 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-6014] Unused sequential element counter_reg was removed.  [D:/aaaaaPROJEEEEKT/src/rtl/reset.v:19]
 INFO: [Synth 8-5546] ROM "rgb_out_nxt" won't be mapped to RAM because it is too sparse
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -189,8 +189,8 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 22    
-	   2 Input     13 Bit       Adders := 67    
+	   2 Input     32 Bit       Adders := 30    
+	   2 Input     13 Bit       Adders := 188   
 	   2 Input     11 Bit       Adders := 2     
 	   2 Input      5 Bit       Adders := 1     
 +---Registers : 
@@ -200,7 +200,7 @@ Detailed RTL Component Info :
 	                5 Bit    Registers := 1     
 	                1 Bit    Registers := 9     
 +---Muxes : 
-	   2 Input     12 Bit        Muxes := 7     
+	   2 Input     12 Bit        Muxes := 15    
 	   3 Input     12 Bit        Muxes := 2     
 	   2 Input     11 Bit        Muxes := 3     
 	   2 Input      5 Bit        Muxes := 1     
@@ -239,14 +239,14 @@ Detailed RTL Component Info :
 Module draw_car 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 22    
-	   2 Input     13 Bit       Adders := 67    
+	   2 Input     32 Bit       Adders := 30    
+	   2 Input     13 Bit       Adders := 188   
 +---Registers : 
 	               12 Bit    Registers := 1     
 	               11 Bit    Registers := 2     
 	                1 Bit    Registers := 4     
 +---Muxes : 
-	   2 Input     12 Bit        Muxes := 7     
+	   2 Input     12 Bit        Muxes := 15    
 	   3 Input     12 Bit        Muxes := 2     
 	   3 Input      4 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 1     
@@ -267,13 +267,11 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "rgb_out_nxt" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "rgb_out_nxt" won't be mapped to RAM because it is too sparse
 WARNING: [Synth 8-6014] Unused sequential element u_reset/rst_reg was removed.  [D:/aaaaaPROJEEEEKT/src/rtl/reset.v:13]
 WARNING: [Synth 8-6014] Unused sequential element u_reset/counter_reg was removed.  [D:/aaaaaPROJEEEEKT/src/rtl/reset.v:19]
 WARNING: [Synth 8-3331] design top has unconnected port ps2_clk
 WARNING: [Synth 8-3331] design top has unconnected port ps2_data
-INFO: [Synth 8-3886] merging instance 'u_draw_car/car_rgb_out_reg[1]' (FDR) to 'u_draw_car/car_rgb_out_reg[3]'
-INFO: [Synth 8-3886] merging instance 'u_draw_car/car_rgb_out_reg[8]' (FDR) to 'u_draw_car/car_rgb_out_reg[10]'
-INFO: [Synth 8-3886] merging instance 'u_draw_car/car_rgb_out_reg[10]' (FDR) to 'u_draw_car/car_rgb_out_reg[11]'
 WARNING: [Synth 8-3332] Sequential element (car_hcount_out_reg[10]) is unused and will be removed from module draw_car.
 WARNING: [Synth 8-3332] Sequential element (car_hcount_out_reg[9]) is unused and will be removed from module draw_car.
 WARNING: [Synth 8-3332] Sequential element (car_hcount_out_reg[8]) is unused and will be removed from module draw_car.
@@ -299,7 +297,7 @@ WARNING: [Synth 8-3332] Sequential element (car_vcount_out_reg[1]) is unused and
 WARNING: [Synth 8-3332] Sequential element (car_vcount_out_reg[0]) is unused and will be removed from module draw_car.
 WARNING: [Synth 8-3332] Sequential element (car_vblnk_out_reg) is unused and will be removed from module draw_car.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -311,13 +309,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:41 ; elapsed = 00:00:41 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:38 ; elapsed = 00:00:40 . Memory (MB): peak = 710.496 ; gain = 450.684
+Finished Timing Optimization : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -329,7 +327,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:39 ; elapsed = 00:00:40 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Technology Mapping : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -353,7 +351,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -366,7 +364,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -378,25 +376,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -415,16 +413,16 @@ Report Cell Usage:
 |1     |BUFG       |     1|
 |2     |BUFGCE     |     2|
 |3     |BUFH       |     2|
-|4     |CARRY4     |   196|
-|5     |LUT1       |   162|
-|6     |LUT2       |   743|
-|7     |LUT3       |    22|
-|8     |LUT4       |    24|
-|9     |LUT5       |    21|
-|10    |LUT6       |    41|
+|4     |CARRY4     |   514|
+|5     |LUT1       |   399|
+|6     |LUT2       |  1872|
+|7     |LUT3       |   108|
+|8     |LUT4       |    59|
+|9     |LUT5       |    36|
+|10    |LUT6       |    95|
 |11    |MMCME2_ADV |     1|
 |12    |FDCE       |    16|
-|13    |FDRE       |    37|
+|13    |FDRE       |    57|
 |14    |IBUF       |     2|
 |15    |OBUF       |    14|
 +------+-----------+------+
@@ -433,20 +431,20 @@ Report Instance Areas:
 +------+---------------+----------------+------+
 |      |Instance       |Module          |Cells |
 +------+---------------+----------------+------+
-|1     |top            |                |  1284|
-|2     |  u_draw_car   |draw_car        |    12|
+|1     |top            |                |  3178|
+|2     |  u_draw_car   |draw_car        |    14|
 |3     |  u_clk_gen    |clk_gen         |    23|
 |4     |    inst       |clk_gen_clk_wiz |    23|
-|5     |  u_vga_timing |vga_timing      |  1234|
+|5     |  u_vga_timing |vga_timing      |  3126|
 +------+---------------+----------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 29 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:27 ; elapsed = 00:00:36 . Memory (MB): peak = 721.320 ; gain = 147.891
-Synthesis Optimization Complete : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 721.320 ; gain = 461.508
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:38 . Memory (MB): peak = 716.770 ; gain = 140.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:43 . Memory (MB): peak = 716.770 ; gain = 456.922
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 201 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 519 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 WARNING: [Netlist 29-101] Netlist 'top' is not ideal for floorplanning, since the cellview 'vga_timing' contains a large number of primitives.  Please consider enabling hierarchy in synthesis if you want to do floorplanning.
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -456,10 +454,10 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   BUFGCE => BUFGCTRL: 2 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-47 Infos, 32 Warnings, 0 Critical Warnings and 0 Errors encountered.
+45 Infos, 32 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:41 ; elapsed = 00:00:43 . Memory (MB): peak = 722.734 ; gain = 475.449
+synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:45 . Memory (MB): peak = 716.770 ; gain = 469.441
 INFO: [Common 17-1381] The checkpoint 'D:/aaaaaPROJEEEEKT/vivado/Drag-Racing.runs/synth_1/top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.025 . Memory (MB): peak = 722.734 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Wed Aug  4 23:44:07 2021...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.037 . Memory (MB): peak = 716.770 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Sat Aug  7 17:39:53 2021...

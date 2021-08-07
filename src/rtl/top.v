@@ -80,7 +80,7 @@ module top(
         .car_vcount_in(vga_vcount),
         .car_vsync_in(vga_vsync),
         .car_vblnk_in(vga_vblnk),
-        .car_rgb_in(12'h0_0_0),
+        .car_rgb_in(12'hf_f_f),
         .car_xpos(256),
         .car_ypos(400),
 
