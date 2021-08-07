@@ -2,3 +2,4 @@
  - [x] interfejs klawiatury
  - [ ] model samochodu
  - [ ] menu główne
+ - [ ] background
