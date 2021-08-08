@@ -83,7 +83,7 @@ module top(
         .car_rgb_in(12'hf_f_f),
         .car_xpos(256),
         .car_ypos(400),
-
+        .car_mov(1),        
         .car_hcount_out(car_hcount_out),
         .car_hsync_out(car_hsync_out),
         .car_hblnk_out(car_hblnk_out),

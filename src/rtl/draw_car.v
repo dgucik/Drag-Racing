@@ -11,6 +11,7 @@ module draw_car(
     input wire [11:0] car_rgb_in,
     input wire [11:0] car_xpos,
     input wire [11:0] car_ypos,
+    input wire car_mov,
     output reg [10:0] car_hcount_out,
     output reg car_hsync_out,
     output reg car_hblnk_out,
@@ -20,8 +21,8 @@ module draw_car(
     output reg [11:0] car_rgb_out
 );
 
-    localparam  RGB_1 = 12'hF8A,
-                RGB_2 = 12'hF54,
+    localparam  RGB_1 = 12'hF83,
+                RGB_2 = 12'hF50,
                 RGB_3 = 12'hD10;
 
     reg [11:0] rgb_out_nxt;
@@ -57,14 +58,54 @@ module draw_car(
             vblnk_out_nxt = car_vblnk_in;
             if(car_hblnk_in || car_vblnk_in) rgb_out_nxt = 12'h0_0_0;
             else begin
-                if (car_vcount_in == 0) rgb_out_nxt = 12'hf_f_0;
-                else if (car_vcount_in == 767) rgb_out_nxt = 12'hf_0_0;
-                else if (car_hcount_in == 0) rgb_out_nxt = 12'h0_f_0;
-                else if (car_hcount_in == 1023) rgb_out_nxt = 12'h0_0_f;
-
-
                 //---------------------------------------------------------------------------------
-                else if( //szpryszki
+                if((car_mov == 0) && (
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 73) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 73) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 77) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 77) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 256) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 256) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 260) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 260) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42)
+                        )
+                )
+                rgb_out_nxt = 12'h777;
+
+                else if((car_mov == 1) && (
+                            (car_hcount_in >= car_xpos + 74) && (car_hcount_in <= car_xpos + 76) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 74) && (car_hcount_in <= car_xpos + 76) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 73) && (car_vcount_in >= car_ypos + 37) && (car_vcount_in <= car_ypos + 39) ||
+                            (car_hcount_in >= car_xpos + 77) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 37) && (car_vcount_in <= car_ypos + 39) ||
+                            (car_hcount_in >= car_xpos + 257) && (car_hcount_in <= car_xpos + 259) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 36) ||
+                            (car_hcount_in >= car_xpos + 257) && (car_hcount_in <= car_xpos + 259) && (car_vcount_in >= car_ypos + 40) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 256) && (car_vcount_in >= car_ypos + 37) && (car_vcount_in <= car_ypos + 39) ||
+                            (car_hcount_in >= car_xpos + 260) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 37) && (car_vcount_in <= car_ypos + 39)
+                        )
+                )
+                rgb_out_nxt = 12'h777;
+
+                else if(
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) ||
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) 
+                )
+                rgb_out_nxt = 12'h445;
+
+                else if(
+                            (car_hcount_in >= car_xpos + 67) && (car_hcount_in <= car_xpos + 83) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) || 
+                            (car_hcount_in >= car_xpos + 68) && (car_hcount_in <= car_xpos + 82) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) || 
+                            (car_hcount_in >= car_xpos + 69) && (car_hcount_in <= car_xpos + 81) && (car_vcount_in >= car_ypos + 32) && (car_vcount_in <= car_ypos + 44) ||
+                            (car_hcount_in >= car_xpos + 70) && (car_hcount_in <= car_xpos + 80) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||
+                            (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 46) ||
+                            (car_hcount_in >= car_xpos + 250) && (car_hcount_in <= car_xpos + 266) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) || 
+                            (car_hcount_in >= car_xpos + 251) && (car_hcount_in <= car_xpos + 265) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) || 
+                            (car_hcount_in >= car_xpos + 252) && (car_hcount_in <= car_xpos + 264) && (car_vcount_in >= car_ypos + 32) && (car_vcount_in <= car_ypos + 44) ||
+                            (car_hcount_in >= car_xpos + 253) && (car_hcount_in <= car_xpos + 263) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||
+                            (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 46) 
+                )
+                rgb_out_nxt = 12'h000;
+
+                else if(
                             (car_hcount_in >= car_xpos + 71) && (car_hcount_in <= car_xpos + 79) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) || 
                             (car_hcount_in >= car_xpos + 63) && (car_hcount_in <= car_xpos + 87) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) ||
                             (car_hcount_in >= car_xpos + 64) && (car_hcount_in <= car_xpos + 86) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) ||
@@ -74,7 +115,6 @@ module draw_car(
                             (car_hcount_in >= car_xpos + 68) && (car_hcount_in <= car_xpos + 82) && (car_vcount_in >= car_ypos + 29) && (car_vcount_in <= car_ypos + 47) ||
                             (car_hcount_in >= car_xpos + 69) && (car_hcount_in <= car_xpos + 81) && (car_vcount_in >= car_ypos + 28) && (car_vcount_in <= car_ypos + 48) ||
                             (car_hcount_in >= car_xpos + 70) && (car_hcount_in <= car_xpos + 80) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 49) ||
-
                             (car_hcount_in >= car_xpos + 254) && (car_hcount_in <= car_xpos + 262) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 50) || 
                             (car_hcount_in >= car_xpos + 246) && (car_hcount_in <= car_xpos + 270) && (car_vcount_in >= car_ypos + 34) && (car_vcount_in <= car_ypos + 42) ||
                             (car_hcount_in >= car_xpos + 247) && (car_hcount_in <= car_xpos + 269) && (car_vcount_in >= car_ypos + 33) && (car_vcount_in <= car_ypos + 43) ||
@@ -88,7 +128,7 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h222;
 
-                else if( //LOPONA
+                else if(
                             (car_hcount_in >= car_xpos + 68) && (car_hcount_in <= car_xpos + 82) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 59) ||
                             (car_hcount_in >= car_xpos + 65) && (car_hcount_in <= car_xpos + 85) && (car_vcount_in >= car_ypos + 18) && (car_vcount_in <= car_ypos + 58) ||
                             (car_hcount_in >= car_xpos + 54) && (car_hcount_in <= car_xpos + 96) && (car_vcount_in >= car_ypos + 31) && (car_vcount_in <= car_ypos + 45) ||
@@ -118,12 +158,10 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h000;
 
-                else if( //SZARY CIEMNY
+                else if(
                             (car_hcount_in >= car_xpos + 142) && (car_hcount_in <= car_xpos + 150) && (car_vcount_in >= car_ypos) && (car_vcount_in <= car_ypos + 2) ||
                             (car_hcount_in >= car_xpos + 142) && (car_hcount_in <= car_xpos + 144) && (car_vcount_in == car_ypos + 3) ||
                             (car_hcount_in >= car_xpos + 142) && (car_hcount_in <= car_xpos + 143) && (car_vcount_in >= car_ypos + 4) && (car_vcount_in <= car_ypos + 5) ||
-                            
-                            //Blotnik lewy
                             (car_hcount_in == car_xpos + 51) && (car_vcount_in == car_ypos + 37) ||
                             (car_hcount_in >= car_xpos + 52) && (car_hcount_in <= car_xpos + 98) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 37) ||
                             (car_hcount_in >= car_xpos + 97) && (car_hcount_in <= car_xpos + 98) && (car_vcount_in >= car_ypos + 38) && (car_vcount_in <= car_ypos + 41) ||
@@ -140,8 +178,6 @@ module draw_car(
                             (car_hcount_in >= car_xpos + 62) && (car_hcount_in <= car_xpos + 88) && (car_vcount_in == car_ypos + 17) ||
                             (car_hcount_in >= car_xpos + 63) && (car_hcount_in <= car_xpos + 87) && (car_vcount_in == car_ypos + 16) ||
                             (car_hcount_in >= car_xpos + 66) && (car_hcount_in <= car_xpos + 84) && (car_vcount_in == car_ypos + 15) ||
-
-                            //Blotnik prawa
                             (car_hcount_in == car_xpos + 282) && (car_vcount_in == car_ypos + 37) ||
                             (car_hcount_in >= car_xpos + 235) && (car_hcount_in <= car_xpos + 281) && (car_vcount_in >= car_ypos + 30) && (car_vcount_in <= car_ypos + 37) ||
                             (car_hcount_in >= car_xpos + 236) && (car_hcount_in <= car_xpos + 280) && (car_vcount_in >= car_ypos + 26) && (car_vcount_in <= car_ypos + 29) ||
@@ -161,7 +197,7 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h322;
 
-                else if( //SZARY CIEMNY
+                else if(
                             (car_hcount_in >= car_xpos + 49) && (car_hcount_in <= car_xpos + 95) && (car_vcount_in >= car_ypos - 4) && (car_vcount_in <= car_ypos - 1) ||
                             (car_hcount_in == car_xpos + 48) && (car_vcount_in >= car_ypos - 3) && (car_vcount_in <= car_ypos - 2) ||
                             (car_hcount_in >= car_xpos + 93) && (car_hcount_in <= car_xpos + 98) && (car_vcount_in >= car_ypos - 7) && (car_vcount_in <= car_ypos - 5) ||
@@ -169,7 +205,7 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h666;
 
-                else if( //CZARNY
+                else if(
                             (car_hcount_in >= car_xpos + 294) && (car_hcount_in <= car_xpos + 295) && (car_vcount_in >= car_ypos + 21) && (car_vcount_in <= car_ypos + 23) ||
                             (car_hcount_in >= car_xpos + 24) && (car_hcount_in <= car_xpos + 50) && (car_vcount_in >= car_ypos + 38) && (car_vcount_in <= car_ypos + 40) ||
                             (car_hcount_in >= car_xpos + 100) && (car_hcount_in <= car_xpos + 233) && (car_vcount_in >= car_ypos + 42) && (car_vcount_in <= car_ypos + 43) ||
@@ -216,17 +252,17 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h000;
 
-                else if( //ZOLTY CIEMNY
+                else if(
                             (car_hcount_in == car_xpos + 296) && (car_vcount_in >= car_ypos + 21) && (car_vcount_in <= car_ypos + 23)   
                 )
-                rgb_out_nxt = 12'h000; 
+                rgb_out_nxt = 12'h650; 
 
-                else if( //ZOLTY JASNY
+                else if(
                             (car_hcount_in >= car_xpos + 297) && (car_hcount_in <= car_xpos + 302) && (car_vcount_in >= car_ypos + 21) && (car_vcount_in <= car_ypos + 23)   
                 )
-                rgb_out_nxt = 12'hfff; 
+                rgb_out_nxt = 12'hfd1; 
 
-                else if( //SZARY
+                else if(
                             (car_hcount_in >= car_xpos - 1) && (car_hcount_in <= car_xpos + 2) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 23) ||
                             (car_hcount_in >= car_xpos - 4) && (car_hcount_in <= car_xpos - 2) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 20) ||
                             (car_hcount_in >= car_xpos + 310) && (car_hcount_in <= car_xpos + 317) && (car_vcount_in >= car_ypos + 24) && (car_vcount_in <= car_ypos + 27) || 
@@ -234,7 +270,7 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'hbcc; 
 
-                else if( //SZARY
+                else if(
                             (car_hcount_in >= car_xpos - 4) && (car_hcount_in <= car_xpos + 2) && (car_vcount_in >= car_ypos + 14) && (car_vcount_in <= car_ypos + 16) ||
                             (car_hcount_in >= car_xpos + 3) && (car_hcount_in <= car_xpos + 5) && (car_vcount_in >= car_ypos + 17) && (car_vcount_in <= car_ypos + 26) ||
                             (car_hcount_in >= car_xpos - 4) && (car_hcount_in <= car_xpos + 2) && (car_vcount_in >= car_ypos + 24) && (car_vcount_in <= car_ypos + 26) ||
@@ -243,7 +279,7 @@ module draw_car(
                 )
                 rgb_out_nxt = 12'h455;
 
-                else if( //SZARY OKNA DO POPRAWY
+                else if(
                             (car_hcount_in >= car_xpos + 113) && (car_hcount_in <= car_xpos + 209) && (car_vcount_in >= car_ypos - 14) && (car_vcount_in <= car_ypos - 11) ||
                             (car_hcount_in >= car_xpos + 138) && (car_hcount_in <= car_xpos + 212) && (car_vcount_in >= car_ypos - 10) && (car_vcount_in <= car_ypos - 8) ||
                             (car_hcount_in >= car_xpos + 182) && (car_hcount_in <= car_xpos + 210) && (car_vcount_in >= car_ypos - 7) && (car_vcount_in <= car_ypos - 5) ||
@@ -255,7 +291,7 @@ module draw_car(
                             (car_hcount_in >= car_xpos + 186) && (car_hcount_in <= car_xpos + 199) && (car_vcount_in >= car_ypos - 24) && (car_vcount_in <= car_ypos - 22) ||
                             (car_hcount_in == car_xpos + 210) && (car_vcount_in == car_ypos - 11)         
                 )
-                rgb_out_nxt = 12'hdd3;   
+                rgb_out_nxt = 12'hddc;   
 
                 else if(
                             (car_hcount_in >= car_xpos + 23) && (car_hcount_in <= car_xpos + 306) && (car_vcount_in >= car_ypos + 27) && (car_vcount_in <= car_ypos + 37) ||
@@ -306,7 +342,6 @@ module draw_car(
                 )
                 rgb_out_nxt = RGB_1;
                 //---------------------------------------------------------------------------------
-
                 else rgb_out_nxt = car_rgb_in;
             end
         end
