@@ -1,7 +1,7 @@
-/vivado/.Xil
-/vivado/Drag-Racing.sim
+/vivado/.Xil/*
+/vivado/Drag-Racing.sim/*
 *.jou
 *.log
-/vivado/Drag-Racing.runs
+/vivado/Drag-Racing.runs/*
 *.dmp
 *.str
