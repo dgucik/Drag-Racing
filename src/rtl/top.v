@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: AGH University of Science and Technology
-// Engineer: Daniel Gucik, Patryk Koci�ski
+// Engineer: Daniel Gucik, Patryk Koci?ski
 // 
 // Create Date: 20.07.2021 21:23:01
 // Design Name: -
@@ -40,12 +40,21 @@ module top(
     //vga_timing
     wire [10:0] vga_vcount, vga_hcount;
     wire vga_vsync, vga_vblnk, vga_hsync, vga_hblnk;
-    
-    //background_module
 
-    //wire [11:0] rgb_out;
-    //wire vga_hsync2, vga_vsync2;
+    //draw_car_p2
+    wire [10:0] car_hcount_p2, car_vcount_p2;
+    wire car_hsync_p2, car_hblnk_p2, car_vsync_p2, car_vblnk_p2;
+    wire [11:0] car_rgb_p2;
 
+    //draw_car_p1
+    wire [10:0] car_hcount_p1, car_vcount_p1;
+    wire car_hsync_p1, car_hblnk_p1, car_vsync_p1, car_vblnk_p1;
+    wire [11:0] car_rgb_p1;
+
+    //draw_backgorund
+    wire [10:0] background_hcount, background_vcount;
+    wire background_hsync, background_hblnk, background_vsync, background_vblnk;
+    wire [11:0] background_rgb;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -70,53 +79,71 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
-
-    //draw_car
-    wire [10:0] car_hcount_out, car_vcount_out;
-    wire car_hsync_out, car_hblnk_out, car_vsync_out, car_vblnk_out;
-    wire [16:0] pixel_addr;
-    wire [11:0] car_rgb_out;
-
-    draw_car u_draw_car(
+    
+    draw_background u_draw_backgroud(
+        .hcount_in(vga_hcount),
+        .vcount_in(vga_vcount),
+        .hsync_in(vga_hsync),
+        .vsync_in(vga_vsync),
+        .hblnk_in(vga_hblnk),
+        .vblnk_in(vga_vblnk),
+        .hcount_out(background_hcount),
+        .vcount_out(background_vcount),
+        .hsync_out(background_hsync),
+        .vsync_out(background_vsync),
+        .hblnk_out(background_hblnk),
+        .vblnk_out(background_vblnk),
+        .rgb_out(background_rgb),
         .clk(clk65MHz),
-        .reset(rst),
-        .car_hcount_in(vga_hcount),
-        .car_hsync_in(vga_hsync),
-        .car_hblnk_in(vga_hblnk),
-        .car_vcount_in(vga_vcount),
-        .car_vsync_in(vga_vsync),
-        .car_vblnk_in(vga_vblnk),
-        .car_rgb_in(12'hf_f_f),
-        .car_xpos(256),
-        .car_ypos(400),
-        .car_mov(1),        
-        .car_hcount_out(car_hcount_out),
-        .car_hsync_out(car_hsync_out),
-        .car_hblnk_out(car_hblnk_out),
-        .car_vcount_out(car_vcount_out),
-        .car_vsync_out(car_vsync_out),
-        .car_vblnk_out(car_vblnk_out),
-        .car_rgb_out(car_rgb_out)
+        .rst(rst_ext)
+    );
+
+    draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069)) u_draw_car_p2(
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .hcount_in(background_hcount),
+        .hsync_in(background_hsync),
+        .hblnk_in(background_hblnk),
+        .vcount_in(background_vcount),
+        .vsync_in(background_vsync),
+        .vblnk_in(background_vblnk),
+        .rgb_in(background_rgb),
+        .xpos(256),
+        .ypos(345),
+        .mov(1),        
+        .hcount_out(car_hcount_p2),
+        .hsync_out(car_hsync_p2),
+        .hblnk_out(car_hblnk_p2),
+        .vcount_out(car_vcount_p2),
+        .vsync_out(car_vsync_p2),
+        .vblnk_out(car_vblnk_p2),
+        .rgb_out(car_rgb_p2)
+    );
+
+    draw_car u_draw_car_p1(
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .hcount_in(car_hcount_p2),
+        .hsync_in(car_hsync_p2),
+        .hblnk_in(car_hblnk_p2),
+        .vcount_in(car_vcount_p2),
+        .vsync_in(car_vsync_p2),
+        .vblnk_in(car_vblnk_p2),
+        .rgb_in(car_rgb_p2),
+        .xpos(256),
+        .ypos(531),
+        .mov(1),        
+        .hcount_out(car_hcount_p1),
+        .hsync_out(car_hsync_p1),
+        .hblnk_out(car_hblnk_p1),
+        .vcount_out(car_vcount_p1),
+        .vsync_out(car_vsync_p1),
+        .vblnk_out(car_vblnk_p1),
+        .rgb_out(car_rgb_p1)
     );
     
-    draw_background draw_backgroud(
-        .hcount_in(),
-        .vcount_in(),
-        .hsync_in(),
-        .vsync_in(),
-        .hblnk_in(),
-        .vblnk_in(),
-        
-        .hsync_out(),
-        .vsync_out(),
-        .rgb_out(),
-        
-        .clk(clk65MHz),
-        .rst()
-    );
 
-    assign vs = car_vsync_out;
-    assign hs = car_hsync_out;
-    assign {r,g,b} = car_rgb_out;  
-
+    assign vs = car_vsync_p1;
+    assign hs = car_hsync_p1;
+    assign {r,g,b} = car_rgb_p1;  
 endmodule
