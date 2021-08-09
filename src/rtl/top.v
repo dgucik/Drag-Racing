@@ -55,6 +55,11 @@ module top(
     wire [10:0] background_hcount, background_vcount;
     wire background_hsync, background_hblnk, background_vsync, background_vblnk;
     wire [11:0] background_rgb;
+    
+    //menu
+    wire [10:0] menu_hcount, menu_vcount;
+    wire menu_hsync, menu_hblnk, menu_vsync, menu_vblnk;
+    wire [11:0] menu_rgb;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -79,7 +84,7 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
-    
+/*    
     draw_background u_draw_backgroud(
         .hcount_in(vga_hcount),
         .vcount_in(vga_vcount),
@@ -141,9 +146,31 @@ module top(
         .vblnk_out(car_vblnk_p1),
         .rgb_out(car_rgb_p1)
     );
-    
+*/
 
-    assign vs = car_vsync_p1;
-    assign hs = car_hsync_p1;
-    assign {r,g,b} = car_rgb_p1;  
+    menu menu(
+    .clk(clk65MHz),
+    .rst(rst_ext),
+    .hcount_in(vga_hcount),
+    .vcount_in(vga_vcount),
+    .hsync_in(vga_hsync),
+    .vsync_in(vga_vsync),
+    .hblnk_in(vga_hblnk),
+    .vblnk_in(vga_vblnk),
+    .hcount_out(menu_hcount),
+    .vcount_out(menu_vcount),
+    .hsync_out(menu_hsync),
+    .vsync_out(menu_vsync),
+    .hblnk_out(menu_hblnk),
+    .vblnk_out(menu_vblnk),
+    .rgb_out(menu_rgb)
+    );
+
+//    assign vs = car_vsync_p1;
+//    assign hs = car_hsync_p1;
+//    assign {r,g,b} = car_rgb_p1;
+    
+    assign vs = menu_vsync;
+    assign hs = menu_hsync;
+    assign {r,g,b} = menu_rgb;  
 endmodule
