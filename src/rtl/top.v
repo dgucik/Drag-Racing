@@ -42,8 +42,10 @@ module top(
     wire vga_vsync, vga_vblnk, vga_hsync, vga_hblnk;
     
     //background_module
+
     //wire [11:0] rgb_out;
     //wire vga_hsync2, vga_vsync2;
+
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -97,25 +99,24 @@ module top(
         .car_rgb_out(car_rgb_out)
     );
     
-
     draw_background draw_backgroud(
-        .hcount_in(vga_hcount),
-        .vcount_in(vga_vcount),
-        .hsync_in(vga_hsync),
-        .vsync_in(vga_vsync),
-        .hblnk_in(vga_hblnk),
-        .vblnk_in(vga_vblnk),
+        .hcount_in(),
+        .vcount_in(),
+        .hsync_in(),
+        .vsync_in(),
+        .hblnk_in(),
+        .vblnk_in(),
         
-        .hsync_out(vga_hsync2),
-        .vsync_out(vga_vsync2),
-        .rgb_out(rgb_out),
+        .hsync_out(),
+        .vsync_out(),
+        .rgb_out(),
         
         .clk(clk65MHz),
-        .rst(rst_ext)
+        .rst()
     );
 
     assign vs = car_vsync_out;
     assign hs = car_hsync_out;
     assign {r,g,b} = car_rgb_out;  
- 
+
 endmodule

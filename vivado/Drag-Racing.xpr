@@ -55,91 +55,78 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/clk_gen.v">
+      <File Path="$PPRDIR/../src/rtl/clk_gen.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/clk_gen.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/reset.v">
+      <File Path="$PPRDIR/../src/rtl/reset.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/reset.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/vga_timing.v">
+      <File Path="$PPRDIR/../src/rtl/vga_timing.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/vga_timing.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/top.v">
+      <File Path="$PPRDIR/../src/rtl/top.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/top.v"/>
-          <Attr Name="ImportTime" Val="1628512027"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/clk_gen_clk_wiz.v">
+      <File Path="$PPRDIR/../src/rtl/clk_gen_clk_wiz.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/clk_gen_clk_wiz.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/draw_background.v">
+      <File Path="$PPRDIR/../src/rtl/draw_background.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/draw_background.v"/>
-          <Attr Name="ImportTime" Val="1628512027"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/kb_interface.v">
+      <File Path="$PPRDIR/../src/rtl/kb_interface.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/kb_interface.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/keyboard.v">
+      <File Path="$PPRDIR/../src/rtl/keyboard.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/keyboard.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/kb_game_code.v">
+      <File Path="$PPRDIR/../src/rtl/kb_game_code.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/kb_game_code.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/rtl/ps2_rx.v">
+      <File Path="$PPRDIR/../src/rtl/ps2_rx.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../src/rtl/ps2_rx.v"/>
-          <Attr Name="ImportTime" Val="1628413851"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../src/rtl/draw_car.v">
+        <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

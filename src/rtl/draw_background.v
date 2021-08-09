@@ -83,7 +83,7 @@ module draw_background(
         // During blanking, make it it black.
         if(hblnk_in||vblnk_in) rgb_out_nxt <= 12'h0_0_0;
         else begin
-            /*
+
             //Sky
             if( (vcount_in>=0)&&(vcount_in<=169)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt <= SKY_COLOR;
             
@@ -115,15 +115,6 @@ module draw_background(
             //else if( (vcount_in>=647)&&(vcount_in<=767)&&(hcount_in==461||hcount_in==561) ) rgb_out_nxt <= ROAD_SIDELINE_COLOR;
             else if( (vcount_in>=647)&&(vcount_in<=767)&&( hcount_in>311||hcount_in<711 ) ) rgb_out_nxt <= 12'h1_1_1;
             else rgb_out_nxt <= ROAD_SIDELINE_COLOR;
-            */
-            
-            //---------------------------------------------------------------------------------------------------
-            //Sky
-            if( ( ((vcount_in>=0)&&(vcount_in<=RECT_Y-1))||((vcount_in>=RECT_Y+RECT_HIGH)&&(vcount_in<=GRASS_Y)) )&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt <= SKY_COLOR;
-            else if( (vcount_in>=RECT_Y)&&(vcount_in<=RECT_Y+RECT_HIGH-1)&&(((hcount_in>=0)&&(hcount_in<=RECT_X-1))||((hcount_in>=RECT_X-1+RECT_WIDTH)&&(hcount_in<=1023))) ) rgb_out_nxt <= SKY_COLOR;
-            
-            //MENU_RECT
-            else if( (vcount_in>=642)&&(vcount_in<=646)&&(hcount_in>=0)&&(hcount_in<=1023) )
             
         end
     end
