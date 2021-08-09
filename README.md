@@ -2,5 +2,6 @@
  - [x] interfejs klawiatury
  - [x] model samochodu
  - [ ] menu główne
- - [ ] background
+ - [x] background
  - [ ] menu
+ - [ ] animacja ruchu
