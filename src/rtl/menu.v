@@ -52,9 +52,9 @@ module menu(
     localparam MENU_SQUARE_COLOR = 12'hf_5_2;   //orange
  
 //----main_menu_rect--------------------------------------------------
-    localparam MENU_RECT_X = 11;
-    localparam MENU_RECT_Y = 12;
-    localparam MENU_RECT_HIGH = 256;
+    localparam MENU_RECT_X = 411;
+    localparam MENU_RECT_Y = 84;
+    localparam MENU_RECT_HIGH = 288;
     localparam MENU_RECT_WIDTH = 200;
     
     always @(posedge clk) begin
@@ -89,7 +89,6 @@ module menu(
         if(hblnk_in||vblnk_in) rgb_out_nxt = 12'h0_0_0;
         else begin
             //Sky
-            //if( (vcount_in>=0)&&(vcount_in<=629)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = SKY_COLOR;
             if( (vcount_in>=0)&&(vcount_in<=MENU_RECT_Y-1)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = SKY_COLOR;
             else if( (vcount_in>=MENU_RECT_Y)&&(vcount_in<=MENU_RECT_Y+MENU_RECT_HIGH-1)&&( ((hcount_in>=0)&&(hcount_in<=MENU_RECT_X-1)||(hcount_in>=MENU_RECT_X+MENU_RECT_WIDTH)&&(hcount_in<=1023)) ) ) rgb_out_nxt = SKY_COLOR;
             else if( (vcount_in>=MENU_RECT_Y+MENU_RECT_HIGH)&&(vcount_in<=629)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = SKY_COLOR;
