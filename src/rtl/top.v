@@ -60,6 +60,18 @@ module top(
     wire [10:0] menu_hcount, menu_vcount;
     wire menu_hsync, menu_hblnk, menu_vsync, menu_vblnk;
     wire [11:0] menu_rgb;
+    
+    //menu_rect_char
+    wire [10:0] menu_rect_char_hcount, menu_rect_char_vcount;
+    wire menu_rect_char_hsync, menu_rect_char_hblnk, menu_rect_char_vsync, menu_rect_char_vblnk;
+    wire [11:0] menu_rect_char_rgb;
+    wire [8:0] menu_rect_char_char_xy;
+    wire [3:0] menu_rect_char_char_line;
+    wire [7:0] menu_rect_char_char_pixels;
+    wire [6:0] char_code;
+    
+    //font_room
+    wire [10:0] addr;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -165,12 +177,43 @@ module top(
     .vblnk_out(menu_vblnk),
     .rgb_out(menu_rgb)
     );
+    
+    draw_rect_char draw_rect_char_menu(
+    .clk(clk65MHz),
+    .rst(rst_ext),
+    .hcount_in(menu_hcount),
+    .vcount_in(menu_vcount),
+    .hsync_in(menu_hsync),
+    .vsync_in(menu_vsync),
+    .hblnk_in(menu_hblnk),
+    .vblnk_in(menu_vblnk),
+    .rgb_in(menu_rgb),
+    .char_xy(menu_rect_char_char_xy),
+    .char_pixels(menu_rect_char_char_pixels),
+    .char_line(menu_rect_char_char_line),
+    .hsync_out(menu_rect_char_hsync),
+    .vsync_out(menu_rect_char_vsync),
+    .hblnk_out(menu_rect_char_hblnk),
+    .vblnk_out(menu_rect_char_vblnk),
+    .rgb_out(menu_rect_char_rgb)
+    );
+
+    char_rom_20x16 char_rom_20x16(
+    .char_xy(menu_rect_char_char_xy),
+    .char_code(char_code)
+    );
+
+    font_rom font_rom(
+    .clk(clk65MHz),
+    .addr({char_code,menu_rect_char_char_line}),
+    .char_line_pixels(menu_rect_char_char_pixels)
+    );
 
 //    assign vs = car_vsync_p1;
 //    assign hs = car_hsync_p1;
 //    assign {r,g,b} = car_rgb_p1;
     
-    assign vs = menu_vsync;
-    assign hs = menu_hsync;
-    assign {r,g,b} = menu_rgb;  
+    assign vs = menu_rect_char_vsync;
+    assign hs = menu_rect_char_hsync;
+    assign {r,g,b} = menu_rect_char_rgb;  
 endmodule
