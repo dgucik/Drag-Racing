@@ -28,11 +28,11 @@ module menu_page_of(
     input wire rst
     );
     
-    localparam Main = 3'b000;
-    localparam StartGame = 3'b001;
-    localparam Control = 3'b010;
-    localparam About = 3'b011;
-    localparam Exit = 3'b100;
+    localparam Main = 0;
+    localparam StartGame = 1;
+    localparam Control = 2;
+    localparam About = 3;
+    localparam Exit = 4;
     
     reg [2:0] state, state_nxt;
     reg [1:0] counter, counter_nxt;
@@ -51,7 +51,7 @@ module menu_page_of(
     end
     
     always@* begin
-        case(menu_state)
+        case(state)
             Main:
                 begin
                     if(keyboard_in[3]) begin
@@ -81,34 +81,44 @@ module menu_page_of(
                             counter_nxt = 0; end
                         else 
                             state_nxt = Main;
-                            counter_nxt = menu_counter;
+                            counter_nxt = counter;
+                    end
+                    else begin
+                        state_nxt = Main;
+                        counter_nxt = counter;
                     end
                 end
             StartGame:
                 begin
                     if(keyboard_in[0]) begin
                         state_nxt = Main;
+                        counter_nxt = counter;
                     end
                     else begin
                         state_nxt = StartGame;
+                        counter_nxt = counter;
                     end
                 end
             Control:
                 begin
                     if(keyboard_in[0]) begin
                         state_nxt = Main;
+                        counter_nxt = counter;
                     end
                     else begin
                         state_nxt = Control;
+                        counter_nxt = counter;
                     end
                 end
             About:
                 begin
                     if(keyboard_in[0]) begin
                         state_nxt = Main;
+                        counter_nxt = counter;
                     end
                     else begin
                         state_nxt = About;
+                        counter_nxt = counter;
                     end
                 end
             Exit:
@@ -120,7 +130,7 @@ module menu_page_of(
                         else begin 
                             counter_nxt = counter;
                         end
-                    state_nxt = Exit;
+                        state_nxt = Exit;
                     end
                     else if(keyboard_in[1]) begin
                         if(counter<1) begin 
@@ -128,20 +138,26 @@ module menu_page_of(
                         end
                         else begin counter_nxt = counter; 
                         end
-                        
                         state_nxt = Exit;
                     end
                     else if(keyboard_in[0]) begin
                         if(counter == 0) begin
                             //set_break_flag
                             state_nxt = Exit;
+                            counter_nxt = counter; 
                         end
                         else if(menu_counter == 1) begin
                             state_nxt = Main;
+                            counter_nxt = counter; 
                         end
                         else begin
                             state_nxt = Exit;
+                            counter_nxt = counter; 
                         end
+                    end
+                    else begin
+                        state_nxt = Exit;
+                        counter_nxt = counter;
                     end 
                 end
         endcase
