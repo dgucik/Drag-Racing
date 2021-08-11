@@ -160,6 +160,10 @@ module menu_page_of(
                         counter_nxt = counter;
                     end 
                 end
+            default: begin
+                state_nxt = Main;
+                counter_nxt = counter;
+            end
         endcase
     end
 endmodule

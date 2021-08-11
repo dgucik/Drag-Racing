@@ -379,7 +379,9 @@ module char_rom_20x16(
                 9'b1111_10001 : char_code = 7'h00;  //
                 9'b1111_10010 : char_code = 7'h00;  //
                 9'b1111_10011 : char_code = 7'h00;  //
-                9'b1111_10100 : char_code = 7'h00;  //     
+                9'b1111_10100 : char_code = 7'h00;  //
+                
+                default: char_code = 7'h00;  //     
             endcase
         end
         else if(menu_state == 1) begin
@@ -734,7 +736,9 @@ module char_rom_20x16(
                 9'b1111_10001 : char_code = 7'h00;  //
                 9'b1111_10010 : char_code = 7'h00;  //
                 9'b1111_10011 : char_code = 7'h00;  //
-                9'b1111_10100 : char_code = 7'h00;  //     
+                9'b1111_10100 : char_code = 7'h00;  // 
+                
+                default: char_code = 7'h00;  //     
             endcase        
         end
         else if(menu_state == 2) begin
@@ -1090,6 +1094,8 @@ module char_rom_20x16(
                 9'b1111_10010 : char_code = 7'h00;  //
                 9'b1111_10011 : char_code = 7'h00;  //
                 9'b1111_10100 : char_code = 7'h00;  //    
+                
+                default: char_code = 7'h00;  // 
             endcase        
         end
         else if(menu_state == 3) begin
@@ -1444,7 +1450,9 @@ module char_rom_20x16(
                 9'b1111_10001 : char_code = 7'h6b;  //k
                 9'b1111_10010 : char_code = 7'h00;  //
                 9'b1111_10011 : char_code = 7'h00;  //
-                9'b1111_10100 : char_code = 7'h00;  //     
+                9'b1111_10100 : char_code = 7'h00;  //  
+                
+                default: char_code = 7'h00;  //    
             endcase        
         end
         else if(menu_state == 4) begin
@@ -1799,7 +1807,9 @@ module char_rom_20x16(
                 9'b1111_10001 : char_code = 7'h00;  //
                 9'b1111_10010 : char_code = 7'h00;  //
                 9'b1111_10011 : char_code = 7'h00;  //
-                9'b1111_10100 : char_code = 7'h00;  //     
+                9'b1111_10100 : char_code = 7'h00;  //    
+                
+                default: char_code = 7'h00;  //  
             endcase
         end
         else begin
