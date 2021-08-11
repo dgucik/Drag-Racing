@@ -1,3 +1,4 @@
+//resolution 1024x768
 module vga_timing (
     output wire [10:0] vga_vcount,
     output wire vga_vsync,

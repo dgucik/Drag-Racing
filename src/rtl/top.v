@@ -30,6 +30,8 @@ module top(
     output wire hs
     );
     
+    wire clk_10Hz; //TEST
+    
     //clk_gen
     wire locked;
     wire clk100MHz, clk65MHz;
@@ -56,6 +58,8 @@ module top(
     wire background_hsync, background_hblnk, background_vsync, background_vblnk;
     wire [11:0] background_rgb;
 
+
+
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
         .clk65MHz(clk65MHz),
@@ -67,7 +71,7 @@ module top(
     reset u_reset (
         .rst(rst_ext),
         .locked(locked),
-        .clk(clk65MHz)
+        .clk(clk_10Hz) //TEST
     );
     
     vga_timing u_vga_timing (
@@ -79,6 +83,33 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
+
+    //TEST: ANIMACJA RUCHU
+    
+    wire [31:0] position;
+    wire [3:0] kb_key_pressed;
+
+    kb_interface u_kb_interface(
+        .clk(clk100MHz),
+        .reset(rst_ext),
+        .ps2_clk(ps2_clk),
+        .ps2_data(ps2_data),
+        .kb_key_pressed(kb_key_pressed)
+    );
+
+    clk_divide #(.DIVISOR(1000000)) u_clk_divide(
+        .clk_in(clk65MHz),
+        .clk_out(clk_10Hz)
+    );
+
+    MOV_TEST u_MOV_TEST(
+        .clk(clk_10Hz),
+        .rst(rst_ext),
+        .key(kb_key_pressed[0]),
+        .pos(position)
+    );
+
+    //KONIEC TESTU: ANIMACJA RUCHU
     
     draw_background u_draw_backgroud(
         .hcount_in(vga_hcount),
@@ -87,6 +118,7 @@ module top(
         .vsync_in(vga_vsync),
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
+        .position(position), //TEST
         .hcount_out(background_hcount),
         .vcount_out(background_vcount),
         .hsync_out(background_hsync),
@@ -95,7 +127,7 @@ module top(
         .vblnk_out(background_vblnk),
         .rgb_out(background_rgb),
         .clk(clk65MHz),
-        .rst(rst_ext)
+        .reset(rst_ext)
     );
 
     draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069)) u_draw_car_p2(
@@ -110,7 +142,7 @@ module top(
         .rgb_in(background_rgb),
         .xpos(256),
         .ypos(345),
-        .mov(1),        
+        .mov(clk_10Hz),  //TEST   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
         .hblnk_out(car_hblnk_p2),
@@ -132,7 +164,7 @@ module top(
         .rgb_in(car_rgb_p2),
         .xpos(256),
         .ypos(531),
-        .mov(1),        
+        .mov(clk_10Hz),  //TEST     
         .hcount_out(car_hcount_p1),
         .hsync_out(car_hsync_p1),
         .hblnk_out(car_hblnk_p1),
