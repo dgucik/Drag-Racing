@@ -35,7 +35,7 @@ module state_and_counter_to_xypos(
     localparam About = 3;
     localparam Exit = 4;    
     
-    reg [10:0] x_pointer_nxt, y_pointer_nxt;
+    reg [10:0] x_pointer_nxt = 0, y_pointer_nxt = 0;
     
     always @(posedge clk) begin
         if(rst) begin
@@ -48,7 +48,7 @@ module state_and_counter_to_xypos(
         end
     end
     
-    always@* begin
+    always @* begin
         case(menu_state)
             Main: begin
                 if(menu_counter == 0) begin
@@ -101,6 +101,10 @@ module state_and_counter_to_xypos(
                     x_pointer_nxt = 1024;
                     y_pointer_nxt = 0;
                 end
+            end
+            default: begin
+                x_pointer_nxt = 1024;
+                y_pointer_nxt = 0;
             end
         endcase
     end    
