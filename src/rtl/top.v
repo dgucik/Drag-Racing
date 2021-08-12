@@ -141,7 +141,7 @@ module top(
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
         .xpos(256),
-        .ypos(345),
+        .ypos(335),
         .mov(clk_10Hz),  //TEST   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
@@ -163,7 +163,7 @@ module top(
         .vblnk_in(car_vblnk_p2),
         .rgb_in(car_rgb_p2),
         .xpos(256),
-        .ypos(531),
+        .ypos(481),
         .mov(clk_10Hz),  //TEST     
         .hcount_out(car_hcount_p1),
         .hsync_out(car_hsync_p1),

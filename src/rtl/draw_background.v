@@ -141,10 +141,10 @@ module draw_background(
             
             //Road
             else if( (vcount_in>=269)&&(vcount_in<=274)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_SIDELINE_COLOR;
-            else if( (vcount_in>=275)&&(vcount_in<=454)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_COLOR;
-            else if( (vcount_in>=455)&&(vcount_in<=460)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_MIDLINE_COLOR;
-            else if( (vcount_in>=461)&&(vcount_in<=640)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_COLOR;
-            else if( (vcount_in>=641)&&(vcount_in<=646)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_SIDELINE_COLOR;
+            else if( (vcount_in>=275)&&(vcount_in<=414)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_COLOR;
+            else if( (vcount_in>=415)&&(vcount_in<=420)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_MIDLINE_COLOR;
+            else if( (vcount_in>=421)&&(vcount_in<=560)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_COLOR;
+            else if( (vcount_in>=561)&&(vcount_in<=566)&&(hcount_in>=0)&&(hcount_in<=1023) ) rgb_out_nxt = ROAD_SIDELINE_COLOR;
             
             //Grass_up
             else rgb_out_nxt = GRASS_COLOR;        
