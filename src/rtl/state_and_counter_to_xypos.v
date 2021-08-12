@@ -79,22 +79,22 @@ module state_and_counter_to_xypos(
             end
             
             Control: begin
-                x_pointer_nxt = 515;
+                x_pointer_nxt = 523;
                 y_pointer_nxt = 340;
             end
             
             About: begin
-                x_pointer_nxt = 515;
+                x_pointer_nxt = 523;
                 y_pointer_nxt = 340;
             end
             
             Exit: begin
                 if(menu_counter == 0) begin
-                    x_pointer_nxt = 427;
+                    x_pointer_nxt = 435;
                     y_pointer_nxt = 244;
                 end
                 else if(menu_counter == 1) begin
-                    x_pointer_nxt = 427;
+                    x_pointer_nxt = 435;
                     y_pointer_nxt = 276;
                 end
                 else begin 

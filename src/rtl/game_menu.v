@@ -138,8 +138,6 @@ module game_menu(
     menu_start_game_flag menu_start_game_flag(
     .clk(clk),
     .rst(rst),
-    .keyboard_in(keyboard_in[0]),
-    .menu_counter(menu_counter),
     .menu_state(menu_state),
     .start_game(start_game)
     );

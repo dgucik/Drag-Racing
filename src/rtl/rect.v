@@ -41,7 +41,7 @@ module rect(
     output reg [11:0] rgb_out
     );
     
-    localparam RECT_HIGH = 16, RECT_LONG = 10, RECT_COLOR = 12'hd_f_0;
+    localparam RECT_HIGH = 13, RECT_LONG = 10, RECT_COLOR = 12'hd_f_0;
     
     reg [10:0] hcount_nxt, vcount_nxt;
     reg hsync_nxt, vsync_nxt, hblnk_nxt, vblnk_nxt;
