@@ -32,7 +32,8 @@ module game_menu(
     input wire [3:0] keyboard_in,
     output wire hsync_out,
     output wire vsync_out,
-    output wire [11:0] rgb_out
+    output wire [11:0] rgb_out,
+    output wire start_game_flag
     );
     
     //menu_background
@@ -50,8 +51,9 @@ module game_menu(
     //delay_for_xypos_pointer
     wire [10:0] x_pointer_delay, y_pointer_delay;
     
+    //delay_for_start_game
+    wire start_game, start_game_delay;
 
-    
     menu_background menu_background(
     .clk(clk),
     .rst(rst),
@@ -132,10 +134,27 @@ module game_menu(
     .vsync_out(menu_pointer_vsync),
     .rgb_out(menu_pointer_rgb)
     );
-       
+    
+    menu_start_game_flag menu_start_game_flag(
+    .clk(clk),
+    .rst(rst),
+    .keyboard_in(keyboard_in[0]),
+    .menu_counter(menu_counter),
+    .menu_state(menu_state),
+    .start_game(start_game)
+    );
+    
+    delay_for_start_game_flag delay_for_start_game_flag(
+    .clk(clk),
+    .rst(rst),
+    .start_game(start_game),
+    .start_game_out_d(start_game_delay)
+    ); 
        
     assign vsync_out = menu_pointer_vsync;
     assign hsync_out = menu_pointer_hsync;
     assign rgb_out = menu_pointer_rgb;
+    
+    assign start_game_flag = start_game_delay;
     
 endmodule
