@@ -47,7 +47,11 @@ module menu_napisy(
     wire [8:0] menu_rect_char_char_xy;
     wire [3:0] menu_rect_char_char_line;
     wire [7:0] menu_rect_char_char_pixels;
-    wire [6:0] char_code;    
+    wire [6:0] char_code;
+    
+    //delay_for_napisy
+    wire [10:0] delay_in_hcount, delay_in_vcount;
+    wire delay_in_hsync, delay_in_vsync, delay_in_hblnk, delay_in_vblnk;
     
     draw_rect_char draw_rect_char_menu(
     .clk(clk),
@@ -62,12 +66,12 @@ module menu_napisy(
     .char_xy(menu_rect_char_char_xy),
     .char_pixels(menu_rect_char_char_pixels),
     .char_line(menu_rect_char_char_line),
-    .hsync_out(hsync_out),
-    .vsync_out(vsync_out),
-    .hblnk_out(hblnk_out),
-    .vblnk_out(vblnk_out),
-    .hcount_out(hcount_out),
-    .vcount_out(vcount_out),
+    .hsync_out(delay_in_hsync),
+    .vsync_out(delay_in_vsync),
+    .hblnk_out(delay_in_hblnk),
+    .vblnk_out(delay_in_vblnk),
+    .hcount_out(delay_in_hcount),
+    .vcount_out(delay_in_vcount),
     .rgb_out(rgb_out)
     );
     
@@ -77,10 +81,27 @@ module menu_napisy(
     .menu_state(menu_state)
     );
     
-     font_rom font_rom(
+    font_rom font_rom(
     .clk(clk),
     .addr({char_code,menu_rect_char_char_line}),
     .char_line_pixels(menu_rect_char_char_pixels)
     );       
+    
+    delay_for_menu_napisy delay_for_menu_napisy(
+    .clk(clk),
+    .rst(rst),
+    .hcount_in(delay_in_hcount),
+    .vcount_in(delay_in_vcount),
+    .hsync_in(delay_in_hsync),
+    .vsync_in(delay_in_vsync),
+    .hblnk_in(delay_in_hblnk),
+    .vblnk_in(delay_in_vblnk),
+    .hcount_out_d(hcount_out),
+    .vcount_out_d(vcount_out),
+    .hsync_out_d(hsync_out),
+    .vsync_out_d(vsync_out),
+    .hblnk_out_d(hblnk_out),
+    .vblnk_out_d(vblnk_out)
+    );
     
 endmodule
