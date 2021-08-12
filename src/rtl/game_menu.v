@@ -47,6 +47,9 @@ module game_menu(
     wire [11:0] menu_pointer_rgb;
     wire [10:0] x_pointer, y_pointer;
     
+    //delay_for_xypos_pointer
+    wire [10:0] x_pointer_delay, y_pointer_delay;
+    
 
     
     menu_background menu_background(
@@ -104,6 +107,15 @@ module game_menu(
     .rst(rst)
     );
     
+    delay_for_xypointer delay_for_xypointer(
+    .clk(clk),
+    .rst(rst),
+    .x_pointer(x_pointer),
+    .y_pointer(y_pointer),
+    .x_pointer_out_d(x_pointer_delay),
+    .y_pointer_out_d(y_pointer_delay)
+    );
+    
     rect menu_pointer(
     .clk(clk),
     .rst(rst),
@@ -114,11 +126,11 @@ module game_menu(
     .hblnk_in(menu_hblnk_2),
     .vblnk_in(menu_vblnk_2),
     .rgb_in(menu_rgb_2),
+    .x_pointer(x_pointer_delay),
+    .y_pointer(y_pointer_delay),
     .hsync_out(menu_pointer_hsync),
     .vsync_out(menu_pointer_vsync),
-    .rgb_out(menu_pointer_rgb),
-    .x_pointer(x_pointer),
-    .y_pointer(y_pointer)
+    .rgb_out(menu_pointer_rgb)
     );
        
        
