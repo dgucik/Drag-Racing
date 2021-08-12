@@ -58,7 +58,10 @@ module top(
     wire background_hsync, background_hblnk, background_vsync, background_vblnk;
     wire [11:0] background_rgb;
 
-
+    //draw_start
+    wire [10:0] start_hcount, start_vcount;
+    wire start_hsync, start_hblnk, start_vsync, start_vblnk;
+    wire [11:0] start_rgb;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -152,16 +155,36 @@ module top(
         .rgb_out(car_rgb_p2)
     );
 
+    draw_start u_draw_start(
+        .hcount_in(car_hcount_p2),
+        .vcount_in(car_vcount_p2),
+        .hsync_in(car_hsync_p2),
+        .vsync_in(car_vsync_p2),
+        .hblnk_in(car_hblnk_p2),
+        .vblnk_in(car_vblnk_p2),
+        .rgb_in(car_rgb_p2),
+
+        .hcount_out(start_hcount),
+        .vcount_out(start_vcount),
+        .hsync_out(start_hsync),
+        .vsync_out(start_vsync),
+        .hblnk_out(start_hblnk),
+        .vblnk_out(start_vblnk),
+        .rgb_out(start_rgb),
+        .clk(clk65MHz),
+        .reset(rst_ext)       
+    );
+
     draw_car u_draw_car_p1(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .hcount_in(car_hcount_p2),
-        .hsync_in(car_hsync_p2),
-        .hblnk_in(car_hblnk_p2),
-        .vcount_in(car_vcount_p2),
-        .vsync_in(car_vsync_p2),
-        .vblnk_in(car_vblnk_p2),
-        .rgb_in(car_rgb_p2),
+        .hcount_in(start_hcount),
+        .hsync_in(start_hsync),
+        .hblnk_in(start_hblnk),
+        .vcount_in(start_vcount),
+        .vsync_in(start_vsync),
+        .vblnk_in(start_vblnk),
+        .rgb_in(start_rgb),
         .xpos(256),
         .ypos(481),
         .mov(clk_10Hz),  //TEST     
