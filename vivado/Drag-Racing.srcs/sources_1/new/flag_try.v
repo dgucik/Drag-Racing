@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 12.08.2021 22:02:33
+// Create Date: 12.08.2021 22:50:14
 // Design Name: 
-// Module Name: menu_start_game_flag
+// Module Name: flag_try
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,27 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module menu_start_game_flag(
+module flag_try(
     input wire clk,
     input wire rst,
-    input wire [2:0] menu_state,
-    output reg start_game
+    input wire start_game_flag,
+    input wire [11:0] rgb_in,
+    output reg [11:0] rgb_out
     );
     
-    reg start_game_nxt;
-    
-    always @(posedge clk) begin
-        if(rst) begin 
-            start_game <= 0;
-        end 
-        else begin
-            start_game <= start_game_nxt;
-        end
-    end
-    
     always @* begin
-        if(menu_state == 1) start_game_nxt = 1;
-        else start_game_nxt = 0;
+        if(start_game_flag) rgb_out = 12'hc_1_8;
+        else rgb_out = rgb_in;
     end
     
 endmodule

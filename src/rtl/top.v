@@ -163,7 +163,8 @@ module top(
     .keyboard_in(key_pressed_2),
     .hsync_out(game_menu_hsync_out),
     .vsync_out(game_menu_vsync_out),
-    .rgb_out(game_menu_rgb_out)
+    .rgb_out(game_menu_rgb_out),
+    .start_game_flag()
     );
 
     kb_interface kb_interface(

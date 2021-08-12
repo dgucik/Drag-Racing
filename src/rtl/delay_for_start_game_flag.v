@@ -27,15 +27,17 @@ module delay_for_start_game_flag(
     output reg start_game_out_d
     );
     
-    reg start_game_d;
+    reg start_game_d, start_game_d2;
     
     always @(posedge clk) begin
         if(rst) begin
             start_game_d <= 0;
+            start_game_d2 <= 0;
             start_game_out_d <= 0;
         end
         else begin
             start_game_d <= start_game;
+            start_game_d2 <= start_game_d;
             start_game_out_d <= start_game_d;
         end
     end
