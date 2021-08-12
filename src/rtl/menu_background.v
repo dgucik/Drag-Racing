@@ -5,7 +5,7 @@
 // 
 // Create Date: 09.08.2021 23:28:51
 // Design Name: 
-// Module Name: menu
+// Module Name: menu_background
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module menu(
+module menu_background(
     output reg [10:0] hcount_out,
     output reg [10:0] vcount_out,
     output reg hsync_out,
