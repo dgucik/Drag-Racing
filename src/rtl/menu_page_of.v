@@ -81,7 +81,7 @@ module menu_page_of(
                             counter_nxt = 0; end
                         else 
                             state_nxt = Main;
-                            counter_nxt = counter;
+                            counter_nxt = 0;
                     end
                     else begin
                         state_nxt = Main;
@@ -124,45 +124,42 @@ module menu_page_of(
             Exit:
                 begin
                     if(keyboard_in[3]) begin
-                        if(counter>0) begin
-                            counter_nxt = counter -1;
-                        end
-                        else begin 
-                            counter_nxt = counter;
-                        end
+                        counter_nxt = 0;
                         state_nxt = Exit;
                     end
                     else if(keyboard_in[1]) begin
-                        if(counter<1) begin 
-                        counter_nxt = counter +1; 
-                        end
-                        else begin counter_nxt = counter; 
-                        end
+                        counter_nxt = 1; 
                         state_nxt = Exit;
                     end
                     else if(keyboard_in[0]) begin
                         if(counter == 0) begin
                             //set_break_flag
                             state_nxt = Exit;
-                            counter_nxt = counter; 
+                            counter_nxt = 0; 
                         end
-                        else if(menu_counter == 1) begin
+                        else if(counter == 1) begin
                             state_nxt = Main;
-                            counter_nxt = counter; 
+                            counter_nxt = 0; 
+                        end
+                        else begin
+                            state_nxt = Exit;
+                            counter_nxt = 0; 
+                        end
+                    end
+                    else begin
+                        if(counter > 1) begin
+                            state_nxt = Exit;
+                            counter_nxt = 0;
                         end
                         else begin
                             state_nxt = Exit;
                             counter_nxt = counter; 
                         end
-                    end
-                    else begin
-                        state_nxt = Exit;
-                        counter_nxt = counter;
                     end 
                 end
             default: begin
                 state_nxt = Main;
-                counter_nxt = counter;
+                counter_nxt = 0;
             end
         endcase
     end

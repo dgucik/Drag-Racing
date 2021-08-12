@@ -56,21 +56,13 @@ module top(
     wire background_hsync, background_hblnk, background_vsync, background_vblnk;
     wire [11:0] background_rgb;
     
-    //menu
-    wire [10:0] menu_hcount, menu_vcount, menu_hcount_2, menu_vcount_2;
-    wire menu_hsync, menu_hblnk, menu_vsync, menu_vblnk, menu_hsync_2, menu_hblnk_2, menu_vsync_2, menu_vblnk_2;
-    wire [11:0] menu_rgb, menu_rgb_2;
-    wire [2:0] menu_state;
-    wire [1:0] menu_counter;
+    //for_keyboard_working
+    wire [3:0] key_pressed, key_pressed_2;
     
-    //menu_pointer
-    wire menu_pointer_hsync, menu_pointer_vsync;
-    wire [11:0] menu_pointer_rgb;
-    wire [10:0] x_pointer, y_pointer;
-    
-    
-    //font_room
-    wire [10:0] addr;
+    //game_menu
+    wire game_menu_hsync_out, game_menu_vsync_out;
+    wire [11:0] game_menu_rgb_out;
+
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -159,7 +151,7 @@ module top(
     );
 */
 
-    menu menu(
+    game_menu game_menu(
     .clk(clk65MHz),
     .rst(rst_ext),
     .hcount_in(vga_hcount),
@@ -168,38 +160,11 @@ module top(
     .vsync_in(vga_vsync),
     .hblnk_in(vga_hblnk),
     .vblnk_in(vga_vblnk),
-    .hcount_out(menu_hcount),
-    .vcount_out(menu_vcount),
-    .hsync_out(menu_hsync),
-    .vsync_out(menu_vsync),
-    .hblnk_out(menu_hblnk),
-    .vblnk_out(menu_vblnk),
-    .rgb_out(menu_rgb)
+    .keyboard_in(key_pressed_2),
+    .hsync_out(game_menu_hsync_out),
+    .vsync_out(game_menu_vsync_out),
+    .rgb_out(game_menu_rgb_out)
     );
-
-    menu_napisy menu_napisy(
-       .clk(clk65MHz),
-       .rst(rst_ext),
-       .hcount_in(menu_hcount),
-       .vcount_in(menu_vcount),
-       .hsync_in(menu_hsync),
-       .vsync_in(menu_vsync),
-       .hblnk_in(menu_hblnk),
-       .vblnk_in(menu_vblnk),
-       .rgb_in(menu_rgb),
-       .hsync_out(menu_hsync_2),
-       .vsync_out(menu_vsync_2),
-       .hcount_out(menu_hcount_2),
-       .vcount_out(menu_vcount_2),
-       .hblnk_out(menu_hblnk_2),
-       .vblnk_out(menu_vblnk_2),
-       .rgb_out(menu_rgb_2),
-       .menu_state(menu_state)
-    );
-    
-    
-//for_keyboard_working
-wire [3:0] key_pressed, key_pressed_2;
 
     kb_interface kb_interface(
     .clk(clk65MHz),
@@ -214,56 +179,13 @@ wire [3:0] key_pressed, key_pressed_2;
     .key_pressed(key_pressed),
     .key_pressed_posedge(key_pressed_2)
     );
-    
-    menu_page_of menu_page(
-    .clk(clk65MHz),
-    .rst(rst_ext),
-    .keyboard_in(key_pressed_2),
-    .menu_state(menu_state),
-    .menu_counter(menu_counter)
-    );
-    
-    rect menu_pointer(
-    .clk(clk65MHz),
-    .rst(rst_ext),
-    .hcount_in(menu_hcount_2),
-    .vcount_in(menu_vcount_2),
-    .hsync_in(menu_hsync_2),
-    .vsync_in(menu_vsync_2),
-    .hblnk_in(menu_hblnk_2),
-    .vblnk_in(menu_vblnk_2),
-    .rgb_in(menu_rgb_2),
-    .hsync_out(menu_pointer_hsync),
-    .vsync_out(menu_pointer_vsync),
-    .rgb_out(menu_pointer_rgb),
-    //.menu_state(menu_state),
-    //.menu_counter(menu_counter)
-    .x_pointer(x_pointer),
-    .y_pointer(y_pointer)
-    );
-    
-    state_and_counter_to_xypos xypos_pointer(
-        .menu_state(menu_state),
-        .menu_counter(menu_counter),
-        .x_pointer(x_pointer),
-        .y_pointer(y_pointer),
-        .clk(clk65MHz),
-        .rst(rst_ext)
-    );
 
 //    assign vs = car_vsync_p1;
 //    assign hs = car_hsync_p1;
 //    assign {r,g,b} = car_rgb_p1;
     
-    //assign vs = menu_rect_char_vsync;
-    //assign hs = menu_rect_char_hsync;
-    //assign {r,g,b} = menu_rect_char_rgb;
+    assign vs = game_menu_vsync_out;
+    assign hs = game_menu_hsync_out;
+    assign {r,g,b} = game_menu_rgb_out;
     
-    //assign vs = menu_vsync_2;
-    //assign hs = menu_hsync_2;
-    //assign {r,g,b} = menu_rgb_2;
-    
-    assign vs = menu_pointer_vsync;
-    assign hs = menu_pointer_hsync;
-    assign {r,g,b} = menu_pointer_rgb;
 endmodule
