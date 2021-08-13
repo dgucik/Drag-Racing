@@ -143,7 +143,7 @@ module top(
         .vsync_in(background_vsync),
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
-        .xpos(300),
+        .xpos(256),
         .ypos(335),
         .mov(clk_10Hz),  //TEST   
         .hcount_out(car_hcount_p2),

@@ -27,6 +27,12 @@ module draw_background(
     localparam PILLAR_COLOR = 12'h678; //gray
 //------------------------------------------------------------------------------- 
 
+//----finish/start line position-------------------------------------------------
+    localparam FINISH_LINE_HOR_POS = 1500;
+
+    localparam LINE_VER_POS = 275;
+//-------------------------------------------------------------------------------
+
     reg [11:0] rgb_out_nxt;
     reg [10:0] hcount_out_nxt, vcount_out_nxt;
     reg hsync_out_nxt, hblnk_out_nxt, vsync_out_nxt, vblnk_out_nxt;
@@ -89,7 +95,72 @@ module draw_background(
         else begin
 
             //START LINE
-            if( (hcount_in >= 580 - position) && (hcount_in <= 588 - position) && (vcount_in >= 275) && (vcount_in <= 560) )
+            if( (hcount_in >= 580 - position) && (hcount_in <= 589 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
+                rgb_out_nxt = 12'hfff;
+
+            //FINISH LINE
+            else if(    (hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 4 - position) && ((vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 4) ||
+                        (vcount_in >= LINE_VER_POS + 10) && (vcount_in <= LINE_VER_POS + 14) ||
+                        (vcount_in >= LINE_VER_POS + 20) && (vcount_in <= LINE_VER_POS + 24) ||
+                        (vcount_in >= LINE_VER_POS + 30) && (vcount_in <= LINE_VER_POS + 34) ||
+                        (vcount_in >= LINE_VER_POS + 40) && (vcount_in <= LINE_VER_POS + 44) ||
+                        (vcount_in >= LINE_VER_POS + 50) && (vcount_in <= LINE_VER_POS + 54) ||
+                        (vcount_in >= LINE_VER_POS + 60) && (vcount_in <= LINE_VER_POS + 64) ||
+                        (vcount_in >= LINE_VER_POS + 70) && (vcount_in <= LINE_VER_POS + 74) ||
+                        (vcount_in >= LINE_VER_POS + 80) && (vcount_in <= LINE_VER_POS + 84) ||
+                        (vcount_in >= LINE_VER_POS + 90) && (vcount_in <= LINE_VER_POS + 94) ||
+                        (vcount_in >= LINE_VER_POS + 100) && (vcount_in <= LINE_VER_POS + 104) ||
+                        (vcount_in >= LINE_VER_POS + 110) && (vcount_in <= LINE_VER_POS + 114) ||
+                        (vcount_in >= LINE_VER_POS + 120) && (vcount_in <= LINE_VER_POS + 124) ||
+                        (vcount_in >= LINE_VER_POS + 130) && (vcount_in <= LINE_VER_POS + 134) ||
+                        (vcount_in >= LINE_VER_POS + 140) && (vcount_in <= LINE_VER_POS + 144) ||
+                        (vcount_in >= LINE_VER_POS + 150) && (vcount_in <= LINE_VER_POS + 154) ||
+                        (vcount_in >= LINE_VER_POS + 160) && (vcount_in <= LINE_VER_POS + 164) ||
+                        (vcount_in >= LINE_VER_POS + 170) && (vcount_in <= LINE_VER_POS + 174) ||
+                        (vcount_in >= LINE_VER_POS + 180) && (vcount_in <= LINE_VER_POS + 184) ||
+                        (vcount_in >= LINE_VER_POS + 190) && (vcount_in <= LINE_VER_POS + 194) ||
+                        (vcount_in >= LINE_VER_POS + 200) && (vcount_in <= LINE_VER_POS + 204) ||
+                        (vcount_in >= LINE_VER_POS + 210) && (vcount_in <= LINE_VER_POS + 214) ||
+                        (vcount_in >= LINE_VER_POS + 220) && (vcount_in <= LINE_VER_POS + 224) ||
+                        (vcount_in >= LINE_VER_POS + 230) && (vcount_in <= LINE_VER_POS + 234) ||
+                        (vcount_in >= LINE_VER_POS + 240) && (vcount_in <= LINE_VER_POS + 244) ||
+                        (vcount_in >= LINE_VER_POS + 250) && (vcount_in <= LINE_VER_POS + 254) ||
+                        (vcount_in >= LINE_VER_POS + 260) && (vcount_in <= LINE_VER_POS + 264) ||
+                        (vcount_in >= LINE_VER_POS + 270) && (vcount_in <= LINE_VER_POS + 274) ||
+                        (vcount_in >= LINE_VER_POS + 280) && (vcount_in <= LINE_VER_POS + 285)) ||
+
+                        (hcount_in >= FINISH_LINE_HOR_POS + 5 - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && ((vcount_in >= LINE_VER_POS + 5) && (vcount_in <= LINE_VER_POS + 9) ||
+                        (vcount_in >= LINE_VER_POS + 15) && (vcount_in <= LINE_VER_POS + 19) ||
+                        (vcount_in >= LINE_VER_POS + 25) && (vcount_in <= LINE_VER_POS + 29) ||
+                        (vcount_in >= LINE_VER_POS + 35) && (vcount_in <= LINE_VER_POS + 39) ||
+                        (vcount_in >= LINE_VER_POS + 45) && (vcount_in <= LINE_VER_POS + 49) ||
+                        (vcount_in >= LINE_VER_POS + 55) && (vcount_in <= LINE_VER_POS + 59) ||
+                        (vcount_in >= LINE_VER_POS + 65) && (vcount_in <= LINE_VER_POS + 69) ||
+                        (vcount_in >= LINE_VER_POS + 75) && (vcount_in <= LINE_VER_POS + 79) ||
+                        (vcount_in >= LINE_VER_POS + 85) && (vcount_in <= LINE_VER_POS + 89) ||
+                        (vcount_in >= LINE_VER_POS + 95) && (vcount_in <= LINE_VER_POS + 99) ||
+                        (vcount_in >= LINE_VER_POS + 105) && (vcount_in <= LINE_VER_POS + 109) ||
+                        (vcount_in >= LINE_VER_POS + 115) && (vcount_in <= LINE_VER_POS + 119) ||
+                        (vcount_in >= LINE_VER_POS + 125) && (vcount_in <= LINE_VER_POS + 129) ||
+                        (vcount_in >= LINE_VER_POS + 135) && (vcount_in <= LINE_VER_POS + 139) ||
+                        (vcount_in >= LINE_VER_POS + 145) && (vcount_in <= LINE_VER_POS + 149) ||
+                        (vcount_in >= LINE_VER_POS + 155) && (vcount_in <= LINE_VER_POS + 159) ||
+                        (vcount_in >= LINE_VER_POS + 165) && (vcount_in <= LINE_VER_POS + 169) ||
+                        (vcount_in >= LINE_VER_POS + 175) && (vcount_in <= LINE_VER_POS + 179) ||
+                        (vcount_in >= LINE_VER_POS + 185) && (vcount_in <= LINE_VER_POS + 189) ||
+                        (vcount_in >= LINE_VER_POS + 195) && (vcount_in <= LINE_VER_POS + 199) ||
+                        (vcount_in >= LINE_VER_POS + 205) && (vcount_in <= LINE_VER_POS + 209) ||
+                        (vcount_in >= LINE_VER_POS + 215) && (vcount_in <= LINE_VER_POS + 219) ||
+                        (vcount_in >= LINE_VER_POS + 225) && (vcount_in <= LINE_VER_POS + 229) ||
+                        (vcount_in >= LINE_VER_POS + 235) && (vcount_in <= LINE_VER_POS + 239) ||
+                        (vcount_in >= LINE_VER_POS + 245) && (vcount_in <= LINE_VER_POS + 249) ||
+                        (vcount_in >= LINE_VER_POS + 255) && (vcount_in <= LINE_VER_POS + 259) ||
+                        (vcount_in >= LINE_VER_POS + 265) && (vcount_in <= LINE_VER_POS + 269) ||
+                        (vcount_in >= LINE_VER_POS + 275) && (vcount_in <= LINE_VER_POS + 279))
+                )
+                rgb_out_nxt = 12'h000;
+
+            else if( (hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
                 rgb_out_nxt = 12'hfff;
 
             //Pillars
