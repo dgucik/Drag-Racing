@@ -128,7 +128,6 @@ module draw_background(
                         (vcount_in >= LINE_VER_POS + 260) && (vcount_in <= LINE_VER_POS + 264) ||
                         (vcount_in >= LINE_VER_POS + 270) && (vcount_in <= LINE_VER_POS + 274) ||
                         (vcount_in >= LINE_VER_POS + 280) && (vcount_in <= LINE_VER_POS + 285)) ||
-
                         (hcount_in >= FINISH_LINE_HOR_POS + 5 - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && ((vcount_in >= LINE_VER_POS + 5) && (vcount_in <= LINE_VER_POS + 9) ||
                         (vcount_in >= LINE_VER_POS + 15) && (vcount_in <= LINE_VER_POS + 19) ||
                         (vcount_in >= LINE_VER_POS + 25) && (vcount_in <= LINE_VER_POS + 29) ||

@@ -163,7 +163,7 @@ module top(
         .hblnk_in(car_hblnk_p2),
         .vblnk_in(car_vblnk_p2),
         .rgb_in(car_rgb_p2),
-
+        .position(position), //TEST
         .hcount_out(start_hcount),
         .vcount_out(start_vcount),
         .hsync_out(start_hsync),
