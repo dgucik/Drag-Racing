@@ -95,11 +95,11 @@ module draw_background(
         else begin
 
             //START LINE
-            if( (hcount_in >= 580 - position) && (hcount_in <= 589 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
+            if( ((580 <= position && position <= 589) || hcount_in >= 580 - position) && (hcount_in <= 589 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
                 rgb_out_nxt = 12'hfff;
 
             //FINISH LINE
-            else if(    (hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 4 - position) && ((vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 4) ||
+            else if(    ((FINISH_LINE_HOR_POS <= position && position <= FINISH_LINE_HOR_POS + 4) || hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 4 - position) && ((vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 4) ||
                         (vcount_in >= LINE_VER_POS + 10) && (vcount_in <= LINE_VER_POS + 14) ||
                         (vcount_in >= LINE_VER_POS + 20) && (vcount_in <= LINE_VER_POS + 24) ||
                         (vcount_in >= LINE_VER_POS + 30) && (vcount_in <= LINE_VER_POS + 34) ||
@@ -128,7 +128,7 @@ module draw_background(
                         (vcount_in >= LINE_VER_POS + 260) && (vcount_in <= LINE_VER_POS + 264) ||
                         (vcount_in >= LINE_VER_POS + 270) && (vcount_in <= LINE_VER_POS + 274) ||
                         (vcount_in >= LINE_VER_POS + 280) && (vcount_in <= LINE_VER_POS + 285)) ||
-                        (hcount_in >= FINISH_LINE_HOR_POS + 5 - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && ((vcount_in >= LINE_VER_POS + 5) && (vcount_in <= LINE_VER_POS + 9) ||
+                        ((FINISH_LINE_HOR_POS + 5 <= position && position <= FINISH_LINE_HOR_POS + 9) || hcount_in >= FINISH_LINE_HOR_POS + 5 - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && ((vcount_in >= LINE_VER_POS + 5) && (vcount_in <= LINE_VER_POS + 9) ||
                         (vcount_in >= LINE_VER_POS + 15) && (vcount_in <= LINE_VER_POS + 19) ||
                         (vcount_in >= LINE_VER_POS + 25) && (vcount_in <= LINE_VER_POS + 29) ||
                         (vcount_in >= LINE_VER_POS + 35) && (vcount_in <= LINE_VER_POS + 39) ||
@@ -159,7 +159,7 @@ module draw_background(
                 )
                 rgb_out_nxt = 12'h000;
 
-            else if( (hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
+            else if( ((FINISH_LINE_HOR_POS <= position && position <= FINISH_LINE_HOR_POS + 9) || hcount_in >= FINISH_LINE_HOR_POS - position) && (hcount_in <= FINISH_LINE_HOR_POS + 9 - position) && (vcount_in >= LINE_VER_POS) && (vcount_in <= LINE_VER_POS + 285) )
                 rgb_out_nxt = 12'hfff;
 
             //Pillars
