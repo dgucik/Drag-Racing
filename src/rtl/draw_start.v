@@ -49,8 +49,6 @@ module draw_start(
         end
     end
 
-// 200 - 703, 375 - 420
-
     always @* begin
         hcount_out_nxt = hcount_in; 
         hsync_out_nxt = hsync_in;
@@ -58,11 +56,10 @@ module draw_start(
         vcount_out_nxt = vcount_in;
         vsync_out_nxt = vsync_in;
         vblnk_out_nxt = vblnk_in;
-        // During blanking, make it it black.
         if(hblnk_in||vblnk_in) rgb_out_nxt = 12'h0_0_0;
         else begin
 
-            //START BARRIER
+            //BARRIER
             if(         (hcount_in >= BARRIER_HOR_POS + 10) && (hcount_in <= BARRIER_HOR_POS + 15) && (vcount_in >= BARRIER_VER_POS + 10) && (vcount_in <= BARRIER_VER_POS + 11) ||
                         (hcount_in >= BARRIER_HOR_POS + 12) && (hcount_in <= BARRIER_HOR_POS + 13) && (vcount_in >= BARRIER_VER_POS + 8) && (vcount_in <= BARRIER_VER_POS + 13) ||
 
@@ -94,9 +91,8 @@ module draw_start(
                         (hcount_in >= BARRIER_HOR_POS + 183) && (hcount_in <= BARRIER_HOR_POS + 195) && (vcount_in >= BARRIER_VER_POS + 23) && (vcount_in <= BARRIER_VER_POS + 39)
                 )
                 rgb_out_nxt = 12'h000;
-            //END BARRIER
 
-            //START WALL
+            //WALL
             else if(    (hcount_in == WALL_HOR_POS + 9) && (vcount_in >= WALL_VER_POS + 31) && (vcount_in <= WALL_VER_POS + 44) ||
                         (hcount_in >= WALL_HOR_POS + 1) && (hcount_in <= WALL_HOR_POS + 2) && (vcount_in == WALL_VER_POS + 26) ||
                         (hcount_in == WALL_HOR_POS + 2) && (vcount_in >= WALL_VER_POS + 13) && (vcount_in <= WALL_VER_POS + 25) ||
@@ -128,17 +124,12 @@ module draw_start(
                         (hcount_in >= WALL_HOR_POS + 4) && (hcount_in <= WALL_HOR_POS + 5) && (vcount_in >= WALL_VER_POS + 2) && (vcount_in <= WALL_VER_POS + 15)
                 )
                 rgb_out_nxt = 12'h444;
+
             else if(    (hcount_in >= WALL_HOR_POS + 7) && (hcount_in <= WALL_HOR_POS + 498) && (vcount_in >= WALL_VER_POS + 1) && (vcount_in <= WALL_VER_POS + 44) ||
                         (hcount_in >= WALL_HOR_POS + 499) && (hcount_in <= WALL_HOR_POS + 501) && (vcount_in >= WALL_VER_POS + 15) && (vcount_in <= WALL_VER_POS + 44) ||
                         (hcount_in == WALL_HOR_POS + 502) && (vcount_in >= WALL_VER_POS + 24) && (vcount_in <= WALL_VER_POS + 44)
                 )
                 rgb_out_nxt = 12'h888;
-            //END WALL
-
-            //START WHITE LINE
-            else if( (hcount_in >= 595) && (hcount_in <= 603) && (vcount_in >= 275) && (vcount_in <= 560) )
-                rgb_out_nxt = 12'hfff;
-            //END WHITE LINE
 
             else rgb_out_nxt = rgb_in;
         end

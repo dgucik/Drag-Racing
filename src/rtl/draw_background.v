@@ -88,8 +88,12 @@ module draw_background(
         if(hblnk_in||vblnk_in) rgb_out_nxt = 12'h0_0_0;
         else begin
 
+            //START LINE
+            if( (hcount_in >= 580 - position) && (hcount_in <= 588 - position) && (vcount_in >= 275) && (vcount_in <= 560) )
+                rgb_out_nxt = 12'hfff;
+
             //Pillars
-            if( (pillar_1_bottom_start < pillar_1_bottom_end) && (hcount_in >= pillar_1_bottom_start ) && (hcount_in <= pillar_1_bottom_end) && (vcount_in >= 84) && (vcount_in <= 169) )
+            else if( (pillar_1_bottom_start < pillar_1_bottom_end) && (hcount_in >= pillar_1_bottom_start ) && (hcount_in <= pillar_1_bottom_end) && (vcount_in >= 84) && (vcount_in <= 169) )
                 rgb_out_nxt = PILLAR_COLOR;
             else if( (pillar_1_bottom_start >= pillar_1_bottom_end) && ((hcount_in >= pillar_1_bottom_start ) || (hcount_in <= pillar_1_bottom_end)) && (vcount_in >= 84) && (vcount_in <= 169) )
                 rgb_out_nxt = PILLAR_COLOR;
