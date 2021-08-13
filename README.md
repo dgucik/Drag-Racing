@@ -4,3 +4,6 @@
  - [ ] menu główne
  - [x] background
  - [ ] animacja ruchu
+ - [ ] komunikacja miedzy basysami
+ - [ ] modul kontrolny
+ - [ ] Tabela końcowa??
