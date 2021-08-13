@@ -21,8 +21,11 @@ module draw_start(
     localparam  WALL_HOR_POS = 200,
                 WALL_VER_POS = 375;
 
-    localparam  BARRIER_HOR_POS = 600,
-                BARRIER_VER_POS = 395;
+    localparam  F_BARRIER_HOR_POS = 600,
+                F_BARRIER_VER_POS = 395;
+
+    localparam  B_BARRIER_HOR_POS = 600,
+                B_BARRIER_VER_POS = 378;
 
     reg [11:0] rgb_out_nxt;
     reg [10:0] hcount_out_nxt, vcount_out_nxt;
@@ -59,36 +62,36 @@ module draw_start(
         if(hblnk_in||vblnk_in) rgb_out_nxt = 12'h0_0_0;
         else begin
 
-            //BARRIER
-            if(         ((BARRIER_HOR_POS + 10 <= position && position <= BARRIER_HOR_POS + 15) || hcount_in >= BARRIER_HOR_POS + 10 - position) && (hcount_in <= BARRIER_HOR_POS + 15 - position) && (vcount_in >= BARRIER_VER_POS + 10) && (vcount_in <= BARRIER_VER_POS + 11) ||
-                        ((BARRIER_HOR_POS + 12 <= position && position <= BARRIER_HOR_POS + 13) || hcount_in >= BARRIER_HOR_POS + 12 - position) && (hcount_in <= BARRIER_HOR_POS + 13 - position) && (vcount_in >= BARRIER_VER_POS + 8) && (vcount_in <= BARRIER_VER_POS + 13) ||
+            //FRONT BARRIER
+            if(         ((F_BARRIER_HOR_POS + 10 <= position && position <= F_BARRIER_HOR_POS + 15) || hcount_in >= F_BARRIER_HOR_POS + 10 - position) && (hcount_in <= F_BARRIER_HOR_POS + 15 - position) && (vcount_in >= F_BARRIER_VER_POS + 10) && (vcount_in <= F_BARRIER_VER_POS + 11) ||
+                        ((F_BARRIER_HOR_POS + 12 <= position && position <= F_BARRIER_HOR_POS + 13) || hcount_in >= F_BARRIER_HOR_POS + 12 - position) && (hcount_in <= F_BARRIER_HOR_POS + 13 - position) && (vcount_in >= F_BARRIER_VER_POS + 8) && (vcount_in <= F_BARRIER_VER_POS + 13) ||
 
-                        ((BARRIER_HOR_POS + 86 <= position && position <= BARRIER_HOR_POS + 91) || hcount_in >= BARRIER_HOR_POS + 86 - position) && (hcount_in <= BARRIER_HOR_POS + 91 - position) && (vcount_in >= BARRIER_VER_POS + 10) && (vcount_in <= BARRIER_VER_POS + 11) ||
-                        ((BARRIER_HOR_POS + 88 <= position && position <= BARRIER_HOR_POS + 89) || hcount_in >= BARRIER_HOR_POS + 88 - position) && (hcount_in <= BARRIER_HOR_POS + 89 - position) && (vcount_in >= BARRIER_VER_POS + 8) && (vcount_in <= BARRIER_VER_POS + 13) ||
+                        ((F_BARRIER_HOR_POS + 86 <= position && position <= F_BARRIER_HOR_POS + 91) || hcount_in >= F_BARRIER_HOR_POS + 86 - position) && (hcount_in <= F_BARRIER_HOR_POS + 91 - position) && (vcount_in >= F_BARRIER_VER_POS + 10) && (vcount_in <= F_BARRIER_VER_POS + 11) ||
+                        ((F_BARRIER_HOR_POS + 88 <= position && position <= F_BARRIER_HOR_POS + 89) || hcount_in >= F_BARRIER_HOR_POS + 88 - position) && (hcount_in <= F_BARRIER_HOR_POS + 89 - position) && (vcount_in >= F_BARRIER_VER_POS + 8) && (vcount_in <= F_BARRIER_VER_POS + 13) ||
 
-                        ((BARRIER_HOR_POS + 186 <= position && position <= BARRIER_HOR_POS + 191) || hcount_in >= BARRIER_HOR_POS + 186 - position) && (hcount_in <= BARRIER_HOR_POS + 191 - position) && (vcount_in >= BARRIER_VER_POS + 10) && (vcount_in <= BARRIER_VER_POS + 11) ||
-                        ((BARRIER_HOR_POS + 188 <= position && position <= BARRIER_HOR_POS + 189) || hcount_in >= BARRIER_HOR_POS + 188 - position) && (hcount_in <= BARRIER_HOR_POS + 189 - position) && (vcount_in >= BARRIER_VER_POS + 8) && (vcount_in <= BARRIER_VER_POS + 13)
+                        ((F_BARRIER_HOR_POS + 186 <= position && position <= F_BARRIER_HOR_POS + 191) || hcount_in >= F_BARRIER_HOR_POS + 186 - position) && (hcount_in <= F_BARRIER_HOR_POS + 191 - position) && (vcount_in >= F_BARRIER_VER_POS + 10) && (vcount_in <= F_BARRIER_VER_POS + 11) ||
+                        ((F_BARRIER_HOR_POS + 188 <= position && position <= F_BARRIER_HOR_POS + 189) || hcount_in >= F_BARRIER_HOR_POS + 188 - position) && (hcount_in <= F_BARRIER_HOR_POS + 189 - position) && (vcount_in >= F_BARRIER_VER_POS + 8) && (vcount_in <= F_BARRIER_VER_POS + 13)
                 )
                 rgb_out_nxt = 12'h333;
 
-            else if(    ((BARRIER_HOR_POS <= position && position <= BARRIER_HOR_POS + 215) || hcount_in >= BARRIER_HOR_POS - position) && (hcount_in <= BARRIER_HOR_POS + 215 - position) && (vcount_in >= BARRIER_VER_POS + 8) && (vcount_in <= BARRIER_VER_POS + 14)
+            else if(    ((F_BARRIER_HOR_POS <= position && position <= F_BARRIER_HOR_POS + 215) || hcount_in >= F_BARRIER_HOR_POS - position) && (hcount_in <= F_BARRIER_HOR_POS + 215 - position) && (vcount_in >= F_BARRIER_VER_POS + 8) && (vcount_in <= F_BARRIER_VER_POS + 14)
                 )
                 rgb_out_nxt = 12'h444;
 
-            else if(    ((BARRIER_HOR_POS + 8 <= position && position <= BARRIER_HOR_POS + 18) || hcount_in >= BARRIER_HOR_POS + 8 - position) && (hcount_in <= BARRIER_HOR_POS + 18 - position) && (vcount_in >= BARRIER_VER_POS + 22) && (vcount_in <= BARRIER_VER_POS + 39) ||
-                        ((BARRIER_HOR_POS + 84 <= position && position <= BARRIER_HOR_POS + 94) || hcount_in >= BARRIER_HOR_POS + 84 - position) && (hcount_in <= BARRIER_HOR_POS + 94 - position) && (vcount_in >= BARRIER_VER_POS + 22) && (vcount_in <= BARRIER_VER_POS + 39) ||
-                        ((BARRIER_HOR_POS + 184 <= position && position <= BARRIER_HOR_POS + 194) || hcount_in >= BARRIER_HOR_POS + 184 - position) && (hcount_in <= BARRIER_HOR_POS + 194 - position) && (vcount_in >= BARRIER_VER_POS + 22) && (vcount_in <= BARRIER_VER_POS + 39)
+            else if(    ((F_BARRIER_HOR_POS + 8 <= position && position <= F_BARRIER_HOR_POS + 18) || hcount_in >= F_BARRIER_HOR_POS + 8 - position) && (hcount_in <= F_BARRIER_HOR_POS + 18 - position) && (vcount_in >= F_BARRIER_VER_POS + 22) && (vcount_in <= F_BARRIER_VER_POS + 39) ||
+                        ((F_BARRIER_HOR_POS + 84 <= position && position <= F_BARRIER_HOR_POS + 94) || hcount_in >= F_BARRIER_HOR_POS + 84 - position) && (hcount_in <= F_BARRIER_HOR_POS + 94 - position) && (vcount_in >= F_BARRIER_VER_POS + 22) && (vcount_in <= F_BARRIER_VER_POS + 39) ||
+                        ((F_BARRIER_HOR_POS + 184 <= position && position <= F_BARRIER_HOR_POS + 194) || hcount_in >= F_BARRIER_HOR_POS + 184 - position) && (hcount_in <= F_BARRIER_HOR_POS + 194 - position) && (vcount_in >= F_BARRIER_VER_POS + 22) && (vcount_in <= F_BARRIER_VER_POS + 39)
                 )
                 rgb_out_nxt = 12'h777;
 
-            else if(    ((BARRIER_HOR_POS <= position && position <= BARRIER_HOR_POS + 215) || hcount_in >= BARRIER_HOR_POS - position) && (hcount_in <= BARRIER_HOR_POS + 215 - position) && (vcount_in >= BARRIER_VER_POS + 2) && (vcount_in <= BARRIER_VER_POS + 20)
+            else if(    ((F_BARRIER_HOR_POS <= position && position <= F_BARRIER_HOR_POS + 215) || hcount_in >= F_BARRIER_HOR_POS - position) && (hcount_in <= F_BARRIER_HOR_POS + 215 - position) && (vcount_in >= F_BARRIER_VER_POS + 2) && (vcount_in <= F_BARRIER_VER_POS + 20)
                 )
                 rgb_out_nxt = 12'hbbb;
 
-            else if(    ((BARRIER_HOR_POS <= position && position <= BARRIER_HOR_POS + 215) || hcount_in >= BARRIER_HOR_POS - position) && (hcount_in <= BARRIER_HOR_POS + 215 - position) && (vcount_in >= BARRIER_VER_POS + 0) && (vcount_in <= BARRIER_VER_POS + 22) ||
-                        ((BARRIER_HOR_POS + 7 <= position && position <= BARRIER_HOR_POS + 19) || hcount_in >= BARRIER_HOR_POS + 7 - position) && (hcount_in <= BARRIER_HOR_POS + 19 - position) && (vcount_in >= BARRIER_VER_POS + 23) && (vcount_in <= BARRIER_VER_POS + 39) ||
-                        ((BARRIER_HOR_POS + 83 <= position && position <= BARRIER_HOR_POS + 95) || hcount_in >= BARRIER_HOR_POS + 83 - position) && (hcount_in <= BARRIER_HOR_POS + 95 - position) && (vcount_in >= BARRIER_VER_POS + 23) && (vcount_in <= BARRIER_VER_POS + 39) ||
-                        ((BARRIER_HOR_POS + 183 <= position && position <= BARRIER_HOR_POS + 195) || hcount_in >= BARRIER_HOR_POS + 183 - position) && (hcount_in <= BARRIER_HOR_POS + 195 - position) && (vcount_in >= BARRIER_VER_POS + 23) && (vcount_in <= BARRIER_VER_POS + 39)
+            else if(    ((F_BARRIER_HOR_POS <= position && position <= F_BARRIER_HOR_POS + 215) || hcount_in >= F_BARRIER_HOR_POS - position) && (hcount_in <= F_BARRIER_HOR_POS + 215 - position) && (vcount_in >= F_BARRIER_VER_POS + 0) && (vcount_in <= F_BARRIER_VER_POS + 22) ||
+                        ((F_BARRIER_HOR_POS + 7 <= position && position <= F_BARRIER_HOR_POS + 19) || hcount_in >= F_BARRIER_HOR_POS + 7 - position) && (hcount_in <= F_BARRIER_HOR_POS + 19 - position) && (vcount_in >= F_BARRIER_VER_POS + 23) && (vcount_in <= F_BARRIER_VER_POS + 39) ||
+                        ((F_BARRIER_HOR_POS + 83 <= position && position <= F_BARRIER_HOR_POS + 95) || hcount_in >= F_BARRIER_HOR_POS + 83 - position) && (hcount_in <= F_BARRIER_HOR_POS + 95 - position) && (vcount_in >= F_BARRIER_VER_POS + 23) && (vcount_in <= F_BARRIER_VER_POS + 39) ||
+                        ((F_BARRIER_HOR_POS + 183 <= position && position <= F_BARRIER_HOR_POS + 195) || hcount_in >= F_BARRIER_HOR_POS + 183 - position) && (hcount_in <= F_BARRIER_HOR_POS + 195 - position) && (vcount_in >= F_BARRIER_VER_POS + 23) && (vcount_in <= F_BARRIER_VER_POS + 39)
                 )
                 rgb_out_nxt = 12'h000;
 
@@ -130,6 +133,28 @@ module draw_start(
                         (hcount_in == WALL_HOR_POS + 502 - position) && (vcount_in >= WALL_VER_POS + 24) && (vcount_in <= WALL_VER_POS + 44)
                 )
                 rgb_out_nxt = 12'h888;
+            
+            //BACK BARRIER
+            else if(    ((B_BARRIER_HOR_POS <= position && position <= B_BARRIER_HOR_POS + 215) || hcount_in >= B_BARRIER_HOR_POS - position) && (hcount_in <= B_BARRIER_HOR_POS + 215 - position) && (vcount_in >= B_BARRIER_VER_POS + 8) && (vcount_in <= B_BARRIER_VER_POS + 14)
+                )
+                rgb_out_nxt = 12'haaa;
+
+            else if(    ((B_BARRIER_HOR_POS + 8 <= position && position <= B_BARRIER_HOR_POS + 18) || hcount_in >= B_BARRIER_HOR_POS + 8 - position) && (hcount_in <= B_BARRIER_HOR_POS + 18 - position) && (vcount_in >= B_BARRIER_VER_POS + 22) && (vcount_in <= B_BARRIER_VER_POS + 39) ||
+                        ((B_BARRIER_HOR_POS + 84 <= position && position <= B_BARRIER_HOR_POS + 94) || hcount_in >= B_BARRIER_HOR_POS + 84 - position) && (hcount_in <= B_BARRIER_HOR_POS + 94 - position) && (vcount_in >= B_BARRIER_VER_POS + 22) && (vcount_in <= B_BARRIER_VER_POS + 39) ||
+                        ((B_BARRIER_HOR_POS + 184 <= position && position <= B_BARRIER_HOR_POS + 194) || hcount_in >= B_BARRIER_HOR_POS + 184 - position) && (hcount_in <= B_BARRIER_HOR_POS + 194 - position) && (vcount_in >= B_BARRIER_VER_POS + 22) && (vcount_in <= B_BARRIER_VER_POS + 39)
+                )
+                rgb_out_nxt = 12'h666;
+
+            else if(    ((B_BARRIER_HOR_POS <= position && position <= B_BARRIER_HOR_POS + 215) || hcount_in >= B_BARRIER_HOR_POS - position) && (hcount_in <= B_BARRIER_HOR_POS + 215 - position) && (vcount_in >= B_BARRIER_VER_POS + 2) && (vcount_in <= B_BARRIER_VER_POS + 20)
+                )
+                rgb_out_nxt = 12'h444;
+
+            else if(    ((B_BARRIER_HOR_POS <= position && position <= B_BARRIER_HOR_POS + 215) || hcount_in >= B_BARRIER_HOR_POS - position) && (hcount_in <= B_BARRIER_HOR_POS + 215 - position) && (vcount_in >= B_BARRIER_VER_POS + 0) && (vcount_in <= B_BARRIER_VER_POS + 22) ||
+                        ((B_BARRIER_HOR_POS + 7 <= position && position <= B_BARRIER_HOR_POS + 19) || hcount_in >= B_BARRIER_HOR_POS + 7 - position) && (hcount_in <= B_BARRIER_HOR_POS + 19 - position) && (vcount_in >= B_BARRIER_VER_POS + 23) && (vcount_in <= B_BARRIER_VER_POS + 39) ||
+                        ((B_BARRIER_HOR_POS + 83 <= position && position <= B_BARRIER_HOR_POS + 95) || hcount_in >= B_BARRIER_HOR_POS + 83 - position) && (hcount_in <= B_BARRIER_HOR_POS + 95 - position) && (vcount_in >= B_BARRIER_VER_POS + 23) && (vcount_in <= B_BARRIER_VER_POS + 39) ||
+                        ((B_BARRIER_HOR_POS + 183 <= position && position <= B_BARRIER_HOR_POS + 195) || hcount_in >= B_BARRIER_HOR_POS + 183 - position) && (hcount_in <= B_BARRIER_HOR_POS + 195 - position) && (vcount_in >= B_BARRIER_VER_POS + 23) && (vcount_in <= B_BARRIER_VER_POS + 39)
+                )
+                rgb_out_nxt = 12'h000;
 
             else rgb_out_nxt = rgb_in;
         end
