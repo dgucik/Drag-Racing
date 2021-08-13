@@ -3,5 +3,4 @@
  - [x] model samochodu
  - [ ] menu główne
  - [x] background
- - [ ] menu
  - [ ] animacja ruchu
