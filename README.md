@@ -5,5 +5,5 @@
  - [x] background
  - [ ] animacja ruchu
  - [ ] komunikacja miedzy basysami
- - [ ] modul kontrolny
- - [ ] Tabela końcowa??
+ - [ ] moduł kontrolny
+ - [ ] Tabela z wynikami??
