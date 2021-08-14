@@ -27,6 +27,9 @@ module draw_start(
     localparam  B_BARRIER_HOR_POS = 600,
                 B_BARRIER_VER_POS = 378;
 
+    localparam  LIGHTS_HOR_POS = 760,
+                LIGHTS_VER_POS = 130;
+
     reg [11:0] rgb_out_nxt;
     reg [10:0] hcount_out_nxt, vcount_out_nxt;
     reg hsync_out_nxt, hblnk_out_nxt, vsync_out_nxt, vblnk_out_nxt;
@@ -94,6 +97,78 @@ module draw_start(
                         ((F_BARRIER_HOR_POS + 183 <= position && position <= F_BARRIER_HOR_POS + 195) || hcount_in >= F_BARRIER_HOR_POS + 183 - position) && (hcount_in <= F_BARRIER_HOR_POS + 195 - position) && (vcount_in >= F_BARRIER_VER_POS + 23) && (vcount_in <= F_BARRIER_VER_POS + 39)
                 )
                 rgb_out_nxt = 12'h000;
+
+            //LIGHTS
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 12 - position) && (hcount_in <= LIGHTS_HOR_POS + 18 - position) && (vcount_in >= LIGHTS_VER_POS + 10) && (vcount_in <= LIGHTS_VER_POS + 31) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 8 - position) && (hcount_in <= LIGHTS_HOR_POS + 24 - position) && (vcount_in >= LIGHTS_VER_POS + 17) && (vcount_in <= LIGHTS_VER_POS + 26) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 10 - position) && (hcount_in <= LIGHTS_HOR_POS + 21 - position) && (vcount_in >= LIGHTS_VER_POS + 13) && (vcount_in <= LIGHTS_VER_POS + 29) ||
+
+                        (hcount_in >= LIGHTS_HOR_POS + 19 - position) && (hcount_in <= LIGHTS_HOR_POS + 20 - position) && (vcount_in == LIGHTS_VER_POS + 12) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 19 - position) && (hcount_in <= LIGHTS_HOR_POS + 21 - position) && (vcount_in == LIGHTS_VER_POS + 30) ||
+
+                        (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + 12) ||
+                        (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + 16) ||
+                        (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + 30)
+                )
+                rgb_out_nxt = 12'h441; //YELLOW
+
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + 16) && (vcount_in <= LIGHTS_VER_POS + 27) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + 12) && (vcount_in <= LIGHTS_VER_POS + 30) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 11 - position) && (hcount_in <= LIGHTS_HOR_POS + 19 - position) && (vcount_in >= LIGHTS_VER_POS + 9) && (vcount_in <= LIGHTS_VER_POS + 32) ||
+                        (hcount_in == LIGHTS_HOR_POS + 10 - position) && (vcount_in >= LIGHTS_VER_POS + 11) && (vcount_in <= LIGHTS_VER_POS + 31) ||
+
+                        (hcount_in == LIGHTS_HOR_POS + 8 - position) && (vcount_in == LIGHTS_VER_POS + 15) ||
+                        (hcount_in == LIGHTS_HOR_POS + 20 - position) && (vcount_in == LIGHTS_VER_POS + 11) ||
+                        (hcount_in == LIGHTS_HOR_POS + 21 - position) && (vcount_in == LIGHTS_VER_POS + 12) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 20 - position) && (hcount_in <= LIGHTS_HOR_POS + 21 - position) && (vcount_in == LIGHTS_VER_POS + 31)
+
+                )
+                rgb_out_nxt = 12'h000;
+
+            else if(    (hcount_in >= LIGHTS_HOR_POS - position) && (hcount_in <= LIGHTS_HOR_POS + 26 - position) && (vcount_in >= LIGHTS_VER_POS + 17) && (vcount_in <= LIGHTS_VER_POS + 22) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + 8) && (vcount_in <= LIGHTS_VER_POS + 30) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 26 - position) && (vcount_in >= LIGHTS_VER_POS + 9) && (vcount_in <= LIGHTS_VER_POS + 30) ||
+
+                        (hcount_in >= LIGHTS_HOR_POS + 5 - position) && (hcount_in <= LIGHTS_HOR_POS + 6 - position) && (vcount_in >= LIGHTS_VER_POS + 10) && (vcount_in <= LIGHTS_VER_POS + 29) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 3 - position) && (hcount_in <= LIGHTS_HOR_POS + 4 - position) && (vcount_in >= LIGHTS_VER_POS + 12) && (vcount_in <= LIGHTS_VER_POS + 27) ||
+                        (hcount_in == LIGHTS_HOR_POS + 2 - position) && (vcount_in >= LIGHTS_VER_POS + 13) && (vcount_in <= LIGHTS_VER_POS + 26) ||
+
+                        (hcount_in == LIGHTS_HOR_POS + 4 - position) && (vcount_in == LIGHTS_VER_POS + 11) ||
+                        (hcount_in == LIGHTS_HOR_POS + 1 - position) && (vcount_in == LIGHTS_VER_POS + 16) ||
+                        (hcount_in == LIGHTS_HOR_POS + 1 - position) && (vcount_in == LIGHTS_VER_POS + 23) ||
+
+                        (hcount_in == LIGHTS_HOR_POS + 4 - position) && (vcount_in == LIGHTS_VER_POS + 28) ||
+                        (hcount_in == LIGHTS_HOR_POS + 6 - position) && (vcount_in == LIGHTS_VER_POS + 30) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 10 - position) && (hcount_in <= LIGHTS_HOR_POS + 23 - position) && (vcount_in >= LIGHTS_VER_POS + 31) && (vcount_in <= LIGHTS_VER_POS + 34) ||
+
+                        (hcount_in == LIGHTS_HOR_POS + 24 - position) && (vcount_in >= LIGHTS_VER_POS + 31) && (vcount_in <= LIGHTS_VER_POS + 32) ||
+                        (hcount_in >= LIGHTS_HOR_POS + 8 - position) && (hcount_in <= LIGHTS_HOR_POS + 9 - position) && (vcount_in >= LIGHTS_VER_POS + 31) && (vcount_in <= LIGHTS_VER_POS + 32) ||
+                        (hcount_in == LIGHTS_HOR_POS + 7 - position) && (vcount_in == LIGHTS_VER_POS + 31) ||
+                        (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + 33) ||
+                        (hcount_in == LIGHTS_HOR_POS + 25 - position) && (vcount_in == LIGHTS_VER_POS + 31)
+                )
+                rgb_out_nxt = 12'h111;
+
+            
+            
+            
+            
+            //LIGHTS PILLAR
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 18 - position) && (hcount_in <= LIGHTS_HOR_POS + 27 - position) && (vcount_in >= LIGHTS_VER_POS + 235) && (vcount_in <= LIGHTS_VER_POS + 285)
+                )
+                rgb_out_nxt = 12'ha9a;
+            
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 17 - position) && (hcount_in <= LIGHTS_HOR_POS + 28 - position) && (vcount_in >= LIGHTS_VER_POS + 235) && (vcount_in <= LIGHTS_VER_POS + 285)
+                )
+                rgb_out_nxt = 12'h000;
+                
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 12 - position) && (hcount_in <= LIGHTS_HOR_POS + 26 - position) && (vcount_in >= LIGHTS_VER_POS) && (vcount_in <= LIGHTS_VER_POS + 234)
+                )
+                rgb_out_nxt = 12'h122;
+
+            else if(    (hcount_in >= LIGHTS_HOR_POS + 27 - position) && (hcount_in <= LIGHTS_HOR_POS + 33 - position) && (vcount_in >= LIGHTS_VER_POS) && (vcount_in <= LIGHTS_VER_POS + 234)
+                )
+                rgb_out_nxt = 12'h010; 
 
             //WALL
             else if(    (hcount_in == WALL_HOR_POS + 9 - position) && (vcount_in >= WALL_VER_POS + 31) && (vcount_in <= WALL_VER_POS + 44) ||
