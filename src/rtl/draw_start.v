@@ -27,7 +27,7 @@ module draw_start(
     localparam  B_BARRIER_HOR_POS = 600,
                 B_BARRIER_VER_POS = 378;
 
-    localparam  LIGHTS_HOR_POS = 785,
+    localparam  LIGHTS_HOR_POS = 755,
                 LIGHTS_VER_POS = 135,
                 LIGHTS_SPACING = 48; 
 
