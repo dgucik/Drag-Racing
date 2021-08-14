@@ -155,6 +155,23 @@ module top(
         .rgb_out(car_rgb_p2)
     );
 
+    wire clk1KHz;
+    wire [11:0] light_timer_seconds;
+
+    clk_divide #(.DIVISOR(100000)) u_timer_clk(
+        .clk_in(clk100MHz),
+        .clk_out(clk1KHz)
+    );
+
+    timer u_light_signals_timer(
+        .clk1KHz(clk1KHz),
+        .reset(rst_ext),
+        .start(1),
+        .restart(0),
+        .seconds(light_timer_seconds),
+        .miliseconds()
+    );
+
     draw_start u_draw_start(
         .hcount_in(car_hcount_p2),
         .vcount_in(car_vcount_p2),
@@ -164,6 +181,7 @@ module top(
         .vblnk_in(car_vblnk_p2),
         .rgb_in(car_rgb_p2),
         .position(position), //TEST
+        .seconds(light_timer_seconds),
         .hcount_out(start_hcount),
         .vcount_out(start_vcount),
         .hsync_out(start_hsync),

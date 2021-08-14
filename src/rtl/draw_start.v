@@ -9,6 +9,7 @@ module draw_start(
     input wire clk,
     input wire reset,
     input wire [31:0] position,
+    input wire [11:0] seconds,
     output reg [10:0] hcount_out,
     output reg [10:0] vcount_out,
     output reg hsync_out,
@@ -27,7 +28,7 @@ module draw_start(
     localparam  B_BARRIER_HOR_POS = 600,
                 B_BARRIER_VER_POS = 378;
 
-    localparam  LIGHTS_HOR_POS = 755,
+    localparam  LIGHTS_HOR_POS = 765,
                 LIGHTS_VER_POS = 135,
                 LIGHTS_SPACING = 48; 
 
@@ -112,7 +113,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + 30)
                 )
-                rgb_out_nxt = 12'h441;
+                rgb_out_nxt = (seconds == 2)? 12'hcb0:12'h441;
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + 16) && (vcount_in <= LIGHTS_VER_POS + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + 12) && (vcount_in <= LIGHTS_VER_POS + 30) ||
@@ -162,7 +163,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + 30)
                 )
-                rgb_out_nxt = 12'h441;
+                rgb_out_nxt = (seconds == 3)? 12'hcb0:12'h441;
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + 16) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + 12) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + 30) ||
@@ -212,7 +213,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 30)
                 )
-                rgb_out_nxt = 12'h441;
+                rgb_out_nxt = (seconds == 4)? 12'hcb0:12'h441;
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 16) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 12) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + 30) ||
@@ -262,7 +263,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30)
                 )
-                rgb_out_nxt = 12'h041;
+                rgb_out_nxt = (seconds >= 5)? 12'h0d2:12'h041;
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 12) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30) ||
@@ -312,7 +313,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30)
                 )
-                rgb_out_nxt = 12'h600; 
+                rgb_out_nxt = (seconds <= 1)? 12'he00:12'h600; 
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 12) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30) ||
