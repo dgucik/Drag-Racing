@@ -3,7 +3,7 @@
  - [x] model samochodu
  - [ ] menu główne
  - [x] background
- - [x] animacja ruchu
+ - [ ] animacja ruchu
  - [ ] komunikacja miedzy basysami
  - [ ] moduł kontrolny
  - [ ] Tabela z wynikami??
