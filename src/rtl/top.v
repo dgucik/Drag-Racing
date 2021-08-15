@@ -55,6 +55,14 @@ module top(
     wire [10:0] background_hcount, background_vcount;
     wire background_hsync, background_hblnk, background_vsync, background_vblnk;
     wire [11:0] background_rgb;
+    
+    //for_keyboard_working
+    wire [3:0] key_pressed, key_pressed_2;
+    
+    //game_menu
+    wire game_menu_hsync_out, game_menu_vsync_out;
+    wire [11:0] game_menu_rgb_out;
+
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -79,7 +87,7 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
-    
+/*    
     draw_background u_draw_backgroud(
         .hcount_in(vga_hcount),
         .vcount_in(vga_vcount),
@@ -141,9 +149,45 @@ module top(
         .vblnk_out(car_vblnk_p1),
         .rgb_out(car_rgb_p1)
     );
-    
+*/
 
-    assign vs = car_vsync_p1;
-    assign hs = car_hsync_p1;
-    assign {r,g,b} = car_rgb_p1;  
+    game_menu game_menu(
+    .clk(clk65MHz),
+    .rst(rst_ext),
+    .hcount_in(vga_hcount),
+    .vcount_in(vga_vcount),
+    .hsync_in(vga_hsync),
+    .vsync_in(vga_vsync),
+    .hblnk_in(vga_hblnk),
+    .vblnk_in(vga_vblnk),
+    .keyboard_in(key_pressed_2),
+    .hsync_out(game_menu_hsync_out),
+    .vsync_out(game_menu_vsync_out),
+    .rgb_out(game_menu_rgb_out),
+    .back_to_main_menu_flag(),
+    .start_game_flag()
+    );
+
+    kb_interface kb_interface(
+    .clk(clk65MHz),
+    .reset(rst_ext),
+    .kb_key_pressed(key_pressed),
+    .ps2_clk(ps2_clk),
+    .ps2_data(ps2_data)
+    );
+
+    keyboard_button_rising_edge keyboard_button_rising_edge(
+    .clk(clk65MHz),
+    .key_pressed(key_pressed),
+    .key_pressed_posedge(key_pressed_2)
+    );
+
+//    assign vs = car_vsync_p1;
+//    assign hs = car_hsync_p1;
+//    assign {r,g,b} = car_rgb_p1;
+    
+    assign vs = game_menu_vsync_out;
+    assign hs = game_menu_hsync_out;
+    assign {r,g,b} = game_menu_rgb_out;
+    
 endmodule
