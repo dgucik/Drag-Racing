@@ -164,6 +164,7 @@ module top(
     .hsync_out(game_menu_hsync_out),
     .vsync_out(game_menu_vsync_out),
     .rgb_out(game_menu_rgb_out),
+    .back_to_main_menu_flag(),
     .start_game_flag()
     );
 

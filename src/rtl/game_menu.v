@@ -30,6 +30,7 @@ module game_menu(
     input wire hblnk_in,
     input wire vblnk_in,
     input wire [3:0] keyboard_in,
+    input wire back_to_main_menu_flag,
     output wire hsync_out,
     output wire vsync_out,
     output wire [11:0] rgb_out,
@@ -77,7 +78,8 @@ module game_menu(
     .rst(rst),
     .keyboard_in(keyboard_in),
     .menu_state(menu_state),
-    .menu_counter(menu_counter)
+    .menu_counter(menu_counter),
+    .back_to_main_menu_flag(back_to_main_menu_flag)
     );
     
     menu_napisy menu_napisy(

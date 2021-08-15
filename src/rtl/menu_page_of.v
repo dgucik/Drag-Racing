@@ -24,6 +24,7 @@ module menu_page_of(
     output reg [2:0] menu_state,
     output reg [1:0] menu_counter,
     input wire [3:0] keyboard_in,
+    input wire back_to_main_menu_flag,
     input wire clk,
     input wire rst
     );
@@ -51,116 +52,122 @@ module menu_page_of(
     end
     
     always@* begin
-        case(state)
-            Main:
-                begin
-                    if(keyboard_in[3]) begin
-                        if(counter>0) counter_nxt = counter -1;
-                        else counter_nxt = counter;
-                        
-                        state_nxt = Main;
+        if(!back_to_main_menu_flag) begin
+            case(state)
+                Main:
+                    begin
+                        if(keyboard_in[3]) begin
+                            if(counter>0) counter_nxt = counter -1;
+                            else counter_nxt = counter;
+                            
+                            state_nxt = Main;
+                        end
+                        else if(keyboard_in[1]) begin
+                            if(counter<3) counter_nxt = counter +1;
+                            else counter_nxt = counter;
+                            
+                            state_nxt = Main;
+                        end
+                        else if(keyboard_in[0]) begin
+                            if(counter==0) begin
+                                state_nxt = StartGame;
+                                counter_nxt = 0; end
+                            else if(counter==1) begin
+                                state_nxt = Control;
+                                counter_nxt = 0; end
+                            else if(counter==2) begin
+                                state_nxt = About;
+                                counter_nxt = 0; end
+                            else if(counter==3) begin
+                                state_nxt = Exit;
+                                counter_nxt = 0; end
+                            else 
+                                state_nxt = Main;
+                                counter_nxt = 0;
+                        end
+                        else begin
+                            state_nxt = Main;
+                            counter_nxt = counter;
+                        end
                     end
-                    else if(keyboard_in[1]) begin
-                        if(counter<3) counter_nxt = counter +1;
-                        else counter_nxt = counter;
-                        
-                        state_nxt = Main;
-                    end
-                    else if(keyboard_in[0]) begin
-                        if(counter==0) begin
+                StartGame:
+                    begin
+                        if(keyboard_in[0]) begin
+                            state_nxt = Main;
+                            counter_nxt = counter;
+                        end
+                        else begin
                             state_nxt = StartGame;
-                            counter_nxt = 0; end
-                        else if(counter==1) begin
+                            counter_nxt = counter;
+                        end
+                    end
+                Control:
+                    begin
+                        if(keyboard_in[0]) begin
+                            state_nxt = Main;
+                            counter_nxt = counter;
+                        end
+                        else begin
                             state_nxt = Control;
-                            counter_nxt = 0; end
-                        else if(counter==2) begin
+                            counter_nxt = counter;
+                        end
+                    end
+                About:
+                    begin
+                        if(keyboard_in[0]) begin
+                            state_nxt = Main;
+                            counter_nxt = counter;
+                        end
+                        else begin
                             state_nxt = About;
-                            counter_nxt = 0; end
-                        else if(counter==3) begin
-                            state_nxt = Exit;
-                            counter_nxt = 0; end
-                        else 
-                            state_nxt = Main;
-                            counter_nxt = 0;
-                    end
-                    else begin
-                        state_nxt = Main;
-                        counter_nxt = counter;
-                    end
-                end
-            StartGame:
-                begin
-                    if(keyboard_in[0]) begin
-                        state_nxt = Main;
-                        counter_nxt = counter;
-                    end
-                    else begin
-                        state_nxt = StartGame;
-                        counter_nxt = counter;
-                    end
-                end
-            Control:
-                begin
-                    if(keyboard_in[0]) begin
-                        state_nxt = Main;
-                        counter_nxt = counter;
-                    end
-                    else begin
-                        state_nxt = Control;
-                        counter_nxt = counter;
-                    end
-                end
-            About:
-                begin
-                    if(keyboard_in[0]) begin
-                        state_nxt = Main;
-                        counter_nxt = counter;
-                    end
-                    else begin
-                        state_nxt = About;
-                        counter_nxt = counter;
-                    end
-                end
-            Exit:
-                begin
-                    if(keyboard_in[3]) begin
-                        counter_nxt = 0;
-                        state_nxt = Exit;
-                    end
-                    else if(keyboard_in[1]) begin
-                        counter_nxt = 1; 
-                        state_nxt = Exit;
-                    end
-                    else if(keyboard_in[0]) begin
-                        if(counter == 0) begin
-                            //set_break_flag
-                            state_nxt = Exit;
-                            counter_nxt = 0; 
+                            counter_nxt = counter;
                         end
-                        else if(counter == 1) begin
-                            state_nxt = Main;
-                            counter_nxt = 0; 
+                    end
+                Exit:
+                    begin
+                        if(keyboard_in[3]) begin
+                            counter_nxt = 0;
+                            state_nxt = Exit;
+                        end
+                        else if(keyboard_in[1]) begin
+                            counter_nxt = 1; 
+                            state_nxt = Exit;
+                        end
+                        else if(keyboard_in[0]) begin
+                            if(counter == 0) begin
+                                //set_break_flag
+                                state_nxt = Exit;
+                                counter_nxt = 0; 
+                            end
+                            else if(counter == 1) begin
+                                state_nxt = Main;
+                                counter_nxt = 0; 
+                            end
+                            else begin
+                                state_nxt = Exit;
+                                counter_nxt = 0; 
+                            end
                         end
                         else begin
-                            state_nxt = Exit;
-                            counter_nxt = 0; 
-                        end
+                            if(counter > 1) begin
+                                state_nxt = Exit;
+                                counter_nxt = 0;
+                            end
+                            else begin
+                                state_nxt = Exit;
+                                counter_nxt = counter; 
+                            end
+                        end 
                     end
-                    else begin
-                        if(counter > 1) begin
-                            state_nxt = Exit;
-                            counter_nxt = 0;
-                        end
-                        else begin
-                            state_nxt = Exit;
-                            counter_nxt = counter; 
-                        end
-                    end 
+                default: begin
+                    state_nxt = Main;
+                    counter_nxt = 0;
                 end
-            default: begin
-                state_nxt = Main;
-                counter_nxt = 0;
-            end
-        endcase
+            endcase
+         end
+         else begin
+            state_nxt = Main;
+            counter_nxt = 0;
+         end
     end
 endmodule
