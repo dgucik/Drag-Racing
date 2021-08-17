@@ -206,7 +206,7 @@ module top(
     .vsync_in(vga_vsync),
     .hblnk_in(vga_hblnk),
     .vblnk_in(vga_vblnk),
-    .keyboard_in(key_pressed_2),
+    .keyboard_in({key_pressed_2[3],key_pressed_2[1:0]}),
     .hsync_out(game_menu_hsync_out),
     .vsync_out(game_menu_vsync_out),
     .rgb_out(game_menu_rgb_out),

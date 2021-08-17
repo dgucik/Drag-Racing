@@ -23,7 +23,7 @@
 module menu_page_of(
     output reg [2:0] menu_state,
     output reg [1:0] menu_counter,
-    input wire [3:0] keyboard_in,
+    input wire [2:0] keyboard_in,
     input wire back_to_main_menu_flag,
     input wire clk,
     input wire rst
@@ -56,7 +56,7 @@ module menu_page_of(
             case(state)
                 Main:
                     begin
-                        if(keyboard_in[3]) begin
+                        if(keyboard_in[2]) begin
                             if(counter>0) counter_nxt = counter -1;
                             else counter_nxt = counter;
                             
@@ -92,14 +92,8 @@ module menu_page_of(
                     end
                 StartGame:
                     begin
-                        if(keyboard_in[0]) begin
-                            state_nxt = Main;
-                            counter_nxt = counter;
-                        end
-                        else begin
-                            state_nxt = StartGame;
-                            counter_nxt = counter;
-                        end
+                        state_nxt = StartGame;
+                        counter_nxt = counter;
                     end
                 Control:
                     begin
@@ -125,7 +119,7 @@ module menu_page_of(
                     end
                 Exit:
                     begin
-                        if(keyboard_in[3]) begin
+                        if(keyboard_in[2]) begin
                             counter_nxt = 0;
                             state_nxt = Exit;
                         end

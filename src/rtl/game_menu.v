@@ -29,7 +29,7 @@ module game_menu(
     input wire vsync_in,
     input wire hblnk_in,
     input wire vblnk_in,
-    input wire [3:0] keyboard_in,
+    input wire [2:0] keyboard_in,
     input wire back_to_main_menu_flag,
     output wire hsync_out,
     output wire vsync_out,
