@@ -30,6 +30,8 @@ module top(
     output wire hs
     );
     
+    wire clk_10Hz; //TEST
+    
     //clk_gen
     wire locked;
     wire clk100MHz, clk65MHz;
@@ -64,6 +66,11 @@ module top(
     wire [11:0] game_menu_rgb_out;
 
 
+    //draw_start
+    wire [10:0] start_hcount, start_vcount;
+    wire start_hsync, start_hblnk, start_vsync, start_vblnk;
+    wire [11:0] start_rgb;
+
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
         .clk65MHz(clk65MHz),
@@ -75,7 +82,7 @@ module top(
     reset u_reset (
         .rst(rst_ext),
         .locked(locked),
-        .clk(clk65MHz)
+        .clk(clk_10Hz) //TEST
     );
     
     vga_timing u_vga_timing (
@@ -95,6 +102,7 @@ module top(
         .vsync_in(vga_vsync),
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
+        .position(position), //TEST
         .hcount_out(background_hcount),
         .vcount_out(background_vcount),
         .hsync_out(background_hsync),
@@ -103,7 +111,7 @@ module top(
         .vblnk_out(background_vblnk),
         .rgb_out(background_rgb),
         .clk(clk65MHz),
-        .rst(rst_ext)
+        .reset(rst_ext)
     );
 
     draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069)) u_draw_car_p2(
@@ -117,8 +125,8 @@ module top(
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
         .xpos(256),
-        .ypos(345),
-        .mov(1),        
+        .ypos(335),
+        .mov(clk_10Hz),  //TEST   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
         .hblnk_out(car_hblnk_p2),
@@ -128,19 +136,57 @@ module top(
         .rgb_out(car_rgb_p2)
     );
 
+    wire clk1KHz;
+    wire [11:0] light_timer_seconds;
+
+    clk_divide #(.DIVISOR(100000)) u_timer_clk(
+        .clk_in(clk100MHz),
+        .clk_out(clk1KHz)
+    );
+
+    timer u_light_signals_timer(
+        .clk1KHz(clk1KHz),
+        .reset(rst_ext),
+        .start(1),
+        .restart(0),
+        .seconds(light_timer_seconds),
+        .miliseconds()
+    );
+
+    draw_start u_draw_start(
+        .hcount_in(car_hcount_p2),
+        .vcount_in(car_vcount_p2),
+        .hsync_in(car_hsync_p2),
+        .vsync_in(car_vsync_p2),
+        .hblnk_in(car_hblnk_p2),
+        .vblnk_in(car_vblnk_p2),
+        .rgb_in(car_rgb_p2),
+        .position(position), //TEST
+        .seconds(light_timer_seconds),
+        .hcount_out(start_hcount),
+        .vcount_out(start_vcount),
+        .hsync_out(start_hsync),
+        .vsync_out(start_vsync),
+        .hblnk_out(start_hblnk),
+        .vblnk_out(start_vblnk),
+        .rgb_out(start_rgb),
+        .clk(clk65MHz),
+        .reset(rst_ext)       
+    );
+
     draw_car u_draw_car_p1(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .hcount_in(car_hcount_p2),
-        .hsync_in(car_hsync_p2),
-        .hblnk_in(car_hblnk_p2),
-        .vcount_in(car_vcount_p2),
-        .vsync_in(car_vsync_p2),
-        .vblnk_in(car_vblnk_p2),
-        .rgb_in(car_rgb_p2),
+        .hcount_in(start_hcount),
+        .hsync_in(start_hsync),
+        .hblnk_in(start_hblnk),
+        .vcount_in(start_vcount),
+        .vsync_in(start_vsync),
+        .vblnk_in(start_vblnk),
+        .rgb_in(start_rgb),
         .xpos(256),
-        .ypos(531),
-        .mov(1),        
+        .ypos(481),
+        .mov(clk_10Hz),  //TEST     
         .hcount_out(car_hcount_p1),
         .hsync_out(car_hsync_p1),
         .hblnk_out(car_hblnk_p1),
