@@ -4,6 +4,9 @@
  - [x] menu główne
  - [x] background
  - [x] animacja ruchu
- - [ ] komunikacja miedzy basysami
+ - [ ] komunikacja miedzy basysami & UART
  - [ ] moduł kontrolny
- - [ ] Tabela z wynikami??
+ - [ ] tabela z wynikiem
+ - [ ] interfejs ?obrotomierz?
+ - [ ] rozprowadzenie flag
+ - [ ] moduly pozycja car_p2
