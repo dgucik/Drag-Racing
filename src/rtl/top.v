@@ -69,7 +69,7 @@ module top(
     
     wire scoreboard_hsync, scoreboard_vsync;
     wire [11:0] scoreboard_rgb;
-    wire image_pixel;
+    wire [1:0] image_pixel;
     wire [14:0] scoreboard_pixel_addr;
 
   scoreboard u_scoreboard (

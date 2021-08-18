@@ -14,7 +14,7 @@ module scoreboard (
     input wire vsync_in,
     input wire vblnk_in,
     input wire [11:0] rgb_in,
-    input wire pixel,
+    input wire [1:0] pixel,
     input wire clk,
     input wire rst
     );
@@ -72,7 +72,7 @@ module scoreboard (
             rgb_out <= 0;
         else begin
             if (vblnk_delay || hblnk_delay) rgb_out <= 12'h0_0_0;
-            else if ((hcount_in > RESULT_TEXT_HOR_POS) && (hcount_in <= RESULT_TEXT_HOR_POS + 512) && (vcount_in >= RESULT_TEXT_VER_POS) && (vcount_in < RESULT_TEXT_VER_POS + 43) && (pixel == 1)) rgb_out <= 12'hfd0;
+            else if ((hcount_in > RESULT_TEXT_HOR_POS) && (hcount_in <= RESULT_TEXT_HOR_POS + 512) && (vcount_in >= RESULT_TEXT_VER_POS) && (vcount_in < RESULT_TEXT_VER_POS + 43) && (pixel[1] == 1)) rgb_out <= 12'hfd0;
             else rgb_out <= rgb_delay;
         end
     end
