@@ -73,25 +73,25 @@ module top(
     wire [14:0] scoreboard_pixel_addr;
 
   scoreboard u_scoreboard (
-        .hcount_out(),
-        .hsync_out(scoreboard_hsync),
-        .hblnk_out(),
-        .vcount_out(),
-        .vsync_out(scoreboard_vsync),
-        .vblnk_out(),
-        .rgb_out(scoreboard_rgb),
-        .pixel_addr(scoreboard_pixel_addr),
-
-        .hcount_in(vga_hcount),
-        .hsync_in(vga_hsync),
-        .hblnk_in(vga_hblnk),
-        .vcount_in(vga_vcount),
-        .vsync_in(vga_vsync),
-        .vblnk_in(vga_vblnk),
-        .rgb_in(12'hf00),
-        .pixel(image_pixel),
-        .clk(clk65MHz),
-        .rst(rst_ext)
+    .clk(clk65MHz),
+    .reset(rst_ext),
+    .end_game_status(1),
+    .keyboard_in(0),
+    .time_p1(30),
+    .time_p2(40),
+    .hcount_in(vga_hcount),
+    .hsync_in(vga_hsync),
+    .hblnk_in(vga_hblnk),
+    .vcount_in(vga_vcount),
+    .vsync_in(vga_vsync),
+    .vblnk_in(vga_vblnk),
+    .rgb_in(12'hfff),
+    .pixel_bit_caption(image_pixel),
+    .key_press_status(),
+    .hsync_out(scoreboard_hsync),
+    .vsync_out(scoreboard_vsync),
+    .rgb_out(scoreboard_rgb),
+    .pixel_addr(scoreboard_pixel_addr) 
   );
     
     caption_rom u_caption_rom(
