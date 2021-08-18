@@ -31,7 +31,7 @@ module scoreboard(
         .dout({rgb_del, hcount_del, hsync_del, hblnk_del, vcount_del, vsync_del, vblnk_del})
     );
 
-    localparam  RESULT_CAP_HOR_POS = 340,
+    localparam  RESULT_CAP_HOR_POS = 330,
                 RESULT_CAP_VER_POS = 200;
 
     wire [8:0] addrx;

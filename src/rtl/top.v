@@ -41,6 +41,24 @@ module top(
     wire [10:0] vga_vcount, vga_hcount;
     wire vga_vsync, vga_vblnk, vga_hsync, vga_hblnk;
 
+    //draw_car_p2
+    wire [10:0] car_hcount_p2, car_vcount_p2;
+    wire car_hsync_p2, car_hblnk_p2, car_vsync_p2, car_vblnk_p2;
+    wire [11:0] car_rgb_p2;
+
+    //draw_car_p1
+    wire [10:0] car_hcount_p1, car_vcount_p1;
+    wire car_hsync_p1, car_hblnk_p1, car_vsync_p1, car_vblnk_p1;
+    wire [11:0] car_rgb_p1;
+
+    //draw_backgorund
+    wire [10:0] background_hcount, background_vcount;
+    wire background_hsync, background_hblnk, background_vsync, background_vblnk;
+    wire [11:0] background_rgb;
+
+    //draw_start
+    wire [10:0] start_hcount, start_vcount;
+    wire start_hsync, start_hblnk, start_vsync, start_vblnk;
     wire [11:0] start_rgb;
 
     clk_gen u_clk_gen (
@@ -67,42 +85,109 @@ module top(
         .clk(clk65MHz)    
     );
     
-    wire scoreboard_hsync, scoreboard_vsync;
-    wire [11:0] scoreboard_rgb;
-    wire [1:0] image_pixel;
-    wire [14:0] scoreboard_pixel_addr;
-
-  scoreboard u_scoreboard (
-    .clk(clk65MHz),
-    .reset(rst_ext),
-    .end_game_status(1),
-    .keyboard_in(0),
-    .time_p1(40),
-    .time_p2(30),
-
-    .hcount_in(vga_hcount),
-    .hsync_in(vga_hsync),
-    .hblnk_in(vga_hblnk),
-    .vcount_in(vga_vcount),
-    .vsync_in(vga_vsync),
-    .vblnk_in(vga_vblnk),
-    .rgb_in(vga_rgb),
-
-    .pixel_bit_caption(image_pixel),
-    .key_press_status(),
-    .hsync_out(scoreboard_hsync),
-    .vsync_out(scoreboard_vsync),
-    .rgb_out(scoreboard_rgb),
-    .pixel_addr(scoreboard_pixel_addr) 
-  );
-    
-    caption_rom u_caption_rom(
+    draw_background u_draw_backgroud(
+        .hcount_in(vga_hcount),
+        .vcount_in(vga_vcount),
+        .hsync_in(vga_hsync),
+        .vsync_in(vga_vsync),
+        .hblnk_in(vga_hblnk),
+        .vblnk_in(vga_vblnk),
+        .position(), //empty
+        .hcount_out(background_hcount),
+        .vcount_out(background_vcount),
+        .hsync_out(background_hsync),
+        .vsync_out(background_vsync),
+        .hblnk_out(background_hblnk),
+        .vblnk_out(background_vblnk),
+        .rgb_out(background_rgb),
         .clk(clk65MHz),
-        .address(scoreboard_pixel_addr),
-        .pixel_bit(image_pixel) 
+        .reset(rst_ext)
     );
 
-    assign vs = scoreboard_vsync;
-    assign hs = scoreboard_hsync;
-    assign {r,g,b} = scoreboard_rgb;  
+    draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069)) u_draw_car_p2(
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .hcount_in(background_hcount),
+        .hsync_in(background_hsync),
+        .hblnk_in(background_hblnk),
+        .vcount_in(background_vcount),
+        .vsync_in(background_vsync),
+        .vblnk_in(background_vblnk),
+        .rgb_in(background_rgb),
+        .xpos(256),
+        .ypos(335),
+        .mov(),  //empty   
+        .hcount_out(car_hcount_p2),
+        .hsync_out(car_hsync_p2),
+        .hblnk_out(car_hblnk_p2),
+        .vcount_out(car_vcount_p2),
+        .vsync_out(car_vsync_p2),
+        .vblnk_out(car_vblnk_p2),
+        .rgb_out(car_rgb_p2)
+    );
+
+    wire clk1KHz;
+    wire [11:0] light_timer_seconds;
+
+    clk_divide #(.DIVISOR(100000)) u_timer_clk(
+        .clk_in(clk100MHz),
+        .clk_out(clk1KHz)
+    );
+
+    timer u_light_signals_timer(
+        .clk1KHz(clk1KHz),
+        .reset(rst_ext),
+        .start(1),
+        .restart(0),
+        .seconds(light_timer_seconds),
+        .miliseconds()
+    );
+
+    draw_start u_draw_start(
+        .hcount_in(car_hcount_p2),
+        .vcount_in(car_vcount_p2),
+        .hsync_in(car_hsync_p2),
+        .vsync_in(car_vsync_p2),
+        .hblnk_in(car_hblnk_p2),
+        .vblnk_in(car_vblnk_p2),
+        .rgb_in(car_rgb_p2),
+        .position(), //empty
+        .seconds(light_timer_seconds),
+        .hcount_out(start_hcount),
+        .vcount_out(start_vcount),
+        .hsync_out(start_hsync),
+        .vsync_out(start_vsync),
+        .hblnk_out(start_hblnk),
+        .vblnk_out(start_vblnk),
+        .rgb_out(start_rgb),
+        .clk(clk65MHz),
+        .reset(rst_ext)       
+    );
+
+    draw_car u_draw_car_p1(
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .hcount_in(start_hcount),
+        .hsync_in(start_hsync),
+        .hblnk_in(start_hblnk),
+        .vcount_in(start_vcount),
+        .vsync_in(start_vsync),
+        .vblnk_in(start_vblnk),
+        .rgb_in(start_rgb),
+        .xpos(256),
+        .ypos(481),
+        .mov(),  //empty    
+        .hcount_out(car_hcount_p1),
+        .hsync_out(car_hsync_p1),
+        .hblnk_out(car_hblnk_p1),
+        .vcount_out(car_vcount_p1),
+        .vsync_out(car_vsync_p1),
+        .vblnk_out(car_vblnk_p1),
+        .rgb_out(car_rgb_p1)
+    );
+    
+
+    assign vs = car_vsync_p1;
+    assign hs = car_hsync_p1;
+    assign {r,g,b} = car_rgb_p1;  
 endmodule
