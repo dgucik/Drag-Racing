@@ -263,7 +263,7 @@ module draw_start(
                         (hcount_in == LIGHTS_HOR_POS + 9 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) ||
                         (hcount_in == LIGHTS_HOR_POS + 11 - position) && (vcount_in == LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30)
                 )
-                rgb_out_nxt = (seconds >= 5)? 12'h0d2:12'h041;
+                rgb_out_nxt = (seconds == 5)? 12'h0d2:12'h041;
 
             else if(    ((LIGHTS_HOR_POS + 7 <= position && position <= LIGHTS_HOR_POS + 25) || hcount_in >= LIGHTS_HOR_POS + 7 - position) && (hcount_in <= LIGHTS_HOR_POS + 25 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 16) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 27) ||
                         ((LIGHTS_HOR_POS + 9 <= position && position <= LIGHTS_HOR_POS + 22) || hcount_in >= LIGHTS_HOR_POS + 9 - position) && (hcount_in <= LIGHTS_HOR_POS + 22 - position) && (vcount_in >= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 12) && (vcount_in <= LIGHTS_VER_POS + LIGHTS_SPACING + LIGHTS_SPACING + LIGHTS_SPACING + 30) ||
