@@ -65,9 +65,9 @@ module scoreboard(
             if(keyboard_in)
                 key_press_status_nxt = 1;
             if(hblnk_del || vblnk_del) rgb_out_nxt = 12'h0_0_0;
-            else if((time_p1 < time_p2) && (hcount_del >= RESULT_CAP_HOR_POS) && (hcount_del < RESULT_CAP_HOR_POS + 512) && (vcount_del >= RESULT_CAP_VER_POS) && (vcount_del < RESULT_CAP_VER_POS + 43) && (pixel_bit_caption[0]))
+            else if((time_p1 > time_p2) && (hcount_del >= RESULT_CAP_HOR_POS) && (hcount_del < RESULT_CAP_HOR_POS + 512) && (vcount_del >= RESULT_CAP_VER_POS) && (vcount_del < RESULT_CAP_VER_POS + 43) && (pixel_bit_caption[0]))
                 rgb_out_nxt = 12'hfd0;
-            else if((time_p1 >= time_p2) && (hcount_del >= RESULT_CAP_HOR_POS) && (hcount_del < RESULT_CAP_HOR_POS + 512) && (vcount_del >= RESULT_CAP_VER_POS) && (vcount_del < RESULT_CAP_VER_POS + 43) && (pixel_bit_caption[1]))
+            else if((time_p1 < time_p2) && (hcount_del >= RESULT_CAP_HOR_POS) && (hcount_del < RESULT_CAP_HOR_POS + 512) && (vcount_del >= RESULT_CAP_VER_POS) && (vcount_del < RESULT_CAP_VER_POS + 43) && (pixel_bit_caption[1]))
                 rgb_out_nxt = 12'hfd0;
         end
     end

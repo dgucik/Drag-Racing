@@ -18,6 +18,13 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+/* NOTATKI
+-brakuje modulu kontrolnego,
+-wyjscie na scoreboard, potrzebny modul ktory wygenerenuje 1 tick
+-animacja ruchu pojazdu pos_diff wzgl 1 i 2
+-interfejs obrotomierz
+*/
+
 module top(
     input wire clk,
     input wire rst,
@@ -30,7 +37,7 @@ module top(
     output wire hs
     );
     
-    localparam FINISH_LINE_POS = 800;
+    localparam FINISH_LINE_POS = 500;
 
     //status
     wire light_signals_status;
@@ -72,7 +79,7 @@ module top(
     wire [11:0] start_rgb;
 
     //timer_clk
-    wire clk1KHz;
+    wire clk_timer;
 
     //ligh_signals_timer
     wire [11:0] light_timer_seconds;
@@ -85,6 +92,17 @@ module top(
     wire [11:0] menu_rgb;
     wire menu_start_game_status;
 
+    //scoreboard also caption_rom
+    wire scoreboard_hsync, scoreboard_vsync;
+    wire [11:0] scoreboard_rgb;
+    wire [14:0] scoreboard_pixel_addr;
+    wire [1:0] caption_pixel;
+
+    //TEST game_controller
+    wire clk_controller;
+    wire [31:0] p1_position;
+    wire [31:0] p2_position;
+
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
         .clk65MHz(clk65MHz),
@@ -96,7 +114,7 @@ module top(
     reset u_reset (
         .rst(rst_ext),
         .locked(locked),
-        .clk(clk65MHz)
+        .clk(clk_controller)
     );
     
     vga_timing u_vga_timing (
@@ -108,6 +126,29 @@ module top(
         .vga_hblnk(vga_hblnk),
         .clk(clk65MHz)    
     );
+
+    //TEST
+    clk_divide #(.DIVISOR(1000000)) u_controller_clk(
+        .clk_in(clk65MHz),
+        .clk_out(clk_controller)
+    );
+
+    game_controller u_game_controller_p1(
+        .reset(rst_ext),
+        .clk(clk_controller),
+        .enable_controller_status((light_signals_status) && !(player1_finish_status)),
+        .keyboard_in(W_key),
+        .position(p1_position)
+    );
+
+    game_controller TEST_controller_for_p2(
+        .reset(rst_ext),
+        .clk(clk_controller),
+        .enable_controller_status((light_signals_status) && !(player2_finish_status)),
+        .keyboard_in(S_key),
+        .position(p2_position)
+    );
+    //TEST
 
     kb_interface kb_interface(
         .clk(clk65MHz),
@@ -140,14 +181,14 @@ module top(
         .start_game_flag(menu_start_game_status)
     );
     
-    draw_background #(.FINISH_LINE_HOR_POS(FINISH_LINE_POS)) u_draw_backgroud(
+    draw_background #(.FINISH_LINE_POS(FINISH_LINE_POS)) u_draw_backgroud(
         .hcount_in(vga_hcount),
         .vcount_in(vga_vcount),
         .hsync_in(vga_hsync),
         .vsync_in(vga_vsync),
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
-        .position(0), //empty
+        .position(p1_position),
         .hcount_out(background_hcount),
         .vcount_out(background_vcount),
         .hsync_out(background_hsync),
@@ -181,13 +222,13 @@ module top(
         .rgb_out(car_rgb_p2)
     );
 
-    clk_divide #(.DIVISOR(100000)) u_timer_clk(
-        .clk_in(clk100MHz),
-        .clk_out(clk1KHz)
+    clk_divide #(.DIVISOR(65000)) u_timer_clk(
+        .clk_in(clk65MHz),
+        .clk_out(clk_timer)
     );
 
     timer u_light_signals_timer(
-        .clk1KHz(clk1KHz),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((menu_start_game_status) && !(light_signals_status)),
         .restart(0), //ten timer musi resetować reset_status
@@ -196,18 +237,18 @@ module top(
     );
 
     timer u_player1_timer(
-        .clk1KHz(clk1KHz),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
-        .start((ligh_signals_status) && !(player1_finish_status)),
+        .start((light_signals_status) && !(player1_finish_status)),
         .restart(0), //ten timer musi resetować reset_status
         .seconds({player1_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player1_timer_seconds_miliseconds[9:0]})
     );
 
     timer u_player2_timer(
-        .clk1KHz(clk1KHz),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
-        .start((ligh_signals_status) && !(player1_finish_status)),
+        .start((light_signals_status) && !(player2_finish_status)),
         .restart(0), //ten timer musi resetować reset_status
         .seconds({player2_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player2_timer_seconds_miliseconds[9:0]})
@@ -221,7 +262,7 @@ module top(
         .hblnk_in(car_hblnk_p2),
         .vblnk_in(car_vblnk_p2),
         .rgb_in(car_rgb_p2),
-        .position(0), //empty
+        .position(p1_position),
         .seconds(light_timer_seconds),
         .hcount_out(start_hcount),
         .vcount_out(start_vcount),
@@ -256,32 +297,26 @@ module top(
         .rgb_out(car_rgb_p1)
     );
 
-    //scoreboard also caption_rom
-    wire scoreboard_hsync, scoreboard_vsync;
-    wire [11:0] scoreboard_rgb;
-    wire [14:0] scoreboard_pixel_addr;
-    wire [1:0] caption_pixel;
-
     scoreboard u_scoreboard(
-    .clk(clk65MHz),
-    .reset(rst_ext),
-    .end_game_status((player1_finish_status) && (player2_finish_status)),
-    .keyboard_in(D_key_tick),
-    .time_p1(player1_timer_seconds_miliseconds),
-    .time_p2(player2_timer_seconds_miliseconds),
-    .hcount_in(car_hcount_p1),
-    .hsync_in(car_hsync_p1),
-    .hblnk_in(car_hblnk_p1),
-    .vcount_in(car_vcount_p1),
-    .vsync_in(car_vsync_p1),
-    .vblnk_in(car_vblnk_p1),
-    .rgb_in(car_rgb_p1),
-    .pixel_bit_caption(caption_pixel),
-    .key_press_status(),
-    .hsync_out(scoreboard_hsync),
-    .vsync_out(scoreboard_vsync),
-    .rgb_out(scoreboard_rgb),
-    .pixel_addr(scoreboard_pixel_addr) 
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .end_game_status((player1_finish_status) && (player2_finish_status)),
+        .keyboard_in(D_key_tick),
+        .time_p1(player1_timer_seconds_miliseconds),
+        .time_p2(player2_timer_seconds_miliseconds),
+        .hcount_in(car_hcount_p1),
+        .hsync_in(car_hsync_p1),
+        .hblnk_in(car_hblnk_p1),
+        .vcount_in(car_vcount_p1),
+        .vsync_in(car_vsync_p1),
+        .vblnk_in(car_vblnk_p1),
+        .rgb_in(car_rgb_p1),
+        .pixel_bit_caption(caption_pixel),
+        .key_press_status(),
+        .hsync_out(scoreboard_hsync),
+        .vsync_out(scoreboard_vsync),
+        .rgb_out(scoreboard_rgb),
+        .pixel_addr(scoreboard_pixel_addr) 
     );
 
     caption_rom u_caption_rom(
@@ -292,6 +327,8 @@ module top(
 
     //status wires
     assign light_signals_status = (light_timer_seconds == 5);
+    assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
+    assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
     
     //output wires
     assign vs = (menu_start_game_status)? scoreboard_vsync:menu_vsync;
