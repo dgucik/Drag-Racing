@@ -46,7 +46,7 @@ module kb_interface #(
         .kb_key_pressed(kb_key_pressed)
     );
 
-    rising_edge_detector #(.WIDTH(WIDTH)) keyboard_button_rising_edge(
+    rising_edge_detector #(.WIDTH(WIDTH)) u_keyboard_button_rising_edge(
         .clk(clk),
         .sig_in(kb_key_pressed),
         .sig_out(kb_key_pressed_tick)
