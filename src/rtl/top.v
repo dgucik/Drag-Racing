@@ -20,7 +20,6 @@
 
 /* NOTATKI
 -brakuje modulu kontrolnego,
--wyjscie na scoreboard, potrzebny modul ktory wygenerenuje 1 tick
 -animacja ruchu pojazdu pos_diff wzgl 1 i 2
 -interfejs obrotomierz
 */
@@ -97,6 +96,7 @@ module top(
     wire [11:0] scoreboard_rgb;
     wire [14:0] scoreboard_pixel_addr;
     wire [1:0] caption_pixel;
+    wire scoreboard_key_press_status, scoreboard_key_press_status_tick;
 
     //TEST game_controller
     wire clk_controller;
@@ -127,7 +127,7 @@ module top(
         .clk(clk65MHz)    
     );
 
-    //TEST
+    //-------------------------MODUL KONTROLNY-------------------------
     clk_divide #(.DIVISOR(1000000)) u_controller_clk(
         .clk_in(clk65MHz),
         .clk_out(clk_controller)
@@ -137,6 +137,7 @@ module top(
         .reset(rst_ext),
         .clk(clk_controller),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
+        .reset_status(scoreboard_key_press_status_tick),
         .keyboard_in(W_key),
         .position(p1_position)
     );
@@ -145,10 +146,11 @@ module top(
         .reset(rst_ext),
         .clk(clk_controller),
         .enable_controller_status((light_signals_status) && !(player2_finish_status)),
+        .reset_status(scoreboard_key_press_status_tick),
         .keyboard_in(S_key),
         .position(p2_position)
     );
-    //TEST
+    //-------------------------MODUL KONTROLNY-------------------------
 
     kb_interface #(.WIDTH(4)) kb_interface(
         .clk(clk65MHz),
@@ -169,7 +171,7 @@ module top(
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
         .keyboard_in({W_key_tick, S_key_tick, D_key_tick}),
-        .back_to_main_menu_flag(), 
+        .back_to_main_menu_flag(scoreboard_key_press_status_tick), 
         .hsync_out(menu_hsync),
         .vsync_out(menu_vsync),
         .rgb_out(menu_rgb),
@@ -226,7 +228,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((menu_start_game_status) && !(light_signals_status)),
-        .restart(0), //ten timer musi resetować reset_status
+        .restart(scoreboard_key_press_status_tick),
         .seconds(light_timer_seconds),
         .miliseconds()
     );
@@ -235,7 +237,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player1_finish_status)),
-        .restart(0), //ten timer musi resetować reset_status
+        .restart(scoreboard_key_press_status_tick),
         .seconds({player1_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player1_timer_seconds_miliseconds[9:0]})
     );
@@ -244,7 +246,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player2_finish_status)),
-        .restart(0), //ten timer musi resetować reset_status
+        .restart(scoreboard_key_press_status_tick),
         .seconds({player2_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player2_timer_seconds_miliseconds[9:0]})
     );
@@ -307,7 +309,7 @@ module top(
         .vblnk_in(car_vblnk_p1),
         .rgb_in(car_rgb_p1),
         .pixel_bit_caption(caption_pixel),
-        .key_press_status(),
+        .key_press_status(scoreboard_key_press_status),
         .hsync_out(scoreboard_hsync),
         .vsync_out(scoreboard_vsync),
         .rgb_out(scoreboard_rgb),
@@ -318,6 +320,12 @@ module top(
         .clk(clk65MHz),
         .address(scoreboard_pixel_addr),
         .pixel_bit(caption_pixel) 
+    );
+
+    rising_edge_detector u_scoreboard_key_press_status_rising_edge(
+        .clk(clk_controller),
+        .sig_in(scoreboard_key_press_status),
+        .sig_out(scoreboard_key_press_status_tick)
     );
 
     //status wires

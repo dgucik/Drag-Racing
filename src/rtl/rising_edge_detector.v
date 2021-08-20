@@ -1,6 +1,6 @@
 //Source: https://www.chipverify.com/verilog/verilog-positive-edge-detector
 module rising_edge_detector #(
-    parameter WIDTH = 1
+    parameter WIDTH = 2
 )
 (
     input wire clk,
