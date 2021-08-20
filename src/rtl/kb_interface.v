@@ -6,7 +6,8 @@ module kb_interface #(
     input wire reset,
     input wire ps2_clk,
     input wire ps2_data,
-    output wire [ WIDTH - 1 : 0 ] kb_key_pressed
+    output wire [ WIDTH - 1 : 0 ] kb_key_pressed,
+    output wire [ WIDTH - 1 : 0 ] kb_key_pressed_tick
 );
 
     //ps2_rx
@@ -43,6 +44,12 @@ module kb_interface #(
         .key_pressed(key_pressed),
         .key_code(key_code),
         .kb_key_pressed(kb_key_pressed)
+    );
+
+    rising_edge_detector #(.WIDTH(WIDTH)) keyboard_button_rising_edge(
+        .clk(clk),
+        .sig_in(kb_key_pressed),
+        .sig_out(kb_key_pressed_tick)
     );
 
 endmodule

@@ -154,14 +154,9 @@ module top(
         .clk(clk65MHz),
         .reset(rst_ext),
         .kb_key_pressed({W_key, A_key, S_key, D_key}),
+        .kb_key_pressed_tick({W_key_tick, A_key_tick, S_key_tick, D_key_tick}),
         .ps2_clk(ps2_clk),
         .ps2_data(ps2_data)
-    );
-
-    rising_edge_detector #(.WIDTH(4)) keyboard_button_rising_edge(
-        .clk(clk65MHz),
-        .sig_in({W_key, A_key, S_key, D_key}),
-        .sig_out({W_key_tick, A_key_tick, S_key_tick, D_key_tick})
     );
 
     game_menu game_menu(
