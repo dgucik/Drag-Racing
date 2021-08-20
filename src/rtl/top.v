@@ -197,7 +197,7 @@ module top(
         .reset(rst_ext)
     );
 
-    draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069)) u_draw_car_p2(
+    draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069), .XPOS(256), .YPOS(335)) u_draw_car_p2(
         .clk(clk65MHz),
         .reset(rst_ext),
         .hcount_in(background_hcount),
@@ -207,8 +207,6 @@ module top(
         .vsync_in(background_vsync),
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
-        .xpos(256),
-        .ypos(335),
         .mov(0),  //empty 
         .position(p1_position),  
         .hcount_out(car_hcount_p2),
@@ -260,7 +258,7 @@ module top(
         .hblnk_in(car_hblnk_p2),
         .vblnk_in(car_vblnk_p2),
         .rgb_in(car_rgb_p2),
-        .position(p1_position),
+        .position(0),
         .seconds(light_timer_seconds),
         .hcount_out(start_hcount),
         .vcount_out(start_vcount),
@@ -283,8 +281,6 @@ module top(
         .vsync_in(start_vsync),
         .vblnk_in(start_vblnk),
         .rgb_in(start_rgb),
-        .xpos(256),
-        .ypos(481),
         .mov(0),  //empty
         .position(0),    
         .hcount_out(car_hcount_p1),
