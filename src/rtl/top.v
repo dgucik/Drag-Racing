@@ -150,7 +150,7 @@ module top(
     );
     //TEST
 
-    kb_interface kb_interface(
+    kb_interface #(.WIDTH(4)) kb_interface(
         .clk(clk65MHz),
         .reset(rst_ext),
         .kb_key_pressed({W_key, A_key, S_key, D_key}),
@@ -158,10 +158,10 @@ module top(
         .ps2_data(ps2_data)
     );
 
-    keyboard_button_rising_edge keyboard_button_rising_edge(
+    rising_edge_detector #(.WIDTH(4)) keyboard_button_rising_edge(
         .clk(clk65MHz),
-        .key_pressed({W_key, A_key, S_key, D_key}),
-        .key_pressed_posedge({W_key_tick, A_key_tick, S_key_tick, D_key_tick})
+        .sig_in({W_key, A_key, S_key, D_key}),
+        .sig_out({W_key_tick, A_key_tick, S_key_tick, D_key_tick})
     );
 
     game_menu game_menu(

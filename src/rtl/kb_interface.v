@@ -1,9 +1,12 @@
-module kb_interface (
+module kb_interface #(
+    parameter WIDTH = 4
+)
+(
     input wire clk, 
     input wire reset,
     input wire ps2_clk,
     input wire ps2_data,
-    output wire [3:0] kb_key_pressed
+    output wire [ WIDTH - 1 : 0 ] kb_key_pressed
 );
 
     //ps2_rx
@@ -34,7 +37,7 @@ module kb_interface (
         .key_code(key_code)
     );
 
-    kb_game_code u_kb_game_code(
+    kb_game_code #(.WIDTH(WIDTH)) u_kb_game_code(
         .clk(clk),
         .reset(reset),
         .key_pressed(key_pressed),
