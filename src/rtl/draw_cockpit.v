@@ -55,7 +55,36 @@ module draw_cockpit(
         vblnk_out_nxt = vblnk_in;
         if(hblnk_in || vblnk_in) rgb_out_nxt = 12'h0_0_0;
         else begin
-            if(         (hcount_in >= HOR_POS + 61) && (hcount_in <= HOR_POS + 104) && (vcount_in >= VER_POS + 56) && (vcount_in <= VER_POS + 75) ||
+            if(     (current_gear == 0) && (
+                    (hcount_in >= HOR_POS + 349) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 95)
+                    )        
+                )
+                rgb_out_nxt = 12'hbbb;
+            else if(    (current_gear == 1) && (
+                        (hcount_in >= HOR_POS + 309) && (hcount_in <= HOR_POS + 356) && (vcount_in >= VER_POS + 84) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 324) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 71) ||
+                        (hcount_in >= HOR_POS + 349) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 71) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 47)
+                        )        
+                )
+                rgb_out_nxt = 12'hbbb;
+            else if(    (current_gear == 2) && (
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 84) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 349) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 71) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 47)
+                        )        
+                )
+                rgb_out_nxt = 12'hbbb;
+            else if(    (current_gear == 3) && (
+                        (hcount_in >= HOR_POS + 349) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 348) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 71) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 324) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 59)
+                        )        
+                )
+                rgb_out_nxt = 12'hbbb;
+            else if(    (hcount_in >= HOR_POS + 61) && (hcount_in <= HOR_POS + 104) && (vcount_in >= VER_POS + 56) && (vcount_in <= VER_POS + 75) ||
                         (hcount_in >= HOR_POS + 73) && (hcount_in <= HOR_POS + 92) && (vcount_in >= VER_POS + 44) && (vcount_in <= VER_POS + 87) ||
                         (hcount_in >= HOR_POS + 65) && (hcount_in <= HOR_POS + 100) && (vcount_in >= VER_POS + 48) && (vcount_in <= VER_POS + 83)
                 )
