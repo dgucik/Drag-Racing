@@ -305,13 +305,14 @@ module top(
         .rgb_out(car_rgb_p1)
     );
 
-    scoreboard u_scoreboard(
+    //draw_cockpit
+    wire [10:0] cockpit_hcount, cockpit_vcount;
+    wire cockpit_hsync, cockpit_hblnk, cockpit_vsync, cockpit_vblnk;
+    wire [11:0] cockpit_rgb;
+
+    draw_cockpit u_draw_cockpit(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .end_game_status((player1_finish_status) && (player2_finish_status)),
-        .keyboard_in(D_key_tick),
-        .time_p1(player1_timer_seconds_miliseconds),
-        .time_p2(player2_timer_seconds_miliseconds),
         .hcount_in(car_hcount_p1),
         .hsync_in(car_hsync_p1),
         .hblnk_in(car_hblnk_p1),
@@ -319,6 +320,31 @@ module top(
         .vsync_in(car_vsync_p1),
         .vblnk_in(car_vblnk_p1),
         .rgb_in(car_rgb_p1),
+        .current_gear(0),
+        .gear_change_status(1),
+        .hcount_out(cockpit_hcount),
+        .hsync_out(cockpit_hsync),
+        .hblnk_out(cockpit_hblnk),
+        .vcount_out(cockpit_vcount),
+        .vsync_out(cockpit_vsync),
+        .vblnk_out(cockpit_vblnk),
+        .rgb_out(cockpit_rgb)
+    );
+
+    scoreboard u_scoreboard(
+        .clk(clk65MHz),
+        .reset(rst_ext),
+        .end_game_status((player1_finish_status) && (player2_finish_status)),
+        .keyboard_in(D_key_tick),
+        .time_p1(player1_timer_seconds_miliseconds),
+        .time_p2(player2_timer_seconds_miliseconds),
+        .hcount_in(cockpit_hcount),
+        .hsync_in(cockpit_hsync),
+        .hblnk_in(cockpit_hblnk),
+        .vcount_in(cockpit_vcount),
+        .vsync_in(cockpit_vsync),
+        .vblnk_in(cockpit_vblnk),
+        .rgb_in(cockpit_rgb),
         .pixel_bit_caption(caption_pixel),
         .key_press_status(scoreboard_key_press_status),
         .hsync_out(scoreboard_hsync),
