@@ -1,9 +1,12 @@
-module kb_game_code (
+module kb_game_code #(
+    parameter WIDTH = 4
+)
+(
     input wire clk,
     input wire reset,
     input wire key_pressed,
     input wire [7:0] key_code,
-    output wire [3:0] kb_key_pressed
+    output wire [ WIDTH - 1 : 0 ] kb_key_pressed
 );
 
 /////////////// TO TYLKO PRZYKLAD, POZMIENIAC KLAWISZE W POZNIEJSZEJ FAZIE ROZWOJU GRY //////////////////

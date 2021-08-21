@@ -1,25 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 12.08.2021 18:08:57
-// Design Name: 
-// Module Name: game_menu
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module game_menu(
     input wire clk,
     input wire rst,
@@ -55,7 +33,7 @@ module game_menu(
     //delay_for_start_game
     wire start_game, start_game_delay;
 
-    menu_background menu_background(
+    menu_background u_menu_background(
     .clk(clk),
     .rst(rst),
     .hcount_in(hcount_in),
@@ -73,7 +51,7 @@ module game_menu(
     .rgb_out(menu_rgb)
     );
     
-    menu_page_of menu_page(
+    menu_page_of u_menu_page(
     .clk(clk),
     .rst(rst),
     .keyboard_in(keyboard_in),
@@ -82,7 +60,7 @@ module game_menu(
     .back_to_main_menu_flag(back_to_main_menu_flag)
     );
     
-    menu_napisy menu_napisy(
+    menu_napisy u_menu_napisy(
     .clk(clk),
     .rst(rst),
     .hcount_in(menu_hcount),
@@ -102,7 +80,7 @@ module game_menu(
     .menu_state(menu_state)
     );
     
-    state_and_counter_to_xypos xypos_pointer(
+    state_and_counter_to_xypos u_xypos_pointer(
     .menu_state(menu_state),
     .menu_counter(menu_counter),
     .x_pointer(x_pointer),
@@ -111,7 +89,7 @@ module game_menu(
     .rst(rst)
     );
     
-    delay_for_xypointer delay_for_xypointer(
+    delay_for_xypointer u_delay_for_xypointer(
     .clk(clk),
     .rst(rst),
     .x_pointer(x_pointer),
@@ -120,7 +98,7 @@ module game_menu(
     .y_pointer_out_d(y_pointer_delay)
     );
     
-    rect menu_pointer(
+    rect u_menu_pointer(
     .clk(clk),
     .rst(rst),
     .hcount_in(menu_hcount_2),
@@ -137,14 +115,14 @@ module game_menu(
     .rgb_out(menu_pointer_rgb)
     );
     
-    menu_start_game_flag menu_start_game_flag(
+    menu_start_game_flag u_menu_start_game_flag(
     .clk(clk),
     .rst(rst),
     .menu_state(menu_state),
     .start_game(start_game)
     );
     
-    delay_for_start_game_flag delay_for_start_game_flag(
+    delay_for_start_game_flag u_delay_for_start_game_flag(
     .clk(clk),
     .rst(rst),
     .start_game(start_game),

@@ -1,4 +1,7 @@
-module draw_background(
+module draw_background #(
+    parameter FINISH_LINE_POS = 800
+    )
+    (
     input wire [10:0] hcount_in,
     input wire [10:0] vcount_in,
     input wire hsync_in,
@@ -28,7 +31,7 @@ module draw_background(
 //------------------------------------------------------------------------------- 
 
 //----finish/start line position-------------------------------------------------
-    localparam FINISH_LINE_HOR_POS = 1500;
+    localparam FINISH_LINE_HOR_POS = FINISH_LINE_POS + 580;
 
     localparam LINE_VER_POS = 275;
 //-------------------------------------------------------------------------------
