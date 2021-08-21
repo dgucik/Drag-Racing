@@ -94,7 +94,8 @@ module top(
     wire scoreboard_key_press_status, scoreboard_key_press_status_tick;
 
     //gear_and_velocity_p1 && p2
-    wire controller_current_gear, controller_next_gear_status;
+    wire [1:0] controller_current_gear; 
+    wire controller_next_gear_status;
     wire [31:0] p1_position;
     wire [31:0] p2_position;
 
