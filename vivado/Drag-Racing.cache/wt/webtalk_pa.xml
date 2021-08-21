@@ -4,10 +4,14 @@
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
 <<<<<<< HEAD
+<<<<<<< HEAD
 <application name="pa" timeStamp="Sat Aug 21 23:44:10 2021">
 =======
 <application name="pa" timeStamp="Sat Aug 21 14:51:30 2021">
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+<application name="pa" timeStamp="Sat Aug 21 15:02:34 2021">
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="f592d52b14a54a17aa0051d856b401f7" type="ProjectID"/>
 <property name="ProjectIteration" value="215" type="ProjectIteration"/>
@@ -53,8 +57,12 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ReportUtilization" value="3" type="JavaHandler"/>
 <property name="RunBitgen" value="101" type="JavaHandler"/>
 <property name="RunImplementation" value="1" type="JavaHandler"/>
+<<<<<<< HEAD
 <property name="RunSchematic" value="22" type="JavaHandler"/>
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+<property name="RunSchematic" value="23" type="JavaHandler"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <property name="RunSynthesis" value="10" type="JavaHandler"/>
 <property name="SaveFileProxyHandler" value="2" type="JavaHandler"/>
 <property name="ShowSource" value="5" type="JavaHandler"/>
@@ -67,8 +75,8 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ViewTaskRTLAnalysis" value="1" type="JavaHandler"/>
 <property name="ViewTaskSynthesis" value="2" type="JavaHandler"/>
 <property name="ZoomFit" value="1" type="JavaHandler"/>
-<property name="ZoomIn" value="237" type="JavaHandler"/>
-<property name="ZoomOut" value="44" type="JavaHandler"/>
+<property name="ZoomIn" value="243" type="JavaHandler"/>
+<property name="ZoomOut" value="45" type="JavaHandler"/>
 </item>
 <item name="Gui Handlers">
 <property name="AbstractCombinedPanel_REMOVE_SELECTED_ELEMENTS" value="3" type="GuiHandlerData"/>
@@ -80,12 +88,16 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="BaseDialog_CANCEL" value="23" type="GuiHandlerData"/>
 <property name="BaseDialog_NO" value="2" type="GuiHandlerData"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <property name="BaseDialog_OK" value="208" type="GuiHandlerData"/>
 <property name="BaseDialog_YES" value="36" type="GuiHandlerData"/>
 <property name="ClosePlanner_NO" value="2" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_OK" value="50" type="GuiHandlerData"/>
 =======
 <property name="BaseDialog_OK" value="185" type="GuiHandlerData"/>
+=======
+<property name="BaseDialog_OK" value="186" type="GuiHandlerData"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <property name="BaseDialog_YES" value="35" type="GuiHandlerData"/>
 <property name="ClosePlanner_NO" value="2" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_OK" value="42" type="GuiHandlerData"/>
@@ -99,6 +111,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CreateSrcFileDialog_FILE_LOCATION" value="5" type="GuiHandlerData"/>
 <property name="CreateSrcFileDialog_FILE_NAME" value="25" type="GuiHandlerData"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <property name="FileSetPanel_FILE_SET_PANEL_TREE" value="822" type="GuiHandlerData"/>
 <property name="FileSetPanel_MESSAGES" value="3" type="GuiHandlerData"/>
 <property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="703" type="GuiHandlerData"/>
@@ -107,6 +120,11 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="FileSetPanel_MESSAGES" value="2" type="GuiHandlerData"/>
 <property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="260" type="GuiHandlerData"/>
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="736" type="GuiHandlerData"/>
+<property name="FileSetPanel_MESSAGES" value="2" type="GuiHandlerData"/>
+<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="263" type="GuiHandlerData"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <property name="GettingStartedView_CREATE_NEW_PROJECT" value="1" type="GuiHandlerData"/>
 <property name="HCodeEditor_CLOSE" value="3" type="GuiHandlerData"/>
 <property name="HCodeEditor_SEARCH_TEXT_COMBO_BOX" value="5" type="GuiHandlerData"/>
@@ -145,10 +163,17 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PACommandNames_SCHEMATIC" value="2" type="GuiHandlerData"/>
 <property name="PACommandNames_SRC_REPLACE_FILE" value="2" type="GuiHandlerData"/>
 <property name="PACommandNames_ZOOM_FIT" value="1" type="GuiHandlerData"/>
+<<<<<<< HEAD
 <property name="PACommandNames_ZOOM_IN" value="134" type="GuiHandlerData"/>
 <property name="PACommandNames_ZOOM_OUT" value="37" type="GuiHandlerData"/>
 <property name="PAViews_CODE" value="71" type="GuiHandlerData"/>
 <property name="PAViews_DEVICE" value="3" type="GuiHandlerData"/>
+=======
+<property name="PACommandNames_ZOOM_IN" value="136" type="GuiHandlerData"/>
+<property name="PACommandNames_ZOOM_OUT" value="38" type="GuiHandlerData"/>
+<property name="PAViews_CODE" value="59" type="GuiHandlerData"/>
+<property name="PAViews_DEVICE" value="2" type="GuiHandlerData"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <property name="PAViews_IP_CATALOG" value="1" type="GuiHandlerData"/>
 <property name="PAViews_PROJECT_SUMMARY" value="1" type="GuiHandlerData"/>
 <property name="PAViews_SCHEMATIC" value="19" type="GuiHandlerData"/>
@@ -175,15 +200,19 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ProjectTab_RELOAD" value="86" type="GuiHandlerData"/>
 =======
 <property name="ProjectSummaryUtilizationPanel_PROJECT_SUMMARY_UTILIZATION_TABLE" value="5" type="GuiHandlerData"/>
+<<<<<<< HEAD
 <property name="ProjectTab_RELOAD" value="91" type="GuiHandlerData"/>
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+<property name="ProjectTab_RELOAD" value="93" type="GuiHandlerData"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 <property name="Project_AUTOMATIC_UPDATE_MANUAL_COMPILE_ORDER" value="2" type="GuiHandlerData"/>
 <property name="PropertiesView_AUTOMATICALLY_UPDATE" value="1" type="GuiHandlerData"/>
 <property name="RDICommands_COPY" value="3" type="GuiHandlerData"/>
 <property name="RDICommands_CUSTOM_COMMANDS" value="1" type="GuiHandlerData"/>
 <property name="RDICommands_DELETE" value="33" type="GuiHandlerData"/>
 <property name="RDICommands_PROPERTIES" value="2" type="GuiHandlerData"/>
-<property name="RDICommands_SAVE_FILE" value="295" type="GuiHandlerData"/>
+<property name="RDICommands_SAVE_FILE" value="300" type="GuiHandlerData"/>
 <property name="RDICommands_SETTINGS" value="1" type="GuiHandlerData"/>
 <property name="RDIViews_WAVEFORM_VIEWER" value="29" type="GuiHandlerData"/>
 <property name="RemoveSourcesDialog_ALSO_DELETE" value="1" type="GuiHandlerData"/>
@@ -238,8 +267,12 @@ This means code written to parse this file will need to be revisited each subseq
 <item name="Other">
 <property name="GuiMode" value="395" type="GuiMode"/>
 <property name="BatchMode" value="0" type="BatchMode"/>
+<<<<<<< HEAD
 <property name="TclMode" value="341" type="TclMode"/>
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+<property name="TclMode" value="342" type="TclMode"/>
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 </item>
 </section>
 </application>

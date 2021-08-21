@@ -415,7 +415,8 @@ module top(
     .enable_controller_status(),
     .reset_status(),
     .position(),
-    .flag_for_readline_diode_in_cockpit()
+    .flag_for_readline_diode_in_cockpit(),
+    .current_gear()
     );
 */
 //    assign vs = car_vsync_p1;

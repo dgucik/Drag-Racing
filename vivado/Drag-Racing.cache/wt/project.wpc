@@ -4,6 +4,10 @@ version:1
 6d6f64655f636f756e7465727c4755494d6f6465:138
 =======
 57656254616c6b5472616e736d697373696f6e417474656d70746564:37
+<<<<<<< HEAD
 6d6f64655f636f756e7465727c4755494d6f6465:34
 >>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+=======
+6d6f64655f636f756e7465727c4755494d6f6465:35
+>>>>>>> 8957b19 (dodanie wyjścia CURRENT_GEAR do modułu)
 eof:
