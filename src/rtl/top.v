@@ -30,7 +30,7 @@ module top(
     output wire hs
     );
     
-    localparam FINISH_LINE_POS = 2000;
+    localparam FINISH_LINE_POS = 15000;
 
     //status
     wire light_signals_status;
@@ -86,18 +86,19 @@ module top(
     wire menu_start_game_status;
 
     //scoreboard also caption_rom
+    wire clk_controller;
     wire scoreboard_hsync, scoreboard_vsync;
     wire [11:0] scoreboard_rgb;
     wire [14:0] scoreboard_pixel_addr;
     wire [1:0] caption_pixel;
     wire scoreboard_key_press_status, scoreboard_key_press_status_tick;
 
-    //TEST game_controller
-    wire clk_controller;
+    //gear_and_velocity_p1 && p2
+    wire cockpit_current_gear, cockpit_next_gear_status;
     wire [31:0] p1_position;
     wire [31:0] p2_position;
 
-    //wheel_movement_p1_p2
+    //wheel_movement_p1 && p2
     wire p2_mov, p1_mov;
 
     //draw_cockpit
@@ -129,30 +130,33 @@ module top(
         .clk(clk65MHz)    
     );
 
-    //-------------------------MODUL KONTROLNY DO TESTUF-------------------------
-    clk_divide #(.DIVISOR(1000000)) u_controller_clk(
-        .clk_in(clk65MHz),
-        .clk_out(clk_controller)
-    );
-
-    game_controller u_game_controller_p1(
-        .reset(rst_ext),
-        .clk(clk_controller),
+    gear_and_velocity  u_gear_and_velocity_p1(
+        .clk(clk65MHz),
+        .rst(rst_ext),
+        .kb_key_pressed_tick(D_key_tick),
+        .kb_key_pressed(W_key),
+        .reset_status(scoreboard_key_press_status_tick),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
-        .reset_status(scoreboard_key_press_status_tick),
-        .keyboard_in(W_key),
-        .position(p1_position)
+        .position(p1_position),
+        .flag_for_readline_diode_in_cockpit(cockpit_next_gear_status),
+        .current_gear(cockpit_current_gear),
+        .slow_clk_out(clk_controller)
     );
 
-    game_controller TEST_controller_for_p2(
-        .reset(rst_ext),
-        .clk(clk_controller),
-        .enable_controller_status((light_signals_status) && !(player2_finish_status)),
+    //------TEST for second player---------------------
+    gear_and_velocity  u_gear_and_velocity_p2(
+        .clk(clk65MHz),
+        .rst(rst_ext),
+        .kb_key_pressed_tick(A_key_tick),
+        .kb_key_pressed(S_key),
         .reset_status(scoreboard_key_press_status_tick),
-        .keyboard_in(S_key),
-        .position(p2_position)
+        .enable_controller_status((light_signals_status) && !(player2_finish_status)),
+        .position(p2_position),
+        .flag_for_readline_diode_in_cockpit(),
+        .current_gear(),
+        .slow_clk_out()
     );
-    //---------------------------------------------------------------------------
+    //--------------------------------------------------
 
     kb_interface #(.WIDTH(4)) kb_interface(
         .clk(clk65MHz),
@@ -320,8 +324,8 @@ module top(
         .vsync_in(car_vsync_p1),
         .vblnk_in(car_vblnk_p1),
         .rgb_in(car_rgb_p1),
-        .current_gear(2),
-        .gear_change_status(1),
+        .current_gear(cockpit_current_gear),
+        .gear_change_status(cockpit_next_gear_status),
         .hcount_out(cockpit_hcount),
         .hsync_out(cockpit_hsync),
         .hblnk_out(cockpit_hblnk),
