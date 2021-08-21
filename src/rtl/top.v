@@ -36,7 +36,7 @@ module top(
     output wire hs
     );
     
-    localparam FINISH_LINE_POS = 1200;
+    localparam FINISH_LINE_POS = 2000;
 
     //status
     wire light_signals_status;
@@ -208,7 +208,8 @@ module top(
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
         .mov(0),  //empty 
-        .position(p1_position),  
+        .position_p1(p1_position),
+        .position_p2(p2_position),   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
         .hblnk_out(car_hblnk_p2),
@@ -282,7 +283,8 @@ module top(
         .vblnk_in(start_vblnk),
         .rgb_in(start_rgb),
         .mov(0),  //empty
-        .position(0),    
+        .position_p1(0),
+        .position_p2(0),    
         .hcount_out(car_hcount_p1),
         .hsync_out(car_hsync_p1),
         .hblnk_out(car_hblnk_p1),
