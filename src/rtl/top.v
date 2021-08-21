@@ -100,6 +100,11 @@ module top(
     //wheel_movement_p1_p2
     wire p2_mov, p1_mov;
 
+    //draw_cockpit
+    wire [10:0] cockpit_hcount, cockpit_vcount;
+    wire cockpit_hsync, cockpit_hblnk, cockpit_vsync, cockpit_vblnk;
+    wire [11:0] cockpit_rgb;
+
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
         .clk65MHz(clk65MHz),
@@ -305,11 +310,6 @@ module top(
         .rgb_out(car_rgb_p1)
     );
 
-    //draw_cockpit
-    wire [10:0] cockpit_hcount, cockpit_vcount;
-    wire cockpit_hsync, cockpit_hblnk, cockpit_vsync, cockpit_vblnk;
-    wire [11:0] cockpit_rgb;
-
     draw_cockpit u_draw_cockpit(
         .clk(clk65MHz),
         .reset(rst_ext),
@@ -320,7 +320,7 @@ module top(
         .vsync_in(car_vsync_p1),
         .vblnk_in(car_vblnk_p1),
         .rgb_in(car_rgb_p1),
-        .current_gear(0),
+        .current_gear(2),
         .gear_change_status(1),
         .hcount_out(cockpit_hcount),
         .hsync_out(cockpit_hsync),
