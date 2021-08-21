@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: AGH University of Science and Technology
-// Engineer: Daniel Gucik, Patryk Koci?ski
+// Engineer: Daniel Gucik, Patryk Kocinski
 // 
 // Create Date: 20.07.2021 21:23:01
 // Design Name: -
@@ -17,12 +17,6 @@
 // Additional Comments: -
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-/* NOTATKI
--brakuje modulu kontrolnego,
--animacja ruchu pojazdu pos_diff wzgl 1 i 2
--interfejs obrotomierz
-*/
 
 module top(
     input wire clk,
@@ -80,7 +74,7 @@ module top(
     //timer_clk
     wire clk_timer;
 
-    //ligh_signals_timer
+    //light_signals_timer
     wire [11:0] light_timer_seconds;
 
     //player_timer
@@ -102,6 +96,9 @@ module top(
     wire clk_controller;
     wire [31:0] p1_position;
     wire [31:0] p2_position;
+
+    //wheel_movement_p1_p2
+    wire p2_mov, p1_mov;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -127,7 +124,7 @@ module top(
         .clk(clk65MHz)    
     );
 
-    //-------------------------MODUL KONTROLNY-------------------------
+    //-------------------------MODUL KONTROLNY DO TESTUF-------------------------
     clk_divide #(.DIVISOR(1000000)) u_controller_clk(
         .clk_in(clk65MHz),
         .clk_out(clk_controller)
@@ -150,7 +147,7 @@ module top(
         .keyboard_in(S_key),
         .position(p2_position)
     );
-    //-------------------------MODUL KONTROLNY-------------------------
+    //---------------------------------------------------------------------------
 
     kb_interface #(.WIDTH(4)) kb_interface(
         .clk(clk65MHz),
@@ -197,6 +194,13 @@ module top(
         .reset(rst_ext)
     );
 
+    wheel_movement u_wheel_movement_p2(
+        .clk(clk_controller),
+        .reset(rst_ext),
+        .position(p2_position),
+        .mov(p2_mov)
+    );
+
     draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069), .XPOS(256), .YPOS(335)) u_draw_car_p2(
         .clk(clk65MHz),
         .reset(rst_ext),
@@ -207,9 +211,9 @@ module top(
         .vsync_in(background_vsync),
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
-        .mov(0),  //empty 
-        .position_p1(p1_position),
-        .position_p2(p2_position),   
+        .p1_position(p1_position),
+        .p2_position(p2_position),
+        .mov(p2_mov),   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
         .hblnk_out(car_hblnk_p2),
@@ -272,6 +276,13 @@ module top(
         .reset(rst_ext)       
     );
 
+    wheel_movement u_wheel_movement_p1(
+        .clk(clk_controller),
+        .reset(rst_ext),
+        .position(p1_position),
+        .mov(p1_mov)
+    );
+
     draw_car u_draw_car_p1(
         .clk(clk65MHz),
         .reset(rst_ext),
@@ -282,9 +293,9 @@ module top(
         .vsync_in(start_vsync),
         .vblnk_in(start_vblnk),
         .rgb_in(start_rgb),
-        .mov(0),  //empty
-        .position_p1(0),
-        .position_p2(0),    
+        .p1_position(0),
+        .p2_position(0),
+        .mov(p1_mov),    
         .hcount_out(car_hcount_p1),
         .hsync_out(car_hsync_p1),
         .hblnk_out(car_hblnk_p1),
