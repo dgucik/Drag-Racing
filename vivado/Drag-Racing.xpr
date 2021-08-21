@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="32" Path="D:/aaaPROJEKT/Drag-Racing-FPGA/vivado/Drag-Racing.xpr">
+<Project Version="7" Minor="32" Path="C:/Users/Lenovo/Desktop/git_vivado/Drag-Racing-FPGA/vivado/Drag-Racing.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="997aeae2d0534f27b86d2f565bf90b66"/>
@@ -251,41 +251,62 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/scoreboard.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/gear_shifter.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/caption_rom.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/rpm.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/delay.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/rpm_to_velocity.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/game_controller.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/gear_and_velocity.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/rising_edge_detector.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/possition_adder.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+<<<<<<< HEAD
       <File Path="$PPRDIR/../src/rtl/wheel_movement.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -336,6 +357,9 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../src/rtl/rpm.v">
+=======
+      <File Path="$PPRDIR/../../../Drag-Racing-FPGA-movement_animation/Drag-Racing-FPGA-movement_animation/src/rtl/mux2to1.v">
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>

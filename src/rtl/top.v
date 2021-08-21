@@ -315,6 +315,7 @@ module top(
         .rgb_out(car_rgb_p1)
     );
 
+<<<<<<< HEAD
     draw_cockpit u_draw_cockpit(
         .clk(clk65MHz),
         .reset(rst_ext),
@@ -374,6 +375,57 @@ module top(
     assign light_signals_status = (light_timer_seconds == 5);
     assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
     assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
+=======
+    game_menu game_menu(
+    .clk(clk65MHz),
+    .rst(rst_ext),
+    .hcount_in(vga_hcount),
+    .vcount_in(vga_vcount),
+    .hsync_in(vga_hsync),
+    .vsync_in(vga_vsync),
+    .hblnk_in(vga_hblnk),
+    .vblnk_in(vga_vblnk),
+    .keyboard_in(key_pressed_2),
+    .hsync_out(game_menu_hsync_out),
+    .vsync_out(game_menu_vsync_out),
+    .rgb_out(game_menu_rgb_out),
+    .back_to_main_menu_flag(),
+    .start_game_flag()
+    );
+
+    kb_interface kb_interface(
+    .clk(clk65MHz),
+    .reset(rst_ext),
+    .kb_key_pressed(key_pressed),
+    .ps2_clk(ps2_clk),
+    .ps2_data(ps2_data)
+    );
+
+    keyboard_button_rising_edge keyboard_button_rising_edge(
+    .clk(clk65MHz),
+    .key_pressed(key_pressed),
+    .key_pressed_posedge(key_pressed_2)
+    );
+/*
+    gear_and_velocity gear_and_velocity(
+    .clk(clk100MHz),
+    .rst(rst_ext),
+    .keyboard_in_posedge(),
+    .key_pressed(),
+    .enable_controller_status(),
+    .reset_status(),
+    .position(),
+    .flag_for_readline_diode_in_cockpit()
+    );
+*/
+//    assign vs = car_vsync_p1;
+//    assign hs = car_hsync_p1;
+//    assign {r,g,b} = car_rgb_p1;
+    
+    assign vs = game_menu_vsync_out;
+    assign hs = game_menu_hsync_out;
+    assign {r,g,b} = game_menu_rgb_out;
+>>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
     
     //output wires
     assign vs = (menu_start_game_status)? scoreboard_vsync:menu_vsync;
