@@ -61,7 +61,7 @@ module draw_cockpit(
                 )
                 rgb_out_nxt = 12'hbbb;
             else if(    (current_gear == 1) && (
-                        (hcount_in >= HOR_POS + 309) && (hcount_in <= HOR_POS + 356) && (vcount_in >= VER_POS + 84) && (vcount_in <= VER_POS + 95) ||
+                        (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 356) && (vcount_in >= VER_POS + 84) && (vcount_in <= VER_POS + 95) ||
                         (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 324) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 95) ||
                         (hcount_in >= HOR_POS + 313) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 60) && (vcount_in <= VER_POS + 71) ||
                         (hcount_in >= HOR_POS + 349) && (hcount_in <= HOR_POS + 360) && (vcount_in >= VER_POS + 36) && (vcount_in <= VER_POS + 71) ||

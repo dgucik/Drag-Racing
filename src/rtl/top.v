@@ -30,7 +30,7 @@ module top(
     output wire hs
     );
     
-    localparam FINISH_LINE_POS = 15000;
+    localparam FINISH_LINE_POS = 25000;
 
     //status
     wire light_signals_status;
@@ -48,8 +48,8 @@ module top(
     wire vga_vsync, vga_vblnk, vga_hsync, vga_hblnk;
 
     //kb_interface  
-    wire W_key, A_key, S_key, D_key;
-    wire W_key_tick, A_key_tick, S_key_tick, D_key_tick;
+    wire W_key, S_key, K_key, Shift_key, Enter_key;
+    wire W_key_tick, S_key_tick, K_key_tick, Shift_key_tick, Enter_key_tick;
 
     //draw_car_p2
     wire [10:0] car_hcount_p2, car_vcount_p2;
@@ -94,7 +94,7 @@ module top(
     wire scoreboard_key_press_status, scoreboard_key_press_status_tick;
 
     //gear_and_velocity_p1 && p2
-    wire cockpit_current_gear, cockpit_next_gear_status;
+    wire controller_current_gear, controller_next_gear_status;
     wire [31:0] p1_position;
     wire [31:0] p2_position;
 
@@ -133,13 +133,13 @@ module top(
     gear_and_velocity  u_gear_and_velocity_p1(
         .clk(clk65MHz),
         .rst(rst_ext),
-        .kb_key_pressed_tick(D_key_tick),
-        .kb_key_pressed(W_key),
+        .kb_key_pressed_tick(Shift_key_tick),
+        .kb_key_pressed(K_key),
         .reset_status(scoreboard_key_press_status_tick),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
         .position(p1_position),
-        .flag_for_readline_diode_in_cockpit(cockpit_next_gear_status),
-        .current_gear(cockpit_current_gear),
+        .flag_for_readline_diode_in_cockpit(controller_next_gear_status),
+        .current_gear(controller_current_gear),
         .slow_clk_out(clk_controller)
     );
 
@@ -147,8 +147,8 @@ module top(
     gear_and_velocity  u_gear_and_velocity_p2(
         .clk(clk65MHz),
         .rst(rst_ext),
-        .kb_key_pressed_tick(A_key_tick),
-        .kb_key_pressed(S_key),
+        .kb_key_pressed_tick(S_key_tick),
+        .kb_key_pressed(W_key),
         .reset_status(scoreboard_key_press_status_tick),
         .enable_controller_status((light_signals_status) && !(player2_finish_status)),
         .position(p2_position),
@@ -158,11 +158,11 @@ module top(
     );
     //--------------------------------------------------
 
-    kb_interface #(.WIDTH(4)) kb_interface(
+    kb_interface #(.WIDTH(5)) kb_interface(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .kb_key_pressed({W_key, A_key, S_key, D_key}),
-        .kb_key_pressed_tick({W_key_tick, A_key_tick, S_key_tick, D_key_tick}),
+        .kb_key_pressed({W_key, S_key, K_key, Shift_key, Enter_key}),
+        .kb_key_pressed_tick({W_key_tick, S_key_tick, K_key_tick, Shift_key_tick, Enter_key_tick}),
         .ps2_clk(ps2_clk),
         .ps2_data(ps2_data)
     );
@@ -176,7 +176,7 @@ module top(
         .vsync_in(vga_vsync),
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
-        .keyboard_in({W_key_tick, S_key_tick, D_key_tick}),
+        .keyboard_in({W_key_tick, S_key_tick, Enter_key_tick}),
         .back_to_main_menu_flag(scoreboard_key_press_status_tick), 
         .hsync_out(menu_hsync),
         .vsync_out(menu_vsync),
@@ -324,8 +324,8 @@ module top(
         .vsync_in(car_vsync_p1),
         .vblnk_in(car_vblnk_p1),
         .rgb_in(car_rgb_p1),
-        .current_gear(cockpit_current_gear),
-        .gear_change_status(cockpit_next_gear_status),
+        .current_gear(controller_current_gear),
+        .gear_change_status(controller_next_gear_status),
         .hcount_out(cockpit_hcount),
         .hsync_out(cockpit_hsync),
         .hblnk_out(cockpit_hblnk),
@@ -339,7 +339,7 @@ module top(
         .clk(clk65MHz),
         .reset(rst_ext),
         .end_game_status((player1_finish_status) && (player2_finish_status)),
-        .keyboard_in(D_key_tick),
+        .keyboard_in(Enter_key_tick),
         .time_p1(player1_timer_seconds_miliseconds),
         .time_p2(player2_timer_seconds_miliseconds),
         .hcount_in(cockpit_hcount),
