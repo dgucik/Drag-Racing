@@ -7,6 +7,6 @@
  - [ ] komunikacja miedzy basysami & UART
  - [ ] moduł kontrolny
  - [ ] tabela z wynikiem
- - [ ] interfejs ?obrotomierz?
- - [ ] rozprowadzenie flag
- - [ ] moduly pozycja car_p2
+ - [x] interfejs ?obrotomierz?
+ - [x] rozprowadzenie flag
+ - [x] moduly pozycja car_p2
