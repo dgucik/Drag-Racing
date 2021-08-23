@@ -205,7 +205,7 @@ module top(
     );
 
     wheel_movement u_wheel_movement_p2(
-        .clk(clk_controller),
+        .clk(clk65MHz),
         .reset(rst_ext),
         .position(p2_position),
         .mov(p2_mov)
@@ -287,7 +287,7 @@ module top(
     );
 
     wheel_movement u_wheel_movement_p1(
-        .clk(clk_controller),
+        .clk(clk65MHz),
         .reset(rst_ext),
         .position(p1_position),
         .mov(p1_mov)

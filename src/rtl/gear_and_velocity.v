@@ -1,25 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 20.08.2021 05:21:43
-// Design Name: 
-// Module Name: gear_and_velocity
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module gear_and_velocity(
     input wire clk,
     input wire rst,
@@ -49,59 +27,63 @@ module gear_and_velocity(
     //mux
     wire mux_key_posedge, mux_key_pressed;
     
-    clk_divide #(.DIVISOR(650000)) u_timer_100Hz(
-    .clk_in(clk),
-    .clk_out(clk100Hz)
+    clk_divide #(.DIVISOR(1000000)) u_timer_100Hz(
+        .clk_in(clk),
+        .clk_out(clk100Hz)
     );
     
     clk_divide #(.DIVISOR(6500000)) u_timer_10Hz(
-    .clk_in(clk),
-    .clk_out(clk10Hz)
+        .clk_in(clk),
+        .clk_out(clk10Hz)
     );
     
     gear_shifter u_gear_shifter(
-    .clk(clk),
-    .rst(rst),
-    .reset_status(reset_status),
-    .keyboard_in_posedge(mux_key_posedge),
-    .gear(sh_gear)
+        .clk(clk),
+        .rst(rst),
+        .reset_status(reset_status),
+        .keyboard_in_posedge(mux_key_posedge),
+        .gear(sh_gear)
     );
     
     rpm u_rpm(
-    .clk100Hz(clk100Hz),
-    .rst(rst),
-    .reset_status(reset_status),
-    .gear_in(sh_gear),
-    .gas_key(mux_key_pressed),
-    .rpm(rpm_rpm_out),
-    .gear_out(rpm_gear_out),
-    .flag_for_readline_diode_in_cockpit(flag_for_readline_diode_in_cockpit)
+        .clk100Hz(clk100Hz),
+        .rst(rst),
+        .reset_status(reset_status),
+        .gear_in(sh_gear),
+        .gas_key(mux_key_pressed),
+        .rpm(rpm_rpm_out),
+        .gear_out(rpm_gear_out)
     );
     
     rpm_to_velocity u_rpm_to_dposition(
-    .clk100Hz(clk100Hz),
-    .rst(rst),
-    .reset_status(reset_status),
-    .rpm(rpm_rpm_out),
-    .gear(rpm_gear_out),
-    .d_position(d_position)
+        .clk100Hz(clk100Hz),
+        .rst(rst),
+        .reset_status(reset_status),
+        .rpm(rpm_rpm_out),
+        .gear(rpm_gear_out),
+        .d_position(d_position)
     );
     
     position_adder u_position_adder(
-    .clk10Hz(clk10Hz),
-    .rst(rst),
-    .reset_status(reset_status),
-    .d_position(d_position),
-    .position(xposition)
+        .clk10Hz(clk100Hz),
+        .rst(rst),
+        .reset_status(reset_status),
+        .d_position(d_position),
+        .position(xposition)
     );
     
     mux2to1 u_mux2to1(
-    .D0(0),
-    .D1(kb_key_pressed_tick),
-    .D2(kb_key_pressed),
-    .S(enable_controller_status),
-    .Y1(mux_key_posedge),
-    .Y2(mux_key_pressed)
+        .D0(0),
+        .D1(kb_key_pressed_tick),
+        .D2(kb_key_pressed),
+        .S(enable_controller_status),
+        .Y1(mux_key_posedge),
+        .Y2(mux_key_pressed)
+    );
+    
+    rev_limit_diode u_rev_limit_diode(
+        .rpm(rpm_rpm_out),
+        .diode(flag_for_readline_diode_in_cockpit)
     );
     
     assign position = xposition;

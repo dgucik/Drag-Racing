@@ -1,25 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 20.08.2021 05:26:39
-// Design Name: 
-// Module Name: rpm_to_velocity
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module rpm_to_velocity(
     input wire clk100Hz,
     input wire rst,
@@ -29,12 +7,12 @@ module rpm_to_velocity(
     output reg [6:0] d_position
     );
     
-    localparam gear_ratio1 = 1;
-    localparam gear_ratio2 = 2;
-    localparam gear_ratio3 = 3;
-    localparam gear_ratio4 = 5;
+    localparam gear_ratio1 = 9;
+    localparam gear_ratio2 = 13;
+    localparam gear_ratio3 = 18;
+    localparam gear_ratio4 = 25;
     
-    reg [15:0] velocity;
+    reg [18:0] velocity;
     reg [6:0] d_position_nxt;
     
     always @(posedge clk100Hz) begin
@@ -55,6 +33,6 @@ module rpm_to_velocity(
             velocity = 0;
         end
         
-        d_position_nxt = velocity[15:9];
+        d_position_nxt = velocity[18:13];
     end
 endmodule
