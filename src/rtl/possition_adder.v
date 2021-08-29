@@ -1,7 +1,7 @@
 module position_adder(
     input wire clk10Hz,
     input wire rst,
-    input wire [6:0] d_position,
+    input wire [4:0] d_position,
     input wire reset_status,
     output reg [31:0] position
     );

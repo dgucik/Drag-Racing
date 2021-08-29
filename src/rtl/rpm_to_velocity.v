@@ -4,7 +4,8 @@ module rpm_to_velocity(
     input wire [13:0] rpm,
     input wire [1:0] gear,
     input wire reset_status,
-    output reg [6:0] d_position
+    //output reg [6:0] d_position
+    output reg [4:0] d_position
     );
     
     localparam gear_ratio1 = 9;
@@ -13,7 +14,8 @@ module rpm_to_velocity(
     localparam gear_ratio4 = 25;
     
     reg [18:0] velocity;
-    reg [6:0] d_position_nxt;
+    //reg [6:0] d_position_nxt;
+    reg [4:0] d_position_nxt;
     
     always @(posedge clk100Hz) begin
         if(rst||reset_status) begin
@@ -28,7 +30,11 @@ module rpm_to_velocity(
         if(gear==0)  velocity = gear_ratio1 * rpm;
         else if(gear==1) velocity = gear_ratio2 * rpm;
         else if(gear==2) velocity = gear_ratio3 * rpm;
-        else if(gear==3) velocity = gear_ratio4 * rpm;
+        else if(gear==3) 
+            begin
+                if((gear_ratio4 * rpm) < 253952) velocity = gear_ratio4 * rpm;
+                else velocity = 253952;
+            end
         else begin 
             velocity = 0;
         end

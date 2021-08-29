@@ -23,6 +23,8 @@ module top(
     input wire rst,
     input wire ps2_clk,
     input wire ps2_data,
+    input wire rx,
+    output wire tx,
     output wire [3:0] r,
     output wire [3:0] g,
     output wire [3:0] b,
@@ -107,6 +109,11 @@ module top(
     wire [10:0] cockpit_hcount, cockpit_vcount;
     wire cockpit_hsync, cockpit_hblnk, cockpit_vsync, cockpit_vblnk;
     wire [11:0] cockpit_rgb;
+    
+    //communication
+    wire [4:0] p1_d_position_out, p2_d_position_out, p2_d_position_in;
+    wire [7:0] p1_out_data, p2_in_data;
+    wire wr_uart, rd_uart, tx_full, rx_empty;
 
     //SECOND PLAYER: WIRES FOR COMMUNICATION
     wire [31:0] p2_position;
@@ -115,9 +122,9 @@ module top(
     wire scoreboard_key_press_status_p2;
 
     //-------------TESTS---- DO USUNIECIA
-    assign menu_start_game_status_p2 = 1;
-    assign rst_ext_p2 = 0;
-    assign scoreboard_key_press_status_p2 = 1;
+    //assign menu_start_game_status_p2 = 1;
+    //assign rst_ext_p2 = 0;
+    //assign scoreboard_key_press_status_p2 = 1;
     //----------------------
 
     clk_gen u_clk_gen (
@@ -151,6 +158,7 @@ module top(
         .kb_key_pressed(K_key),
         .reset_status(scoreboard_key_press_status_tick),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
+        .d_position_out(p1_d_position_out),
         .position(p1_position),
         .flag_for_readline_diode_in_cockpit(controller_next_gear_status),
         .current_gear(controller_current_gear),
@@ -158,7 +166,7 @@ module top(
     );
 
     //------TEST for second player--------------------- DO USUNIECIA
-    gear_and_velocity  u_gear_and_velocity_p2(
+    /*gear_and_velocity  u_gear_and_velocity_p2(
         .clk(clk65MHz),
         .rst(rst_ext_p1 || rst_ext_p2),
         .kb_key_pressed_tick(S_key_tick),
@@ -169,7 +177,7 @@ module top(
         .flag_for_readline_diode_in_cockpit(),
         .current_gear(),
         .slow_clk_out()
-    );
+    );*/
     //--------------------------------------------------
 
     kb_interface #(.WIDTH(5)) kb_interface(
@@ -383,64 +391,45 @@ module top(
         .sig_out(scoreboard_key_press_status_tick)
     );
 
+    p1_and_p2_data u_p1_and_p2_data(
+    .clk(clk65MHz),
+    .rst(rst_ext_p1 || rst_ext_p2),
+    .p1_in_data({scoreboard_key_press_status_p1, rst_ext_p1, menu_start_game_status_p1, p1_d_position_out}),
+    .wr_uart(wr_uart),
+    .p1_out_data(p1_out_data),
+    .tx_full(tx_full),
+    .p2_in_data(p2_in_data),
+    .rd_uart(rd_uart),
+    .p2_out_data({scoreboard_key_press_status_p2, rst_ext_p2, menu_start_game_status_p2, p2_d_position_out}),
+    .rx_empty(rx_empty)
+    );
+
+    uart_ff_buf u_uart_ff_buf(
+    .clk(clk65MHz),
+    .reset(rst_ext_p1 || rst_ext_p2),
+    .w_data(p1_out_data),
+    .r_data(p2_in_data),
+    .wr_uart(wr_uart),
+    .rd_uart(rd_uart),
+    .tx_full(tx_full),
+    .rx_empty(rx_empty),
+    .rx(rx),
+    .tx(tx)
+    );
+
+    player2_position u_player2_position(
+    .clk(clk65MHz),
+    .rst(rst_ext_p1 || rst_ext_p2),
+    .d_position(p2_d_position_out),
+    .position(p2_position)
+    );
+
     //status wires
     assign light_signals_status = (light_timer_seconds == 5);
     assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
     assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
-
-    game_menu game_menu(
-    .clk(clk65MHz),
-    .rst(rst_ext),
-    .hcount_in(vga_hcount),
-    .vcount_in(vga_vcount),
-    .hsync_in(vga_hsync),
-    .vsync_in(vga_vsync),
-    .hblnk_in(vga_hblnk),
-    .vblnk_in(vga_vblnk),
-    .keyboard_in(key_pressed_2),
-    .hsync_out(game_menu_hsync_out),
-    .vsync_out(game_menu_vsync_out),
-    .rgb_out(game_menu_rgb_out),
-    .back_to_main_menu_flag(),
-    .start_game_flag()
-    );
-
-    kb_interface kb_interface(
-    .clk(clk65MHz),
-    .reset(rst_ext),
-    .kb_key_pressed(key_pressed),
-    .ps2_clk(ps2_clk),
-    .ps2_data(ps2_data)
-    );
-
-    keyboard_button_rising_edge keyboard_button_rising_edge(
-    .clk(clk65MHz),
-    .key_pressed(key_pressed),
-    .key_pressed_posedge(key_pressed_2)
-    );
-/*
-    gear_and_velocity gear_and_velocity(
-    .clk(clk100MHz),
-    .rst(rst_ext),
-    .keyboard_in_posedge(),
-    .key_pressed(),
-    .enable_controller_status(),
-    .reset_status(),
-    .position(),
-    .flag_for_readline_diode_in_cockpit(),
-    .current_gear()
-    );
-*/
-//    assign vs = car_vsync_p1;
-//    assign hs = car_hsync_p1;
-//    assign {r,g,b} = car_rgb_p1;
-    
-    assign vs = game_menu_vsync_out;
-    assign hs = game_menu_hsync_out;
-    assign {r,g,b} = game_menu_rgb_out;
     assign menu_start_game_status = (menu_start_game_status_p1 && menu_start_game_status_p2);
     assign scoreboard_key_press_status = (scoreboard_key_press_status_p1 && scoreboard_key_press_status_p2);
-
     
     //output wires
     assign vs = (menu_start_game_status)? scoreboard_vsync:menu_vsync;
