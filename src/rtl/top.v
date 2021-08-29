@@ -35,13 +35,15 @@ module top(
     //status
     wire light_signals_status;
     wire player1_finish_status, player2_finish_status;
+    wire menu_start_game_status;
+    wire scoreboard_key_press_status;
 
     //clk_gen
     wire locked;
     wire clk100MHz, clk65MHz;
     
     //reset
-    wire rst_ext;
+    wire rst_ext_p1;
     
     //vga_timing
     wire [10:0] vga_vcount, vga_hcount;
@@ -83,7 +85,7 @@ module top(
     //game_menu
     wire menu_hsync, menu_vsync;
     wire [11:0] menu_rgb;
-    wire menu_start_game_status;
+    wire menu_start_game_status_p1;
 
     //scoreboard also caption_rom
     wire clk_controller;
@@ -91,13 +93,12 @@ module top(
     wire [11:0] scoreboard_rgb;
     wire [14:0] scoreboard_pixel_addr;
     wire [1:0] caption_pixel;
-    wire scoreboard_key_press_status, scoreboard_key_press_status_tick;
+    wire scoreboard_key_press_status_p1, scoreboard_key_press_status_tick;
 
     //gear_and_velocity_p1 && p2
     wire [1:0] controller_current_gear; 
     wire controller_next_gear_status;
     wire [31:0] p1_position;
-    wire [31:0] p2_position;
 
     //wheel_movement_p1 && p2
     wire p2_mov, p1_mov;
@@ -106,6 +107,18 @@ module top(
     wire [10:0] cockpit_hcount, cockpit_vcount;
     wire cockpit_hsync, cockpit_hblnk, cockpit_vsync, cockpit_vblnk;
     wire [11:0] cockpit_rgb;
+
+    //SECOND PLAYER: WIRES FOR COMMUNICATION
+    wire [31:0] p2_position;
+    wire menu_start_game_status_p2;
+    wire rst_ext_p2;
+    wire scoreboard_key_press_status_p2;
+
+    //-------------TESTS---- DO USUNIECIA
+    assign menu_start_game_status_p2 = 1;
+    assign rst_ext_p2 = 0;
+    assign scoreboard_key_press_status_p2 = 1;
+    //----------------------
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -116,7 +129,7 @@ module top(
     );
      
     reset u_reset (
-        .rst(rst_ext),
+        .rst(rst_ext_p1),
         .locked(locked),
         .clk(clk_controller)
     );
@@ -133,7 +146,7 @@ module top(
 
     gear_and_velocity  u_gear_and_velocity_p1(
         .clk(clk65MHz),
-        .rst(rst_ext),
+        .rst(rst_ext_p1 || rst_ext_p2),
         .kb_key_pressed_tick(Shift_key_tick),
         .kb_key_pressed(K_key),
         .reset_status(scoreboard_key_press_status_tick),
@@ -144,10 +157,10 @@ module top(
         .slow_clk_out(clk_controller)
     );
 
-    //------TEST for second player---------------------
+    //------TEST for second player--------------------- DO USUNIECIA
     gear_and_velocity  u_gear_and_velocity_p2(
         .clk(clk65MHz),
-        .rst(rst_ext),
+        .rst(rst_ext_p1 || rst_ext_p2),
         .kb_key_pressed_tick(S_key_tick),
         .kb_key_pressed(W_key),
         .reset_status(scoreboard_key_press_status_tick),
@@ -161,7 +174,7 @@ module top(
 
     kb_interface #(.WIDTH(5)) kb_interface(
         .clk(clk65MHz),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .kb_key_pressed({W_key, S_key, K_key, Shift_key, Enter_key}),
         .kb_key_pressed_tick({W_key_tick, S_key_tick, K_key_tick, Shift_key_tick, Enter_key_tick}),
         .ps2_clk(ps2_clk),
@@ -170,7 +183,7 @@ module top(
 
     game_menu game_menu(
         .clk(clk65MHz),
-        .rst(rst_ext),
+        .rst(rst_ext_p1 || rst_ext_p2),
         .hcount_in(vga_hcount),
         .vcount_in(vga_vcount),
         .hsync_in(vga_hsync),
@@ -182,7 +195,7 @@ module top(
         .hsync_out(menu_hsync),
         .vsync_out(menu_vsync),
         .rgb_out(menu_rgb),
-        .start_game_flag(menu_start_game_status)
+        .start_game_flag(menu_start_game_status_p1)
     );
     
     draw_background #(.FINISH_LINE_POS(FINISH_LINE_POS)) u_draw_backgroud(
@@ -201,19 +214,19 @@ module top(
         .vblnk_out(background_vblnk),
         .rgb_out(background_rgb),
         .clk(clk65MHz),
-        .reset(rst_ext)
+        .reset(rst_ext_p1 || rst_ext_p2)
     );
 
     wheel_movement u_wheel_movement_p2(
-        .clk(clk_controller),
-        .reset(rst_ext),
+        .clk(clk65MHz),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .position(p2_position),
         .mov(p2_mov)
     );
 
     draw_car #(.RGB_1(12'h09E), .RGB_2(12'h07B), .RGB_3(12'h069), .XPOS(256), .YPOS(335)) u_draw_car_p2(
         .clk(clk65MHz),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .hcount_in(background_hcount),
         .hsync_in(background_hsync),
         .hblnk_in(background_hblnk),
@@ -240,7 +253,7 @@ module top(
 
     timer u_light_signals_timer(
         .clk1KHz(clk_timer),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .start((menu_start_game_status) && !(light_signals_status)),
         .restart(scoreboard_key_press_status_tick),
         .seconds(light_timer_seconds),
@@ -249,7 +262,7 @@ module top(
 
     timer u_player1_timer(
         .clk1KHz(clk_timer),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .start((light_signals_status) && !(player1_finish_status)),
         .restart(scoreboard_key_press_status_tick),
         .seconds({player1_timer_seconds_miliseconds[21:10]}),
@@ -258,7 +271,7 @@ module top(
 
     timer u_player2_timer(
         .clk1KHz(clk_timer),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .start((light_signals_status) && !(player2_finish_status)),
         .restart(scoreboard_key_press_status_tick),
         .seconds({player2_timer_seconds_miliseconds[21:10]}),
@@ -283,19 +296,19 @@ module top(
         .vblnk_out(start_vblnk),
         .rgb_out(start_rgb),
         .clk(clk65MHz),
-        .reset(rst_ext)       
+        .reset(rst_ext_p1 || rst_ext_p2)       
     );
 
     wheel_movement u_wheel_movement_p1(
-        .clk(clk_controller),
-        .reset(rst_ext),
+        .clk(clk65MHz),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .position(p1_position),
         .mov(p1_mov)
     );
 
     draw_car u_draw_car_p1(
         .clk(clk65MHz),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .hcount_in(start_hcount),
         .hsync_in(start_hsync),
         .hblnk_in(start_hblnk),
@@ -315,10 +328,9 @@ module top(
         .rgb_out(car_rgb_p1)
     );
 
-<<<<<<< HEAD
     draw_cockpit u_draw_cockpit(
         .clk(clk65MHz),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .hcount_in(car_hcount_p1),
         .hsync_in(car_hsync_p1),
         .hblnk_in(car_hblnk_p1),
@@ -339,7 +351,7 @@ module top(
 
     scoreboard u_scoreboard(
         .clk(clk65MHz),
-        .reset(rst_ext),
+        .reset(rst_ext_p1 || rst_ext_p2),
         .end_game_status((player1_finish_status) && (player2_finish_status)),
         .keyboard_in(Enter_key_tick),
         .time_p1(player1_timer_seconds_miliseconds),
@@ -352,7 +364,7 @@ module top(
         .vblnk_in(cockpit_vblnk),
         .rgb_in(cockpit_rgb),
         .pixel_bit_caption(caption_pixel),
-        .key_press_status(scoreboard_key_press_status),
+        .key_press_status(scoreboard_key_press_status_p1),
         .hsync_out(scoreboard_hsync),
         .vsync_out(scoreboard_vsync),
         .rgb_out(scoreboard_rgb),
@@ -375,7 +387,7 @@ module top(
     assign light_signals_status = (light_timer_seconds == 5);
     assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
     assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
-=======
+
     game_menu game_menu(
     .clk(clk65MHz),
     .rst(rst_ext),
@@ -426,7 +438,9 @@ module top(
     assign vs = game_menu_vsync_out;
     assign hs = game_menu_hsync_out;
     assign {r,g,b} = game_menu_rgb_out;
->>>>>>> 1dfd980 (dodanie modułu uzależniającego prędkość samochodu od biegów i obrotów silnika)
+    assign menu_start_game_status = (menu_start_game_status_p1 && menu_start_game_status_p2);
+    assign scoreboard_key_press_status = (scoreboard_key_press_status_p1 && scoreboard_key_press_status_p2);
+
     
     //output wires
     assign vs = (menu_start_game_status)? scoreboard_vsync:menu_vsync;

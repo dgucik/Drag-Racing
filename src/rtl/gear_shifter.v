@@ -1,25 +1,3 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 20.08.2021 05:25:45
-// Design Name: 
-// Module Name: gear_shifter
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 module gear_shifter(
     input wire clk,
     input wire rst,
@@ -40,6 +18,6 @@ module gear_shifter(
     end
     
     always @*
-        if( (keyboard_in_posedge) && (gear<4) ) gear_nxt = gear+1;
+        if( (keyboard_in_posedge) && (gear<3) ) gear_nxt = gear+1;
         else gear_nxt = gear;
 endmodule
