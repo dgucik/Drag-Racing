@@ -23,6 +23,7 @@
 module player2_position(
     input wire clk,
     input wire rst,
+    input wire reset_status,
     input wire [4:0] d_position,
     output wire [31:0] position
     );
@@ -37,6 +38,7 @@ module player2_position(
     position_adder u_position_adder(
         .clk10Hz(clk100Hz),
         .rst(rst),
+        .reset_status(reset_status),
         .d_position(d_position),
         .position(position)
     );    

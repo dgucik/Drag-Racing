@@ -420,6 +420,7 @@ module top(
     player2_position u_player2_position(
     .clk(clk65MHz),
     .rst(rst_ext_p1 || rst_ext_p2),
+    .reset_status(scoreboard_key_press_status_tick),
     .d_position(p2_d_position_out),
     .position(p2_position)
     );
