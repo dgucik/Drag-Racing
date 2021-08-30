@@ -8,8 +8,7 @@ module gear_and_velocity(
     output wire [4:0] d_position_out,
     output wire [31:0] position,
     output wire flag_for_readline_diode_in_cockpit,
-    output wire [1:0] current_gear,
-    output wire slow_clk_out
+    output wire [1:0] current_gear
     );
     
     wire clk100Hz, clk10Hz;
@@ -28,12 +27,12 @@ module gear_and_velocity(
     //mux
     wire mux_key_posedge, mux_key_pressed;
     
-    clk_divide #(.DIVISOR(1000000)) u_timer_100Hz(
+    clk_divide #(.DIVISOR(1000000)) u_clk_100Hz(
         .clk_in(clk),
         .clk_out(clk100Hz)
     );
     
-    clk_divide #(.DIVISOR(6500000)) u_timer_10Hz(
+    clk_divide #(.DIVISOR(6500000)) u_clk_10Hz(
         .clk_in(clk),
         .clk_out(clk10Hz)
     );
@@ -90,6 +89,5 @@ module gear_and_velocity(
     assign position = xposition;
     assign d_position_out = d_position;
     assign current_gear = sh_gear;
-    assign slow_clk_out = clk10Hz;
 
 endmodule
