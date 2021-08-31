@@ -9,7 +9,7 @@ module position_adder(
     reg [31:0] position_nxt = 0;
     
     always @(posedge clk10Hz) begin
-        if(rst||reset_status) begin
+        if(rst) begin
             position <= 0;
         end
         else begin
@@ -19,5 +19,7 @@ module position_adder(
     
     always @* begin
         position_nxt = position + d_position;
+        if(reset_status)
+            position_nxt = 0;
     end
 endmodule

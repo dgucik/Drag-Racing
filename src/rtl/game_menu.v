@@ -34,99 +34,99 @@ module game_menu(
     wire start_game, start_game_delay;
 
     menu_background u_menu_background(
-    .clk(clk),
-    .rst(rst),
-    .hcount_in(hcount_in),
-    .vcount_in(vcount_in),
-    .hsync_in(hsync_in),
-    .vsync_in(vsync_in),
-    .hblnk_in(hblnk_in),
-    .vblnk_in(vblnk_in),
-    .hcount_out(menu_hcount),
-    .vcount_out(menu_vcount),
-    .hsync_out(menu_hsync),
-    .vsync_out(menu_vsync),
-    .hblnk_out(menu_hblnk),
-    .vblnk_out(menu_vblnk),
-    .rgb_out(menu_rgb)
+        .clk(clk),
+        .rst(rst),
+        .hcount_in(hcount_in),
+        .vcount_in(vcount_in),
+        .hsync_in(hsync_in),
+        .vsync_in(vsync_in),
+        .hblnk_in(hblnk_in),
+        .vblnk_in(vblnk_in),
+        .hcount_out(menu_hcount),
+        .vcount_out(menu_vcount),
+        .hsync_out(menu_hsync),
+        .vsync_out(menu_vsync),
+        .hblnk_out(menu_hblnk),
+        .vblnk_out(menu_vblnk),
+        .rgb_out(menu_rgb)
     );
     
     menu_page_of u_menu_page(
-    .clk(clk),
-    .rst(rst),
-    .keyboard_in(keyboard_in),
-    .menu_state(menu_state),
-    .menu_counter(menu_counter),
-    .back_to_main_menu_flag(back_to_main_menu_flag)
+        .clk(clk),
+        .rst(rst),
+        .keyboard_in(keyboard_in),
+        .menu_state(menu_state),
+        .menu_counter(menu_counter),
+        .back_to_main_menu_flag(back_to_main_menu_flag)
     );
     
     menu_napisy u_menu_napisy(
-    .clk(clk),
-    .rst(rst),
-    .hcount_in(menu_hcount),
-    .vcount_in(menu_vcount),
-    .hsync_in(menu_hsync),
-    .vsync_in(menu_vsync),
-    .hblnk_in(menu_hblnk),
-    .vblnk_in(menu_vblnk),
-    .rgb_in(menu_rgb),
-    .hsync_out(menu_hsync_2),
-    .vsync_out(menu_vsync_2),
-    .hcount_out(menu_hcount_2),
-    .vcount_out(menu_vcount_2),
-    .hblnk_out(menu_hblnk_2),
-    .vblnk_out(menu_vblnk_2),
-    .rgb_out(menu_rgb_2),
-    .menu_state(menu_state)
+        .clk(clk),
+        .rst(rst),
+        .hcount_in(menu_hcount),
+        .vcount_in(menu_vcount),
+        .hsync_in(menu_hsync),
+        .vsync_in(menu_vsync),
+        .hblnk_in(menu_hblnk),
+        .vblnk_in(menu_vblnk),
+        .rgb_in(menu_rgb),
+        .hsync_out(menu_hsync_2),
+        .vsync_out(menu_vsync_2),
+        .hcount_out(menu_hcount_2),
+        .vcount_out(menu_vcount_2),
+        .hblnk_out(menu_hblnk_2),
+        .vblnk_out(menu_vblnk_2),
+        .rgb_out(menu_rgb_2),
+        .menu_state(menu_state)
     );
     
     state_and_counter_to_xypos u_xypos_pointer(
-    .menu_state(menu_state),
-    .menu_counter(menu_counter),
-    .x_pointer(x_pointer),
-    .y_pointer(y_pointer),
-    .clk(clk),
-    .rst(rst)
+        .menu_state(menu_state),
+        .menu_counter(menu_counter),
+        .x_pointer(x_pointer),
+        .y_pointer(y_pointer),
+        .clk(clk),
+        .rst(rst)
     );
     
     delay_for_xypointer u_delay_for_xypointer(
-    .clk(clk),
-    .rst(rst),
-    .x_pointer(x_pointer),
-    .y_pointer(y_pointer),
-    .x_pointer_out_d(x_pointer_delay),
-    .y_pointer_out_d(y_pointer_delay)
+        .clk(clk),
+        .rst(rst),
+        .x_pointer(x_pointer),
+        .y_pointer(y_pointer),
+        .x_pointer_out_d(x_pointer_delay),
+        .y_pointer_out_d(y_pointer_delay)
     );
     
     rect u_menu_pointer(
-    .clk(clk),
-    .rst(rst),
-    .hcount_in(menu_hcount_2),
-    .vcount_in(menu_vcount_2),
-    .hsync_in(menu_hsync_2),
-    .vsync_in(menu_vsync_2),
-    .hblnk_in(menu_hblnk_2),
-    .vblnk_in(menu_vblnk_2),
-    .rgb_in(menu_rgb_2),
-    .x_pointer(x_pointer_delay),
-    .y_pointer(y_pointer_delay),
-    .hsync_out(menu_pointer_hsync),
-    .vsync_out(menu_pointer_vsync),
-    .rgb_out(menu_pointer_rgb)
+        .clk(clk),
+        .rst(rst),
+        .hcount_in(menu_hcount_2),
+        .vcount_in(menu_vcount_2),
+        .hsync_in(menu_hsync_2),
+        .vsync_in(menu_vsync_2),
+        .hblnk_in(menu_hblnk_2),
+        .vblnk_in(menu_vblnk_2),
+        .rgb_in(menu_rgb_2),
+        .x_pointer(x_pointer_delay),
+        .y_pointer(y_pointer_delay),
+        .hsync_out(menu_pointer_hsync),
+        .vsync_out(menu_pointer_vsync),
+        .rgb_out(menu_pointer_rgb)
     );
     
     menu_start_game_flag u_menu_start_game_flag(
-    .clk(clk),
-    .rst(rst),
-    .menu_state(menu_state),
-    .start_game(start_game)
+        .clk(clk),
+        .rst(rst),
+        .menu_state(menu_state),
+        .start_game(start_game)
     );
     
     delay_for_start_game_flag u_delay_for_start_game_flag(
-    .clk(clk),
-    .rst(rst),
-    .start_game(start_game),
-    .start_game_out_d(start_game_delay)
+        .clk(clk),
+        .rst(rst),
+        .start_game(start_game),
+        .start_game_out_d(start_game_delay)
     ); 
        
     assign vsync_out = menu_pointer_vsync;

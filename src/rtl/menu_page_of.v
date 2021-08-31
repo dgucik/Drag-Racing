@@ -1,6 +1,6 @@
 module menu_page_of(
-    output reg [2:0] menu_state,
-    output reg [1:0] menu_counter,
+    output wire [2:0] menu_state,
+    output wire [1:0] menu_counter,
     input wire [2:0] keyboard_in,
     input wire back_to_main_menu_flag,
     input wire clk,
@@ -23,9 +23,9 @@ module menu_page_of(
         end
         else begin
             state <= state_nxt;
-            menu_state <= state_nxt;
+            //menu_state <= state_nxt;
             counter <= counter_nxt;
-            menu_counter <= counter_nxt;
+            //menu_counter <= counter_nxt;
         end
     end
     
@@ -142,4 +142,7 @@ module menu_page_of(
             counter_nxt = 0;
          end
     end
+
+    assign menu_state = state;
+    assign menu_counter = counter;
 endmodule

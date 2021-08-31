@@ -18,7 +18,7 @@ module rpm_to_velocity(
     reg [4:0] d_position_nxt;
     
     always @(posedge clk100Hz) begin
-        if(rst||reset_status) begin
+        if(rst) begin
             d_position <= 0;
         end
         else begin
@@ -27,18 +27,21 @@ module rpm_to_velocity(
     end
     
     always @* begin
-        if(gear==0)  velocity = gear_ratio1 * rpm;
-        else if(gear==1) velocity = gear_ratio2 * rpm;
-        else if(gear==2) velocity = gear_ratio3 * rpm;
-        else if(gear==3) 
-            begin
-                if((gear_ratio4 * rpm) < 253952) velocity = gear_ratio4 * rpm;
-                else velocity = 253952;
+        if(reset_status) d_position_nxt = 0;
+        else begin
+            if(gear==0)  velocity = gear_ratio1 * rpm;
+            else if(gear==1) velocity = gear_ratio2 * rpm;
+            else if(gear==2) velocity = gear_ratio3 * rpm;
+            else if(gear==3) 
+                begin
+                    if((gear_ratio4 * rpm) < 253952) velocity = gear_ratio4 * rpm;
+                    else velocity = 253952;
+                end
+            else begin 
+                velocity = 0;
             end
-        else begin 
-            velocity = 0;
+            
+            d_position_nxt = velocity[18:13];
         end
-        
-        d_position_nxt = velocity[18:13];
     end
 endmodule

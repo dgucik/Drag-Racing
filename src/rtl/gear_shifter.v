@@ -9,7 +9,7 @@ module gear_shifter(
     reg [1:0] gear_nxt = 0;
     
     always @(posedge clk) begin
-        if(rst||reset_status) begin
+        if(rst) begin
             gear <= 0;
         end
         else begin
@@ -17,7 +17,12 @@ module gear_shifter(
         end    
     end
     
-    always @*
-        if( (keyboard_in_posedge) && (gear<3) ) gear_nxt = gear+1;
-        else gear_nxt = gear;
+    always @* begin
+        if(reset_status)
+            gear_nxt = 0;
+        else begin
+            if( (keyboard_in_posedge) && (gear<3) ) gear_nxt = gear+1;
+            else gear_nxt = gear;
+        end
+    end
 endmodule
