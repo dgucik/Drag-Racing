@@ -99,7 +99,7 @@ module top(
     wire [11:0] scoreboard_rgb;
     wire [14:0] scoreboard_pixel_addr;
     wire [1:0] caption_pixel;
-    wire scoreboard_key_press_status_p1, scoreboard_key_press_status_tick;
+    wire scoreboard_key_press_status_p1, scoreboard_key_press_status_tick_p1;
 
     //gear_and_velocity_p1 && p2
     wire [1:0] controller_current_gear; 
@@ -123,6 +123,7 @@ module top(
     wire [31:0] p2_position;
     wire menu_start_game_status_p2;
     wire scoreboard_key_press_status_p2;
+    wire scoreboard_key_press_status_tick_p2;
 
     //-------------TESTS---- DO USUNIECIA
     // assign menu_start_game_status_p2 = sw[0];
@@ -163,7 +164,7 @@ module top(
         .rst(rst_ext),
         .kb_key_pressed_tick(Shift_key_tick),
         .kb_key_pressed(K_key),
-        .reset_status(scoreboard_key_press_status_tick),
+        .reset_status(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
         .d_position_out(p1_d_position_out),
         .position(p1_position),
@@ -177,7 +178,7 @@ module top(
     //     .rst(rst_ext),
     //     .kb_key_pressed_tick(S_key_tick),
     //     .kb_key_pressed(W_key),
-    //     .reset_status(scoreboard_key_press_status_tick),
+    //     .reset_status(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
     //     .enable_controller_status((light_signals_status) && !(player2_finish_status)),
     //     .position(p2_position),
     //     .flag_for_readline_diode_in_cockpit(),
@@ -204,7 +205,7 @@ module top(
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
         .keyboard_in({W_key_tick, S_key_tick, Enter_key_tick}),
-        .back_to_main_menu_flag(scoreboard_key_press_status_tick), 
+        .back_to_main_menu_flag(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2), 
         .hsync_out(menu_hsync),
         .vsync_out(menu_vsync),
         .rgb_out(menu_rgb),
@@ -268,7 +269,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((menu_start_game_status) && !(light_signals_status)),
-        .restart(scoreboard_key_press_status_tick),
+        .restart(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
         .seconds(light_timer_seconds),
         .miliseconds()
     );
@@ -277,7 +278,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player1_finish_status)),
-        .restart(scoreboard_key_press_status_tick),
+        .restart(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
         .seconds({player1_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player1_timer_seconds_miliseconds[9:0]})
     );
@@ -286,7 +287,7 @@ module top(
         .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player2_finish_status)),
-        .restart(scoreboard_key_press_status_tick),
+        .restart(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
         .seconds({player2_timer_seconds_miliseconds[21:10]}),
         .miliseconds({player2_timer_seconds_miliseconds[9:0]})
     );
@@ -395,25 +396,25 @@ module top(
         .reset(rst_ext),
         .clear((!scoreboard_key_press_status_p1) && (!scoreboard_key_press_status_p2) && (!menu_start_game_status_p1) && (!menu_start_game_status_p2)),
         .set(scoreboard_key_press_status),
-        .status(scoreboard_key_press_status_tick)
+        .status(scoreboard_key_press_status_tick_p1)
     );
 
     /*rising_edge_detector u_scoreboard_key_press_status_rising_edge(
         .clk(clk_reset),
         .sig_in(scoreboard_key_press_status),
-        .sig_out(scoreboard_key_press_status_tick)
+        .sig_out(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2)
     );*/
 
     p1_and_p2_data u_p1_and_p2_data(
         .clk(clk65MHz),
         .rst(rst_ext),
-        .p1_in_data({scoreboard_key_press_status_p1, menu_start_game_status_p1, p1_d_position_out}),
+        .p1_in_data({scoreboard_key_press_status_tick_p1, scoreboard_key_press_status_p1, menu_start_game_status_p1, p1_d_position_out}),
         .wr_uart(wr_uart),
         .p1_out_data(p1_out_data),
         .tx_full(tx_full),
         .p2_in_data(p2_in_data),
         .rd_uart(rd_uart),
-        .p2_out_data({scoreboard_key_press_status_p2, menu_start_game_status_p2, p2_d_position_out}),
+        .p2_out_data({scoreboard_key_press_status_tick_p2, scoreboard_key_press_status_p2, menu_start_game_status_p2, p2_d_position_out}),
         .rx_empty(rx_empty)
     );
 
@@ -433,7 +434,7 @@ module top(
     player2_position u_player2_position(
         .clk(clk65MHz),
         .rst(rst_ext),
-        .reset_status(scoreboard_key_press_status_tick),
+        .reset_status(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
         .d_position(p2_d_position_out),
         .position(p2_position)
     );
