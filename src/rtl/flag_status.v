@@ -16,7 +16,7 @@ module flag_status(
     
     always @* begin
         status_nxt = status;
-        if(clear == 0)
+        if(clear == 1)
             status_nxt = 0;
         else if(set == 1)
             status_nxt = 1;
