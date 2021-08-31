@@ -393,7 +393,7 @@ module top(
     flag_status u_flag_status(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .clear(neg_menu_start_game_status),
+        .clear((!scoreboard_key_press_status_p1) && (!scoreboard_key_press_status_p2) && (!menu_start_game_status_p1) && (!menu_start_game_status_p2)),
         .set(scoreboard_key_press_status),
         .status(scoreboard_key_press_status_tick)
     );
@@ -443,7 +443,7 @@ module top(
     assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
     assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
     assign menu_start_game_status = (menu_start_game_status_p1 && menu_start_game_status_p2);
-    assign neg_menu_start_game_status = (~menu_start_game_status_p1 && ~menu_start_game_status_p2);
+    //assign neg_menu_start_game_status = (~menu_start_game_status_p1 && ~menu_start_game_status_p2);
     assign scoreboard_key_press_status = (scoreboard_key_press_status_p1 && scoreboard_key_press_status_p2);
     
     //output wires

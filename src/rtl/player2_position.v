@@ -31,8 +31,8 @@ module player2_position(
     wire clk100Hz;
     
     clk_divide #(.DIVISOR(1000000)) u_timer_100Hz(
-    .clk_in(clk),
-    .clk_out(clk100Hz)
+        .clk_in(clk),
+        .clk_out(clk100Hz)
     );
     
     position_adder u_position_adder(
