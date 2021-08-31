@@ -19,6 +19,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module top(
+    input wire [1:0] sw,
     input wire clk,
     input wire rst,
     input wire ps2_clk,
@@ -124,8 +125,8 @@ module top(
     wire scoreboard_key_press_status_p2;
 
     //-------------TESTS---- DO USUNIECIA
-    //assign menu_start_game_status_p2 = 1;
-    //assign scoreboard_key_press_status_p2 = 1;
+    assign menu_start_game_status_p2 = sw[0];
+    assign scoreboard_key_press_status_p2 = sw[1];
     //----------------------
 
     clk_gen u_clk_gen (
@@ -171,17 +172,17 @@ module top(
     );
 
     //------TEST for second player--------------------- DO USUNIECIA
-    // gear_and_velocity  u_gear_and_velocity_p2(
-    //     .clk(clk65MHz),
-    //     .rst(rst_ext),
-    //     .kb_key_pressed_tick(S_key_tick),
-    //     .kb_key_pressed(W_key),
-    //     .reset_status(scoreboard_key_press_status_tick),
-    //     .enable_controller_status((light_signals_status) && !(player2_finish_status)),
-    //     .position(p2_position),
-    //     .flag_for_readline_diode_in_cockpit(),
-    //     .current_gear()
-    // );
+    gear_and_velocity  u_gear_and_velocity_p2(
+        .clk(clk65MHz),
+        .rst(rst_ext),
+        .kb_key_pressed_tick(S_key_tick),
+        .kb_key_pressed(W_key),
+        .reset_status(scoreboard_key_press_status_tick),
+        .enable_controller_status((light_signals_status) && !(player2_finish_status)),
+        .position(p2_position),
+        .flag_for_readline_diode_in_cockpit(),
+        .current_gear()
+    );
     //--------------------------------------------------
 
     kb_interface #(.WIDTH(5)) kb_interface(
@@ -403,39 +404,39 @@ module top(
         .sig_out(scoreboard_key_press_status_tick)
     );*/
 
-    p1_and_p2_data u_p1_and_p2_data(
-        .clk(clk65MHz),
-        .rst(rst_ext),
-        .p1_in_data({scoreboard_key_press_status_p1, menu_start_game_status_p1, p1_d_position_out}),
-        .wr_uart(wr_uart),
-        .p1_out_data(p1_out_data),
-        .tx_full(tx_full),
-        .p2_in_data(p2_in_data),
-        .rd_uart(rd_uart),
-        .p2_out_data({scoreboard_key_press_status_p2, menu_start_game_status_p2, p2_d_position_out}),
-        .rx_empty(rx_empty)
-    );
+    // p1_and_p2_data u_p1_and_p2_data(
+    //     .clk(clk65MHz),
+    //     .rst(rst_ext),
+    //     .p1_in_data({scoreboard_key_press_status_p1, menu_start_game_status_p1, p1_d_position_out}),
+    //     .wr_uart(wr_uart),
+    //     .p1_out_data(p1_out_data),
+    //     .tx_full(tx_full),
+    //     .p2_in_data(p2_in_data),
+    //     .rd_uart(rd_uart),
+    //     .p2_out_data({scoreboard_key_press_status_p2, menu_start_game_status_p2, p2_d_position_out}),
+    //     .rx_empty(rx_empty)
+    // );
 
-    uart_ff_buf u_uart_ff_buf(
-        .clk(clk65MHz),
-        .reset(rst_ext),
-        .w_data(p1_out_data),
-        .r_data(p2_in_data),
-        .wr_uart(wr_uart),
-        .rd_uart(rd_uart),
-        .tx_full(tx_full),
-        .rx_empty(rx_empty),
-        .rx(rx),
-        .tx(tx)
-    );
+    // uart_ff_buf u_uart_ff_buf(
+    //     .clk(clk65MHz),
+    //     .reset(rst_ext),
+    //     .w_data(p1_out_data),
+    //     .r_data(p2_in_data),
+    //     .wr_uart(wr_uart),
+    //     .rd_uart(rd_uart),
+    //     .tx_full(tx_full),
+    //     .rx_empty(rx_empty),
+    //     .rx(rx),
+    //     .tx(tx)
+    // );
 
-    player2_position u_player2_position(
-        .clk(clk65MHz),
-        .rst(rst_ext),
-        .reset_status(scoreboard_key_press_status_tick),
-        .d_position(p2_d_position_out),
-        .position(p2_position)
-    );
+    // player2_position u_player2_position(
+    //     .clk(clk65MHz),
+    //     .rst(rst_ext),
+    //     .reset_status(scoreboard_key_press_status_tick),
+    //     .d_position(p2_d_position_out),
+    //     .position(p2_position)
+    // );
 
     //status wires
     assign light_signals_status = (light_timer_seconds == 5);
