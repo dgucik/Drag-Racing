@@ -45,6 +45,5 @@ module delay_for_xypointer(
             x_pointer_out_d <= x_pointer_d;
             y_pointer_out_d <= y_pointer_d;
         end
-    end
-  
+    end 
 endmodule

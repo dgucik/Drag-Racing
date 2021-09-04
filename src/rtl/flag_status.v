@@ -20,6 +20,5 @@ module flag_status(
             status_nxt = 0;
         else if(set == 1)
             status_nxt = 1;
-    end
-      
+    end     
 endmodule

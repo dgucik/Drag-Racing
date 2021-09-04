@@ -16,6 +16,5 @@ module mux2to1(
             Y1 = D0;
             Y2 = D0;
         end
-    end
-    
+    end  
 endmodule

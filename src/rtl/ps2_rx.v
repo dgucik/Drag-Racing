@@ -98,5 +98,4 @@ module ps2_rx
    end
    // output
    assign dout = b_reg[8:1]; // data bits
-
 endmodule

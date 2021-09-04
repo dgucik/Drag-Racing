@@ -424,4 +424,5 @@ module top(
     assign vs = (menu_start_game_status)? scoreboard_vsync:menu_vsync;
     assign hs = (menu_start_game_status)? scoreboard_hsync:menu_hsync;
     assign {r,g,b} = (menu_start_game_status)? scoreboard_rgb:menu_rgb;  
+     
 endmodule

@@ -81,6 +81,5 @@ module menu_background(
             
             else rgb_out_nxt = 12'h0_0_0;        
         end
-    end
-    
+    end   
 endmodule

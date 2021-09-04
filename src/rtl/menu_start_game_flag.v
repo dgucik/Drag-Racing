@@ -19,6 +19,5 @@ module menu_start_game_flag(
     always @* begin
         if(menu_state == 1) start_game_nxt = 1;
         else start_game_nxt = 0;
-    end
-    
+    end  
 endmodule

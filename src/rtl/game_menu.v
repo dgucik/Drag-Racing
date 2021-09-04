@@ -133,6 +133,5 @@ module game_menu(
     assign hsync_out = menu_pointer_hsync;
     assign rgb_out = menu_pointer_rgb;
     
-    assign start_game_flag = start_game_delay;
-    
+    assign start_game_flag = start_game_delay;   
 endmodule

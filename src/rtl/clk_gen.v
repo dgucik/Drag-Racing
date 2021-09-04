@@ -91,5 +91,4 @@ module clk_gen
  // Clock in ports
   .clk(clk)
   );
-
 endmodule

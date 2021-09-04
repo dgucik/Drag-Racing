@@ -34,5 +34,4 @@ module timer(
             miliseconds_nxt = miliseconds;
         end   
     end
-
 endmodule

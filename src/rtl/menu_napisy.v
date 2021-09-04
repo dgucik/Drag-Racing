@@ -80,6 +80,5 @@ module menu_napisy(
     .vsync_out_d(vsync_out),
     .hblnk_out_d(hblnk_out),
     .vblnk_out_d(vblnk_out)
-    );
-    
+    );  
 endmodule

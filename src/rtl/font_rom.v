@@ -2199,5 +2199,4 @@ module font_rom
             11'h7fe: data = 8'b00000000; //
             11'h7ff: data = 8'b00000000; //
         endcase
-
 endmodule

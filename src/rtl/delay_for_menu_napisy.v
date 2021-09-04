@@ -71,7 +71,5 @@ module delay_for_menu_napisy(
             hblnk_out_d <= hblnk_d;
             vblnk_out_d <= vblnk_d;
         end
-    end
-    
-    
+    end   
 endmodule

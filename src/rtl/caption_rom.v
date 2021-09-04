@@ -10,16 +10,14 @@ module caption_rom (
     output reg [1:0] pixel_bit
 );
 
+    reg rom_1 [0:22015];
+    reg rom_2 [0:22015];
 
-reg rom_1 [0:22015];
-reg rom_2 [0:22015];
+    initial $readmemh("lose_caption_rom.data", rom_1);
+    initial $readmemh("win_caption_rom.data", rom_2);  
 
-initial $readmemh("lose_caption_rom.data", rom_1);
-initial $readmemh("win_caption_rom.data", rom_2);  
-
-always @(posedge clk) begin
-    pixel_bit[0] <= rom_1[address];
-    pixel_bit[1] <= rom_2[address];
-end
-
+    always @(posedge clk) begin
+        pixel_bit[0] <= rom_1[address];
+        pixel_bit[1] <= rom_2[address];
+    end
 endmodule

@@ -58,5 +58,4 @@ module vga_timing (
     assign vga_hcount = vga_hcount_reg;
     assign vga_hsync = vga_hsync_reg;
     assign vga_hblnk = vga_hblnk_reg;
-
 endmodule

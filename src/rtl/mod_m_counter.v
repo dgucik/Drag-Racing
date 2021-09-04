@@ -27,5 +27,4 @@ module mod_m_counter
    // output logic
    assign q = r_reg;
    assign max_tick = (r_reg==(M-1)) ? 1'b1 : 1'b0;
-
 endmodule

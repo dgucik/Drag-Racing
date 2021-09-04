@@ -51,5 +51,4 @@ module kb_interface #(
         .sig_in(kb_key_pressed),
         .sig_out(kb_key_pressed_tick)
     );
-
 endmodule

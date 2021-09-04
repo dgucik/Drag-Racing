@@ -93,5 +93,4 @@ module uart_rx
    end
    // output
    assign dout = b_reg;
-
 endmodule

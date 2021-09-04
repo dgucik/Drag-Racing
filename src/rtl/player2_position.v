@@ -41,7 +41,5 @@ module player2_position(
         .reset_status(reset_status),
         .d_position(d_position),
         .position(position)
-    );    
-    
-    
+    );      
 endmodule

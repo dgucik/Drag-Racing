@@ -433,5 +433,4 @@ module draw_start(
             else rgb_out_nxt = rgb_in;
         end
     end
-
 endmodule

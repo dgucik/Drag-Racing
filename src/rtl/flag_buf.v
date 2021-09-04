@@ -44,5 +44,4 @@ module flag_buf
    // output logic
    assign dout = buf_reg;
    assign flag = flag_reg;
-
 endmodule

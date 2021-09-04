@@ -74,5 +74,4 @@ module uart_ff_buf
 
     assign rx_empty = ~rx_flag;
     assign tx_full = tx_flag;
-
 endmodule

@@ -89,5 +89,4 @@ module gear_and_velocity(
     assign position = xposition;
     assign d_position_out = d_position;
     assign current_gear = sh_gear;
-
 endmodule

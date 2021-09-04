@@ -1793,6 +1793,5 @@ module char_rom_20x16(
         else begin
             char_code = 7'h00;
         end
-    end
-    
+    end  
 endmodule

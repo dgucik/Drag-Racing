@@ -102,5 +102,4 @@ module draw_cockpit(
             else rgb_out_nxt = rgb_in;
         end      
     end
-
 endmodule

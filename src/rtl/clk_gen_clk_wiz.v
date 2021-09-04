@@ -243,9 +243,4 @@ wire clk_in2_clk_gen;
   
     end
   end
-
-
-
-
-
 endmodule

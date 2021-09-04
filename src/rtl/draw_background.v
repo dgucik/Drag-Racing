@@ -226,6 +226,5 @@ module draw_background #(
             //Grass_up
             else rgb_out_nxt = GRASS_COLOR;        
         end
-    end
-    
+    end    
 endmodule

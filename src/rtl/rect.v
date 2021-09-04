@@ -62,5 +62,4 @@ module rect(
                 rgb_out_nxt = 12'b0_0_0;
         end
     end
-
 endmodule

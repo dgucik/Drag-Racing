@@ -44,5 +44,4 @@ module delay
         end
 
     endgenerate
-
 endmodule

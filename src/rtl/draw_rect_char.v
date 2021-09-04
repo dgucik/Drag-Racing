@@ -69,6 +69,5 @@ module draw_rect_char(
     assign char_line = vcount_y[3:0];
     
     assign hcount_x = hcount_in - X_CHAR_RECT;
-    assign vcount_y = vcount_in - Y_CHAR_RECT;
-    
+    assign vcount_y = vcount_in - Y_CHAR_RECT; 
 endmodule

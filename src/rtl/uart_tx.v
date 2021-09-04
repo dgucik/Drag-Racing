@@ -111,5 +111,4 @@ module uart_tx
    end
    // output
    assign tx = tx_reg;
-
 endmodule
