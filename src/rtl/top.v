@@ -19,7 +19,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module top(
-    // input wire [1:0] sw,
     input wire clk,
     input wire rst,
     input wire ps2_clk,
@@ -125,11 +124,6 @@ module top(
     wire scoreboard_key_press_status_p2;
     wire scoreboard_key_press_status_tick_p2;
 
-    //-------------TESTS---- DO USUNIECIA
-    // assign menu_start_game_status_p2 = sw[0];
-    // assign scoreboard_key_press_status_p2 = sw[1];
-    //----------------------
-
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
         .clk65MHz(clk65MHz),
@@ -171,20 +165,6 @@ module top(
         .flag_for_readline_diode_in_cockpit(controller_next_gear_status),
         .current_gear(controller_current_gear)
     );
-
-    //------TEST for second player--------------------- DO USUNIECIA
-    // gear_and_velocity  u_gear_and_velocity_p2(
-    //     .clk(clk65MHz),
-    //     .rst(rst_ext),
-    //     .kb_key_pressed_tick(S_key_tick),
-    //     .kb_key_pressed(W_key),
-    //     .reset_status(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2),
-    //     .enable_controller_status((light_signals_status) && !(player2_finish_status)),
-    //     .position(p2_position),
-    //     .flag_for_readline_diode_in_cockpit(),
-    //     .current_gear()
-    // );
-    //--------------------------------------------------
 
     kb_interface #(.WIDTH(5)) kb_interface(
         .clk(clk65MHz),
@@ -399,12 +379,6 @@ module top(
         .status(scoreboard_key_press_status_tick_p1)
     );
 
-    /*rising_edge_detector u_scoreboard_key_press_status_rising_edge(
-        .clk(clk_reset),
-        .sig_in(scoreboard_key_press_status),
-        .sig_out(scoreboard_key_press_status_tick_p1 || scoreboard_key_press_status_tick_p2)
-    );*/
-
     p1_and_p2_data u_p1_and_p2_data(
         .clk(clk65MHz),
         .rst(rst_ext),
@@ -444,7 +418,6 @@ module top(
     assign player1_finish_status = (p1_position >= FINISH_LINE_POS);
     assign player2_finish_status = (p2_position >= FINISH_LINE_POS);
     assign menu_start_game_status = (menu_start_game_status_p1 && menu_start_game_status_p2);
-    //assign neg_menu_start_game_status = (~menu_start_game_status_p1 && ~menu_start_game_status_p2);
     assign scoreboard_key_press_status = (scoreboard_key_press_status_p1 && scoreboard_key_press_status_p2);
     
     //output wires
