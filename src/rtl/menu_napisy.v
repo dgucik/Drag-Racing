@@ -64,21 +64,11 @@ module menu_napisy(
     .addr({char_code,menu_rect_char_char_line}),
     .char_line_pixels(menu_rect_char_char_pixels)
     );       
-    
-    delay_for_menu_napisy delay_for_menu_napisy(
-    .clk(clk),
-    .rst(rst),
-    .hcount_in(delay_in_hcount),
-    .vcount_in(delay_in_vcount),
-    .hsync_in(delay_in_hsync),
-    .vsync_in(delay_in_vsync),
-    .hblnk_in(delay_in_hblnk),
-    .vblnk_in(delay_in_vblnk),
-    .hcount_out_d(hcount_out),
-    .vcount_out_d(vcount_out),
-    .hsync_out_d(hsync_out),
-    .vsync_out_d(vsync_out),
-    .hblnk_out_d(hblnk_out),
-    .vblnk_out_d(vblnk_out)
-    );  
+
+    delay #(.WIDTH(26), .CLK_DEL(2)) delay_for_menu_napisy(
+        .clk(clk),
+        .rst(rst),
+        .din({delay_in_hcount, delay_in_vcount, delay_in_hsync, delay_in_vsync, delay_in_hblnk, delay_in_vblnk}),
+        .dout({hcount_out, vcount_out, hsync_out, vsync_out, hblnk_out, vblnk_out})
+    );
 endmodule

@@ -1,7 +1,7 @@
 import serial
 
-serialPortP1 = serial.Serial(port='COM5', baudrate = 19200, timeout=0)
-serialPortP2 = serial.Serial(port='COM4', baudrate = 19200, timeout=0)
+serialPortP1 = serial.Serial(port='COM6', baudrate = 19200, timeout=0)
+serialPortP2 = serial.Serial(port='COM6', baudrate = 19200, timeout=0)
 
 playersData = [bytes(1), bytes(1)]
 

@@ -88,14 +88,12 @@ module game_menu(
         .clk(clk),
         .rst(rst)
     );
-    
-    delay_for_xypointer u_delay_for_xypointer(
+
+    delay #(.WIDTH(22), .CLK_DEL(2)) u_delay_for_xypointer(
         .clk(clk),
         .rst(rst),
-        .x_pointer(x_pointer),
-        .y_pointer(y_pointer),
-        .x_pointer_out_d(x_pointer_delay),
-        .y_pointer_out_d(y_pointer_delay)
+        .din({x_pointer, y_pointer}),
+        .dout({x_pointer_delay, y_pointer_delay})
     );
     
     rect u_menu_pointer(
@@ -121,17 +119,16 @@ module game_menu(
         .menu_state(menu_state),
         .start_game(start_game)
     );
-    
-    delay_for_start_game_flag u_delay_for_start_game_flag(
+
+    delay #(.WIDTH(2), .CLK_DEL(2)) u_delay_for_start_game_flag(
         .clk(clk),
         .rst(rst),
-        .start_game(start_game),
-        .start_game_out_d(start_game_delay)
-    ); 
+        .din(start_game),
+        .dout(start_game_delay)
+    );
        
     assign vsync_out = menu_pointer_vsync;
     assign hsync_out = menu_pointer_hsync;
-    assign rgb_out = menu_pointer_rgb;
-    
+    assign rgb_out = menu_pointer_rgb;  
     assign start_game_flag = start_game_delay;   
 endmodule
