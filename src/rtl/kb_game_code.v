@@ -9,7 +9,6 @@ module kb_game_code #(
     output wire [ WIDTH - 1 : 0 ] kb_key_pressed
 );
 
-/////////////// TO TYLKO PRZYKLAD, POZMIENIAC KLAWISZE W POZNIEJSZEJ FAZIE ROZWOJU GRY //////////////////
     localparam  W_code      = 8'h1D,
                 S_code      = 8'h1B,
                 K_code      = 8'h42,

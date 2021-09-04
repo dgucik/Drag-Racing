@@ -1,4 +1,3 @@
-//draw_car HORIZONTAL/VERTICAL: 328px/91 px
 module draw_car
 #(
     parameter   RGB_1 = 12'hF83,

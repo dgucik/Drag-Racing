@@ -6,8 +6,6 @@ module draw_rect_char(
     output reg vsync_out,
     output reg vblnk_out,
     output reg [11:0] rgb_out,
-    //output reg [10:0] addr,
-    //output wire [7:0] char_xy,
     output wire [8:0] char_xy,
     output wire [3:0] char_line,
     
