@@ -17,7 +17,7 @@ module keyboard (
     reg [7:0] key_code_nxt;
     reg code_new_nxt, key_pressed_nxt;
 
-    always @(posedge clk, posedge reset)
+    always @(posedge clk)
         if(reset) begin
             code_new <= 0;
             key_pressed <= 0;
@@ -29,7 +29,7 @@ module keyboard (
             key_code <= key_code_nxt;
         end
 
-    always @(posedge clk, posedge reset)
+    always @(posedge clk)
         if(reset)
             state <= WAIT_CODE;
         else

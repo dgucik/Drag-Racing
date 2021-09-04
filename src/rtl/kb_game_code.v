@@ -19,7 +19,7 @@ module kb_game_code #(
     reg W_pressed, S_pressed, K_pressed, Shift_pressed, Enter_pressed;
     reg W_pressed_nxt, S_pressed_nxt, K_pressed_nxt, Shift_pressed_nxt, Enter_pressed_nxt;
 
-    always @(posedge clk, posedge reset)
+    always @(posedge clk)
         if(reset) begin
             W_pressed <= 0;
             S_pressed <= 0;

@@ -16,7 +16,7 @@ module flag_buf
 
    // body
    // FF & register
-   always @(posedge clk, posedge reset)
+   always @(posedge clk)
       if (reset)
          begin
             buf_reg <= 0;

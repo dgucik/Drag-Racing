@@ -29,7 +29,7 @@ module ps2_rx
    //=================================================
    // filter and falling-edge tick generation for ps2c
    //=================================================
-   always @(posedge clk, posedge reset)
+   always @(posedge clk)
    if (reset)
       begin
          filter_reg <= 0;
@@ -51,7 +51,7 @@ module ps2_rx
    // FSMD
    //=================================================
    // FSMD state & data registers
-   always @(posedge clk, posedge reset)
+   always @(posedge clk)
       if (reset)
          begin
             state_reg <= idle;
