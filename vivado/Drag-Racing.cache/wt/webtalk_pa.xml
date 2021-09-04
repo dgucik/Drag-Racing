@@ -3,10 +3,10 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pa" timeStamp="Sat Sep  4 15:52:33 2021">
+<application name="pa" timeStamp="Sat Sep  4 16:10:50 2021">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="f592d52b14a54a17aa0051d856b401f7" type="ProjectID"/>
-<property name="ProjectIteration" value="239" type="ProjectIteration"/>
+<property name="ProjectIteration" value="240" type="ProjectIteration"/>
 </section>
 <section name="PlanAhead Usage" visible="true">
 <item name="Project Data">
@@ -37,7 +37,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ReportMethodology" value="3" type="JavaHandler"/>
 <property name="ReportUtilization" value="15" type="JavaHandler"/>
 <property name="ResetLayout" value="1" type="JavaHandler"/>
-<property name="RunBitgen" value="245" type="JavaHandler"/>
+<property name="RunBitgen" value="246" type="JavaHandler"/>
 <property name="RunImplementation" value="2" type="JavaHandler"/>
 <property name="RunSchematic" value="34" type="JavaHandler"/>
 <property name="RunSynthesis" value="10" type="JavaHandler"/>
@@ -78,7 +78,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CreateSrcFileDialog_FILE_NAME" value="25" type="GuiHandlerData"/>
 <property name="FileSetPanel_FILE_SET_PANEL_TREE" value="908" type="GuiHandlerData"/>
 <property name="FileSetPanel_MESSAGES" value="3" type="GuiHandlerData"/>
-<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="852" type="GuiHandlerData"/>
+<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="853" type="GuiHandlerData"/>
 <property name="GettingStartedView_CREATE_NEW_PROJECT" value="1" type="GuiHandlerData"/>
 <property name="HCodeEditor_CLOSE" value="3" type="GuiHandlerData"/>
 <property name="HCodeEditor_SEARCH_TEXT_COMBO_BOX" value="5" type="GuiHandlerData"/>
@@ -201,11 +201,6 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="UtilizationHierViewTreeTablePanel_TABLE(Hierarchy)" value="108" type="GuiHandlerData"/>
 <property name="UtilizationInstTreeTablePanel_UTILIZATION_INST_TREE_TABLE(LUT as Logic)" value="5" type="GuiHandlerData"/>
 <property name="UtilizationInstTreeTablePanel_UTILIZATION_INST_TREE_TABLE(LUT as Shift Register)" value="3" type="GuiHandlerData"/>
-</item>
-<item name="Other">
-<property name="GuiMode" value="729" type="GuiMode"/>
-<property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="672" type="TclMode"/>
 </item>
 </section>
 </application>

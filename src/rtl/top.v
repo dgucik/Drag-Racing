@@ -118,7 +118,7 @@ module top(
     wire [7:0] p1_out_data, p2_in_data;
     wire wr_uart, rd_uart, tx_full, rx_empty;
 
-    //SECOND PLAYER: WIRES FOR COMMUNICATION
+    //player2
     wire [31:0] p2_position;
     wire menu_start_game_status_p2;
     wire scoreboard_key_press_status_p2;
