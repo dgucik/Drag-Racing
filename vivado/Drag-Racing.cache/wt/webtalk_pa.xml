@@ -3,10 +3,10 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pa" timeStamp="Sat Sep  4 21:41:06 2021">
+<application name="pa" timeStamp="Sat Sep  4 22:06:48 2021">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="f592d52b14a54a17aa0051d856b401f7" type="ProjectID"/>
-<property name="ProjectIteration" value="245" type="ProjectIteration"/>
+<property name="ProjectIteration" value="246" type="ProjectIteration"/>
 </section>
 <section name="PlanAhead Usage" visible="true">
 <item name="Project Data">
@@ -22,7 +22,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CoreView" value="1" type="JavaHandler"/>
 <property name="CustomizeCore" value="1" type="JavaHandler"/>
 <property name="EditConstraintSets" value="3" type="JavaHandler"/>
-<property name="EditDelete" value="39" type="JavaHandler"/>
+<property name="EditDelete" value="42" type="JavaHandler"/>
 <property name="EditPaste" value="1" type="JavaHandler"/>
 <property name="EditProperties" value="2" type="JavaHandler"/>
 <property name="EditUndo" value="31" type="JavaHandler"/>
@@ -37,7 +37,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="ReportMethodology" value="3" type="JavaHandler"/>
 <property name="ReportUtilization" value="15" type="JavaHandler"/>
 <property name="ResetLayout" value="1" type="JavaHandler"/>
-<property name="RunBitgen" value="251" type="JavaHandler"/>
+<property name="RunBitgen" value="252" type="JavaHandler"/>
 <property name="RunImplementation" value="2" type="JavaHandler"/>
 <property name="RunSchematic" value="34" type="JavaHandler"/>
 <property name="RunSynthesis" value="10" type="JavaHandler"/>
@@ -64,10 +64,10 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="BaseDialog_APPLY" value="1" type="GuiHandlerData"/>
 <property name="BaseDialog_CANCEL" value="26" type="GuiHandlerData"/>
 <property name="BaseDialog_NO" value="2" type="GuiHandlerData"/>
-<property name="BaseDialog_OK" value="225" type="GuiHandlerData"/>
+<property name="BaseDialog_OK" value="228" type="GuiHandlerData"/>
 <property name="BaseDialog_YES" value="40" type="GuiHandlerData"/>
 <property name="ClosePlanner_NO" value="2" type="GuiHandlerData"/>
-<property name="CmdMsgDialog_OK" value="56" type="GuiHandlerData"/>
+<property name="CmdMsgDialog_OK" value="57" type="GuiHandlerData"/>
 <property name="ConstraintsChooserPanel_ADD_EXISTING_OR_CREATE_NEW_CONSTRAINTS" value="2" type="GuiHandlerData"/>
 <property name="ConstraintsChooserPanel_ADD_FILES" value="2" type="GuiHandlerData"/>
 <property name="ConstraintsChooserPanel_CREATE_FILE" value="2" type="GuiHandlerData"/>
@@ -76,9 +76,9 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CreateConstraintsFilePanel_FILE_NAME" value="2" type="GuiHandlerData"/>
 <property name="CreateSrcFileDialog_FILE_LOCATION" value="5" type="GuiHandlerData"/>
 <property name="CreateSrcFileDialog_FILE_NAME" value="25" type="GuiHandlerData"/>
-<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="911" type="GuiHandlerData"/>
+<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="918" type="GuiHandlerData"/>
 <property name="FileSetPanel_MESSAGES" value="3" type="GuiHandlerData"/>
-<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="870" type="GuiHandlerData"/>
+<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="871" type="GuiHandlerData"/>
 <property name="GettingStartedView_CREATE_NEW_PROJECT" value="1" type="GuiHandlerData"/>
 <property name="HCodeEditor_CLOSE" value="3" type="GuiHandlerData"/>
 <property name="HCodeEditor_SEARCH_TEXT_COMBO_BOX" value="5" type="GuiHandlerData"/>
@@ -101,8 +101,8 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="MsgTreePanel_MESSAGE_VIEW_TREE" value="157" type="GuiHandlerData"/>
 <property name="MsgView_CRITICAL_WARNINGS" value="10" type="GuiHandlerData"/>
 <property name="MsgView_ERROR_MESSAGES" value="8" type="GuiHandlerData"/>
-<property name="MsgView_INFORMATION_MESSAGES" value="78" type="GuiHandlerData"/>
-<property name="MsgView_WARNING_MESSAGES" value="29" type="GuiHandlerData"/>
+<property name="MsgView_INFORMATION_MESSAGES" value="79" type="GuiHandlerData"/>
+<property name="MsgView_WARNING_MESSAGES" value="31" type="GuiHandlerData"/>
 <property name="NavigableTimingReportTab_TIMING_REPORT_NAVIGATION_TREE" value="11" type="GuiHandlerData"/>
 <property name="NetlistSchMenuAndMouse_VIEW" value="1" type="GuiHandlerData"/>
 <property name="NetlistSchematicView_SHOW_CELLS_IN_THIS_SCHEMATIC" value="1" type="GuiHandlerData"/>
@@ -152,7 +152,7 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="PropertiesView_AUTOMATICALLY_UPDATE" value="1" type="GuiHandlerData"/>
 <property name="RDICommands_COPY" value="3" type="GuiHandlerData"/>
 <property name="RDICommands_CUSTOM_COMMANDS" value="1" type="GuiHandlerData"/>
-<property name="RDICommands_DELETE" value="39" type="GuiHandlerData"/>
+<property name="RDICommands_DELETE" value="42" type="GuiHandlerData"/>
 <property name="RDICommands_PROPERTIES" value="2" type="GuiHandlerData"/>
 <property name="RDICommands_SAVE_FILE" value="306" type="GuiHandlerData"/>
 <property name="RDICommands_SETTINGS" value="1" type="GuiHandlerData"/>
@@ -203,9 +203,9 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="UtilizationInstTreeTablePanel_UTILIZATION_INST_TREE_TABLE(LUT as Shift Register)" value="3" type="GuiHandlerData"/>
 </item>
 <item name="Other">
-<property name="GuiMode" value="734" type="GuiMode"/>
+<property name="GuiMode" value="736" type="GuiMode"/>
 <property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="677" type="TclMode"/>
+<property name="TclMode" value="679" type="TclMode"/>
 </item>
 </section>
 </application>
