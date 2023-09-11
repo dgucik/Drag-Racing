@@ -1,3 +1,23 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: AGH University of Science and Technology
+// Engineer: Daniel Gucik
+// 
+// Create Date: 20.07.2021 21:23:01
+// Design Name: -
+// Module Name: vga_timing
+// Project Name: Drag-Racing
+// Target Devices: Basys3
+// Tool Versions: Vivado 2017.3
+// Description: This is vga_timing module of Drag Racing game for Basys3 platform
+// 
+// Dependencies: 
+// 
+// Revision: -
+// Revision 0.01 - File Created
+// Additional Comments: -
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module vga_timing (
     output wire [10:0] vga_vcount,
     output wire vga_vsync,

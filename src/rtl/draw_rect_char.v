@@ -1,3 +1,23 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: AGH University of Science and Technology
+// Engineer: Patryk Kocinski
+// 
+// Create Date:
+// Design Name:
+// Module Name: draw_rect_char
+// Project Name: Drag-Racing
+// Target Devices: Basys3
+// Tool Versions: Vivado 2017.3
+// Description: This is draw_rect_char module of Drag Racing game for Basys3 platform
+// 
+// Dependencies: 
+// 
+// Revision: -
+// Revision 0.01 - File Created
+// Additional Comments: -
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module draw_rect_char(
     output reg [10:0] hcount_out,
     output reg hsync_out,

@@ -1,3 +1,23 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: AGH University of Science and Technology
+// Engineer: Patryk Kocinski
+// 
+// Create Date:
+// Design Name:
+// Module Name: menu_page_of
+// Project Name: Drag-Racing
+// Target Devices: Basys3
+// Tool Versions: Vivado 2017.3
+// Description: This is menu_page_of module of Drag Racing game for Basys3 platform
+// 
+// Dependencies: 
+// 
+// Revision: -
+// Revision 0.01 - File Created
+// Additional Comments: -
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module menu_page_of(
     output wire [2:0] menu_state,
     output wire [1:0] menu_counter,

@@ -1,3 +1,23 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: AGH University of Science and Technology
+// Engineer: Daniel Gucik
+// 
+// Create Date:
+// Design Name:
+// Module Name: draw_start
+// Project Name: Drag-Racing
+// Target Devices: Basys3
+// Tool Versions: Vivado 2017.3
+// Description: This is draw_start module of Drag Racing game for Basys3 platform
+// 
+// Dependencies: 
+// 
+// Revision: -
+// Revision 0.01 - File Created
+// Additional Comments: -
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module draw_start(
     input wire [10:0] hcount_in,
     input wire [10:0] vcount_in,

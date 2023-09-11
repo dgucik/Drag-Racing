@@ -1,3 +1,5 @@
+//Source: book "FPGA PROTOTYPING BY VERILOG EXAMPLES", Pong P. Chu
+
 // Listing 4.11
 module mod_m_counter
    #(

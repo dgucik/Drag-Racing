@@ -1,12 +1,26 @@
-// This is the ROM for the 'AGH48x64.png' image.
-// The image size is 48 x 64 pixels.
-// The input 'address' is a 12-bit number, composed of the concatenated
-// 6-bit y and 6-bit x pixel coordinates.
-// The output 'rgb' is 12-bit number with concatenated
-// red, green and blue color values (4-bit each)
+//////////////////////////////////////////////////////////////////////////////////
+// Company: AGH University of Science and Technology
+// Engineer: Daniel Gucik
+// 
+// Create Date:
+// Design Name:
+// Module Name: caption_rom
+// Project Name: Drag-Racing
+// Target Devices: Basys3
+// Tool Versions: Vivado 2017.3
+// Description: This is caption_rom module of Drag Racing game for Basys3 platform
+// 
+// Dependencies: 
+// 
+// Revision: -
+// Revision 0.01 - File Created
+// Additional Comments: -
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module caption_rom (
     input wire clk ,
-    input wire [14:0] address,  // address = {addry[5:0], addrx[5:0]}
+    input wire [14:0] address,
     output reg [1:0] pixel_bit
 );
 

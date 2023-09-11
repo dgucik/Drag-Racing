@@ -1,3 +1,5 @@
+//Source: book "FPGA PROTOTYPING BY VERILOG EXAMPLES", Pong P. Chu
+
 //Listing 8.4
 module uart_ff_buf
    #( // Default setting:
@@ -26,14 +28,14 @@ module uart_ff_buf
    wire [7:0] tx_buf_out, rx_data_out;
 
    //body
-   mod_m_counter #(.M(DVSR), .N(DVSR_BIT)) baud_gen_unit (.
+   mod_m_counter #(.M(DVSR), .N(DVSR_BIT)) u_baud_gen_unit (.
         clk(clk),
         .reset(reset),
         .q(),
         .max_tick(tick)
     );
 
-   uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) uart_rx_unit (
+   uart_rx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) u_uart_rx_unit (
         .clk(clk),
         .reset(reset),
         .rx(rx),
@@ -42,7 +44,7 @@ module uart_ff_buf
         .dout(rx_data_out)
     );
 
-    flag_buf #(.W(DBIT)) flag_buf_rx_unit (
+    flag_buf #(.W(DBIT)) u_flag_buf_rx_unit (
         .clk(clk),
         .reset(reset),
         .clr_flag(rd_uart),
@@ -52,7 +54,7 @@ module uart_ff_buf
         .dout(r_data)
     );
 
-    flag_buf #(.W(DBIT)) flag_buf_tx_unit (
+    flag_buf #(.W(DBIT)) u_flag_buf_tx_unit (
         .clk(clk),
         .reset(reset),
         .clr_flag(tx_done_tick),
@@ -62,7 +64,7 @@ module uart_ff_buf
         .dout(tx_buf_out)
     );
 
-   uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) uart_tx_unit (
+   uart_tx #(.DBIT(DBIT), .SB_TICK(SB_TICK)) u_uart_tx_unit (
         .clk(clk),
         .reset(reset),
         .tx_start(tx_flag),

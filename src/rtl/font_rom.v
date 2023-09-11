@@ -1,4 +1,5 @@
-`timescale 1ns / 1ps
+//Source: UEC-2 2020/21 course, Lab II-5
+
 // ROM with synchonous read (inferring Block RAM)
 // character ROM
 //  - 8-by-16 (8-by-2^4) font

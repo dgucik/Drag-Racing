@@ -1,12 +1,3 @@
- ## Postęp prac
- - [x] interfejs klawiatury
- - [x] model samochodu
- - [x] menu główne
- - [x] background
- - [x] animacja ruchu
- - [x] komunikacja miedzy basysami & UART
- - [x] moduł kontrolny
- - [x] tabela z wynikiem
- - [x] interfejs ?obrotomierz?
- - [x] rozprowadzenie flag
- - [x] moduly pozycja car_p2
+## Film
+
+[![Watch the video](https://i.imgur.com/aaupWow.png)](https://drive.google.com/file/d/1Pk09-zmOej-51R5nSeqMn9Dpl3tt4P6g/view)

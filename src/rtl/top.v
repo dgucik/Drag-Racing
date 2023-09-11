@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Company: AGH University of Science and Technology
-// Engineer: Daniel Gucik, Patryk Kocinski
+// Engineer: Daniel Gucik
 // 
 // Create Date: 20.07.2021 21:23:01
 // Design Name: -
@@ -48,7 +48,7 @@ module top(
     wire rst_ext;
 
     //reset_clk
-    wire d_clk_reset;
+    wire clk_reset;
     
     //vga_timing
     wire [10:0] vga_vcount, vga_hcount;
@@ -79,7 +79,7 @@ module top(
     wire [11:0] start_rgb;
 
     //timer_clk
-    wire d_clk_timer;
+    wire clk_timer;
 
     //light_signals_timer
     wire [11:0] timer_seconds_light;
@@ -129,13 +129,13 @@ module top(
     wire uart_tx_full, uart_rx_empty;
     
     //p1_and_p2_data
-    wire [7:0] dat_p1_out_data;
-    wire dat_wr_uart, dat_rd_uart;
-    wire [31:0] dat_position_p2;
-    wire dat_start_game_status_p2;
-    wire dat_key_press_status_p2;
-    wire dat_key_press_status_tick_p2;
-    wire [4:0] dat_d_position_p2;
+    wire [7:0] data_p1_out_data;
+    wire data_wr_uart, data_rd_uart;
+    wire [31:0] data_position_p2;
+    wire data_start_game_status_p2;
+    wire data_key_press_status_p2;
+    wire data_key_press_status_tick_p2;
+    wire [4:0] data_d_position_p2;
 
     clk_gen u_clk_gen (
         .clk100MHz(clk100MHz),
@@ -148,12 +148,12 @@ module top(
     reset u_reset (
         .rst(rst_ext),
         .locked(locked),
-        .clk(d_clk_reset)
+        .clk(clk_reset)
     );
 
     clk_divide #(.DIVISOR(6500000)) u_reset_clk(
         .clk_in(clk65MHz),
-        .clk_out(d_clk_reset)
+        .clk_out(clk_reset)
     );
     
     vga_timing u_vga_timing (
@@ -171,7 +171,7 @@ module top(
         .rst(rst_ext),
         .kb_key_pressed_tick(kb_Shift_key_tick),
         .kb_key_pressed(kb_K_key),
-        .reset_status(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2),
+        .reset_status(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2),
         .enable_controller_status((light_signals_status) && !(player1_finish_status)),
         .d_position_out(gv_d_position_p1),
         .position(gv_position_p1),
@@ -188,7 +188,7 @@ module top(
         .ps2_data(ps2_data)
     );
 
-    game_menu game_menu(
+    game_menu u_game_menu(
         .clk(clk65MHz),
         .rst(rst_ext),
         .hcount_in(vga_hcount),
@@ -198,7 +198,7 @@ module top(
         .hblnk_in(vga_hblnk),
         .vblnk_in(vga_vblnk),
         .keyboard_in({kb_W_key_tick, kb_S_key_tick, kb_Enter_key_tick}),
-        .back_to_main_menu_flag(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2), 
+        .back_to_main_menu_flag(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2), 
         .hsync_out(menu_hsync),
         .vsync_out(menu_vsync),
         .rgb_out(menu_rgb),
@@ -227,7 +227,7 @@ module top(
     wheel_movement u_wheel_movement_p2(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .position(dat_position_p2),
+        .position(data_position_p2),
         .mov(wheel_mov_p2)
     );
 
@@ -242,7 +242,7 @@ module top(
         .vblnk_in(background_vblnk),
         .rgb_in(background_rgb),
         .p1_position(gv_position_p1),
-        .p2_position(dat_position_p2),
+        .p2_position(data_position_p2),
         .mov(wheel_mov_p2),   
         .hcount_out(car_hcount_p2),
         .hsync_out(car_hsync_p2),
@@ -255,32 +255,32 @@ module top(
 
     clk_divide #(.DIVISOR(65000)) u_timer_clk(
         .clk_in(clk65MHz),
-        .clk_out(d_clk_timer)
+        .clk_out(clk_timer)
     );
 
     timer u_light_signals_timer(
-        .clk1KHz(d_clk_timer),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((start_game_status) && !(light_signals_status)),
-        .restart(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2),
+        .restart(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2),
         .seconds(timer_seconds_light),
         .miliseconds()
     );
 
     timer u_player1_timer(
-        .clk1KHz(d_clk_timer),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player1_finish_status)),
-        .restart(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2),
+        .restart(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2),
         .seconds({timer_seconds_miliseconds_p1[21:10]}),
         .miliseconds({timer_seconds_miliseconds_p1[9:0]})
     );
 
     timer u_player2_timer(
-        .clk1KHz(d_clk_timer),
+        .clk1KHz(clk_timer),
         .reset(rst_ext),
         .start((light_signals_status) && !(player2_finish_status)),
-        .restart(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2),
+        .restart(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2),
         .seconds({timer_seconds_miliseconds_p2[21:10]}),
         .miliseconds({timer_seconds_miliseconds_p2[9:0]})
     );
@@ -387,7 +387,7 @@ module top(
     flag_status u_flag_status(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .clear((!key_press_status_p1) && (!dat_key_press_status_p2) && (!start_game_status_p1) && (!dat_start_game_status_p2)),
+        .clear((!key_press_status_p1) && (!data_key_press_status_p2) && (!start_game_status_p1) && (!data_start_game_status_p2)),
         .set(key_press_status),
         .status(fs_key_press_status_tick_p1)
     );
@@ -396,22 +396,22 @@ module top(
         .clk(clk65MHz),
         .rst(rst_ext),
         .p1_in_data({fs_key_press_status_tick_p1, key_press_status_p1, start_game_status_p1, gv_d_position_p1}),
-        .wr_uart(dat_wr_uart),
-        .p1_out_data(dat_p1_out_data),
+        .wr_uart(data_wr_uart),
+        .p1_out_data(data_p1_out_data),
         .tx_full(uart_tx_full),
         .p2_in_data(uart_r_data),
-        .rd_uart(dat_rd_uart),
-        .p2_out_data({dat_key_press_status_tick_p2, dat_key_press_status_p2, dat_start_game_status_p2, dat_d_position_p2}),
+        .rd_uart(data_rd_uart),
+        .p2_out_data({data_key_press_status_tick_p2, data_key_press_status_p2, data_start_game_status_p2, data_d_position_p2}),
         .rx_empty(uart_rx_empty)
     );
 
     uart_ff_buf u_uart_ff_buf(
         .clk(clk65MHz),
         .reset(rst_ext),
-        .w_data(dat_p1_out_data),
+        .w_data(data_p1_out_data),
         .r_data(uart_r_data),
-        .wr_uart(dat_wr_uart),
-        .rd_uart(dat_rd_uart),
+        .wr_uart(data_wr_uart),
+        .rd_uart(data_rd_uart),
         .tx_full(uart_tx_full),
         .rx_empty(uart_rx_empty),
         .rx(rx),
@@ -421,17 +421,17 @@ module top(
     player2_position u_player2_position(
         .clk(clk65MHz),
         .rst(rst_ext),
-        .reset_status(fs_key_press_status_tick_p1 || dat_key_press_status_tick_p2),
-        .d_position(dat_d_position_p2),
-        .position(dat_position_p2)
+        .reset_status(fs_key_press_status_tick_p1 || data_key_press_status_tick_p2),
+        .d_position(data_d_position_p2),
+        .position(data_position_p2)
     );
 
     //status wires
     assign light_signals_status = (timer_seconds_light == 5);
     assign player1_finish_status = (gv_position_p1 >= FINISH_LINE_POS);
-    assign player2_finish_status = (dat_position_p2 >= FINISH_LINE_POS);
-    assign start_game_status = (start_game_status_p1 && dat_start_game_status_p2);
-    assign key_press_status = (key_press_status_p1 && dat_key_press_status_p2);
+    assign player2_finish_status = (data_position_p2 >= FINISH_LINE_POS);
+    assign start_game_status = (start_game_status_p1 && data_start_game_status_p2);
+    assign key_press_status = (key_press_status_p1 && data_key_press_status_p2);
     
     //output wires
     assign vs = (start_game_status)? scoreboard_vsync:menu_vsync;

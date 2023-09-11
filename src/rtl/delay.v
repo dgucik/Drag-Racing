@@ -1,3 +1,5 @@
+//Source: UEC-2 2020/21 course, Lab II-5
+
 module delay
     #( parameter
         WIDTH   = 8, // bit width of the input/output data

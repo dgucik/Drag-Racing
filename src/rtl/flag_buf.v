@@ -1,3 +1,5 @@
+//Source: book "FPGA PROTOTYPING BY VERILOG EXAMPLES", Pong P. Chu
+
 //Listing 8.2
 module flag_buf
    #(parameter W = 8) // # buffer bits
